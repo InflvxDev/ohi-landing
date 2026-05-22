@@ -17,13 +17,11 @@ const teamRoles = [
   <main id="inicio" class="bg-background text-text-base">
 
     <!-- ── HERO ─────────────────────────────────────────────── -->
-    <section class="relative overflow-hidden border-b border-primary-800 bg-link rounded-b-full md:rounded-b-[3rem]">
-      <div class="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-white/5 blur-3xl"></div>
-      <div class="pointer-events-none absolute -right-20 bottom-10 h-56 w-56 rounded-full bg-accent-500/15 blur-3xl"></div>
+    <section class="quienes-hero relative overflow-hidden border-b border-primary-800 bg-link rounded-b-full md:rounded-b-[3rem]">
+      <div class="absolute inset-0 quienes-grid" aria-hidden="true"></div>
       <div class="mx-auto max-w-7xl px-5 py-16 md:py-20">
         <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <!-- Logo negativo vertical -->
-          <div class="hidden lg:flex items-center justify-center py-6">
+          <div class="relative z-10 hidden lg:flex items-center justify-center py-6">
             <img
               src="/logo_negativo_fondo_azul_vertical.png"
               alt="OHI — Organización Humana Integral"
@@ -31,14 +29,17 @@ const teamRoles = [
             />
           </div>
 
-          <div>
+          <article class="relative z-10">
+            <span class="inline-flex rounded border border-accent-400/50 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.2em] text-accent-300 shadow-sm">
+              Quiénes somos
+            </span>
             <h1 class="mt-5 text-3xl font-black leading-tight text-white md:text-5xl">
               Institución líder en la región en servicios de salud de mediana y alta complejidad
             </h1>
             <p class="mt-6 text-base leading-7 text-white/70 md:text-lg md:leading-8">
               Brindamos atención integral de calidad, eficiente, oportuna y humanizada, con tecnología médica avanzada y un talento humano idóneo, comprometido con cada paciente.
             </p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
@@ -118,3 +119,21 @@ const teamRoles = [
 
   <SiteFooter />
 </Layout>
+
+<style>
+  .quienes-hero {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(194, 213, 1, 0.16) 0%, rgba(194, 213, 1, 0) 34%),
+      radial-gradient(circle at 88% 80%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 40%),
+      linear-gradient(135deg, #052e87 0%, #04256c 58%, #031c51 100%);
+  }
+
+  .quienes-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+
+</style>

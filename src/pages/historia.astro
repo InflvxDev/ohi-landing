@@ -1,0 +1,310 @@
+---
+import MainHeader from '../components/MainHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Layout from '../layouts/Layout.astro';
+
+const milestones = [
+  {
+    year: '2003',
+    eyebrow: 'Los inicios',
+    title: 'Una clínica pequeña con vocación regional',
+    summary:
+      'Los fundadores abrieron una clínica en la Carrera 19 #14-47, sobre la Avenida Simón Bolívar de Valledupar, bajo el nombre de Clínica Integral de Emergencias Laura Daniela.',
+    detail:
+      'Nació como una institución prestadora de servicios de urgencias e internación, con la vocación de atender a la población del Cesar y sus departamentos vecinos con un servicio cercano y humanizado.',
+    stat: 'Urgencias e internación',
+  },
+  {
+    year: '~2009',
+    eyebrow: 'Crecimiento y especialización',
+    title: 'La atención se amplía y la clínica gana referente',
+    summary:
+      'La clínica creció hasta convertirse en referente regional y fue pionera en el Cesar en nefrología pediátrica, con hitos médicos sin precedentes para la región.',
+    detail:
+      'También sumó una segunda sede a su red asistencial: la Clínica Santa Isabel L.D., ubicada en la Carrera 18D #22-33 de Valledupar, complementando la atención de la sede principal.',
+    stat: 'Nueva sede asistencial',
+  },
+  {
+    year: '~2014',
+    eyebrow: 'Alta complejidad',
+    title: 'Más especialidades, mayor capacidad de respuesta',
+    summary:
+      'Para mediados de la década, la institución ya contaba con más de 25 especialidades y subespecialidades, consolidándose como una IPS de mediana y alta complejidad.',
+    detail:
+      'Fortaleció la ortopedia infantil y estableció el Centro de Excelencia Materno Infantil del Cesar, con una unidad de perinatología para el manejo del alto riesgo obstétrico.',
+    stat: '+25 especialidades',
+  },
+  {
+    year: '2020-2021',
+    eyebrow: 'Respuesta a la pandemia',
+    title: 'Adaptación en el momento más exigente',
+    summary:
+      'Durante la emergencia sanitaria por Covid-19, Santa Isabel amplió sus áreas e inauguró una sala de cuidados críticos para absorber la alta demanda hospitalaria.',
+    detail:
+      'La sede principal también expandió sus unidades de cuidados intensivos. Ambas sedes operaron al máximo de su capacidad y fueron soporte fundamental del sistema de salud del Cesar.',
+    stat: 'Cuidados críticos',
+  },
+  {
+    year: '2023',
+    eyebrow: 'Nueva identidad',
+    title: 'Nace Organización Humana Integral S.A.',
+    summary:
+      'El 20 de enero de 2023, los socios y propietarios formalizaron un nuevo capítulo institucional al cambiar la razón social a Organización Humana Integral S.A., OHI.',
+    detail:
+      'La nueva marca consolida más de dos décadas de historia, dos sedes en Valledupar y unidades especializadas como oncología, banco de sangre, endoscopia y el Centro de Excelencia Materno Infantil del Cesar.',
+    stat: 'OHI',
+    featured: true,
+  },
+];
+---
+
+<Layout>
+  <MainHeader />
+
+  <main class="bg-background text-text-base">
+    <section class="historia-hero relative overflow-hidden border-b border-primary-800 bg-link">
+      <div class="absolute inset-0 historia-grid" aria-hidden="true"></div>
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <article class="relative z-10 max-w-2xl">
+          <span class="inline-flex rounded border border-accent-400/50 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.2em] text-accent-300 shadow-sm">
+            Nuestra historia
+          </span>
+          <h1 class="mt-5 text-4xl font-black leading-[1.05] text-white md:text-6xl">
+            Una historia de crecimiento al servicio de la salud.
+          </h1>
+          <p class="mt-6 text-base leading-7 text-white/80 md:max-w-xl md:text-lg md:leading-8">
+            Desde una clinica de urgencias en Valledupar hasta una organizacion de mediana y alta complejidad, OHI ha crecido con una idea constante: cuidar con calidad humana.
+          </p>
+        </article>
+
+        <aside class="relative z-10">
+          <div class="historia-year-panel overflow-hidden rounded-lg border border-primary-100 bg-white shadow-[0_20px_50px_-30px_rgba(3,28,81,0.45)]">
+            <div class="relative h-64 overflow-hidden md:h-80">
+              <div class="historia-image-rotator h-full w-full" aria-label="Pasado y presente de la institución">
+                <img
+                  src="/img/CLD-entrada.webp"
+                  alt="CLD - origen de la organización"
+                  class="historia-slide historia-slide-past"
+                  loading="eager"
+                  decoding="async"
+                />
+                <img
+                  src="/img/OHI-entrada.webp"
+                  alt="OHI - entrada actual de la organización"
+                  class="historia-slide historia-slide-present"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+              <div class="absolute inset-0 bg-linear-to-t from-primary-900/85 via-primary-900/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <p class="text-xs font-bold uppercase tracking-[0.22em] text-accent-300">Línea de tiempo</p>
+                <p class="mt-2 text-5xl font-black leading-none">2003</p>
+                <p class="mt-1 text-sm font-semibold text-white/75">a 2026</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 divide-x divide-primary-100 bg-white text-center">
+              <div class="px-3 py-4">
+                <p class="text-lg font-black text-primary-700">2</p>
+                <p class="mt-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-text-subtle">Sedes</p>
+              </div>
+              <div class="px-3 py-4">
+                <p class="text-lg font-black text-primary-700">25+</p>
+                <p class="mt-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-text-subtle">Especialidades</p>
+              </div>
+              <div class="px-3 py-4">
+                <p class="text-lg font-black text-primary-700">20+</p>
+                <p class="mt-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-text-subtle">Años</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="historia-story border-b border-primary-100 bg-white">
+      <div class="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-primary-600">Cronología institucional</p>
+          <h2 class="mt-3 text-3xl font-black leading-tight text-primary-800 md:text-4xl">
+            Cada etapa amplió la capacidad de cuidar.
+          </h2>
+          <p class="mt-5 text-base leading-7 text-text-muted md:text-lg md:leading-8">
+            La línea de tiempo resume los momentos que marcaron la evolución de la organización: origen, especialización, alta complejidad, respuesta sanitaria y nueva identidad.
+          </p>
+        </div>
+
+        <ol class="historia-timeline relative mx-auto mt-14 max-w-4xl list-none space-y-7 p-0">
+          {milestones.map((milestone) => (
+            <li class={`timeline-row relative pl-11 md:pl-16 ${milestone.featured ? 'featured' : ''}`}>
+              <div class="timeline-marker absolute left-0 top-2 flex h-8 w-8 items-center justify-center rounded bg-white shadow ring-1 ring-primary-200 md:h-10 md:w-10">
+                <span></span>
+              </div>
+
+              <article class={`timeline-card overflow-hidden rounded-lg border bg-white shadow-[0_14px_34px_-26px_rgba(3,28,81,0.55)] ${milestone.featured ? 'border-accent-500/70 bg-linear-to-br from-accent-50 via-white to-primary-50' : 'border-primary-100'}`}>
+                <div class="grid gap-0 md:grid-cols-[10rem_1fr]">
+                  <div class={`flex flex-row items-center justify-between gap-4 border-b px-5 py-4 md:flex-col md:items-start md:justify-start md:border-b-0 md:border-r md:p-6 ${milestone.featured ? 'border-accent-500/30 bg-accent-500/12' : 'border-primary-100 bg-primary-50/55'}`}>
+                    <div>
+                      <p class={`text-3xl font-black leading-none md:text-4xl ${milestone.featured ? 'text-accent-700' : 'text-primary-700'}`}>{milestone.year}</p>
+                      <p class="mt-2 text-[0.7rem] font-extrabold uppercase tracking-[0.16em] text-text-subtle">{milestone.eyebrow}</p>
+                    </div>
+                    <span class={`rounded border px-3 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.12em] md:mt-5 ${milestone.featured ? 'border-accent-500 bg-accent-500 text-primary-800' : 'border-primary-100 bg-white text-primary-700'}`}>
+                      {milestone.stat}
+                    </span>
+                  </div>
+
+                  <div class="p-6 md:p-8">
+                    <h3 class="text-xl font-black leading-snug text-primary-800 md:text-2xl">
+                      {milestone.title}
+                    </h3>
+                    <p class="mt-4 text-base leading-7 text-text-base">
+                      {milestone.summary}
+                    </p>
+                    <p class="mt-3 text-sm leading-6 text-text-muted md:text-base md:leading-7">
+                      {milestone.detail}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="bg-primary-50/40">
+      <div class="mx-auto max-w-5xl px-5 py-14 text-center md:py-16">
+        <div class="rounded-lg border border-primary-100 bg-white px-6 py-10 shadow-[0_16px_38px_-28px_rgba(3,28,81,0.45)] md:px-10">
+          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-primary-600">Hoy somos OHI</p>
+          <p class="mx-auto mt-4 max-w-3xl text-2xl font-black leading-tight text-primary-800 md:text-4xl">
+            Una organización que integra experiencia, tecnología y trato humano para responder a la salud de la región.
+          </p>
+          <a
+            href="/quienes-somos"
+            class="mt-8 inline-flex rounded bg-cta px-6 py-3 text-sm font-extrabold text-primary-800 transition hover:bg-accent-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2"
+          >
+            Conocer quiénes somos
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .historia-hero {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(194, 213, 1, 0.16) 0%, rgba(194, 213, 1, 0) 34%),
+      radial-gradient(circle at 88% 80%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 40%),
+      linear-gradient(135deg, #052e87 0%, #04256c 58%, #031c51 100%);
+  }
+
+  .historia-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+
+  .historia-year-panel {
+    transform: rotate(1deg);
+  }
+
+  .historia-image-rotator {
+    position: relative;
+  }
+
+  .historia-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  .historia-slide-past {
+    animation-name: historiaFadePast;
+  }
+
+  .historia-slide-present {
+    animation-name: historiaFadePresent;
+  }
+
+  @keyframes historiaFadePast {
+    0%,
+    44% {
+      opacity: 1;
+    }
+    50%,
+    94% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes historiaFadePresent {
+    0%,
+    44% {
+      opacity: 0;
+    }
+    50%,
+    94% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .historia-timeline::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: linear-gradient(to bottom, #052e87 0%, #052e87 72%, #c2d501 100%);
+  }
+
+  .timeline-marker span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: #052e87;
+  }
+
+  .timeline-row.featured .timeline-marker {
+    color: #031c51;
+    background: #c2d501;
+  }
+
+  .timeline-row.featured .timeline-marker span {
+    background: #031c51;
+  }
+
+  .timeline-card {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .timeline-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(5, 46, 135, 0.28);
+    box-shadow: 0 18px 34px -22px rgba(3, 28, 81, 0.55);
+  }
+
+  @media (max-width: 640px) {
+    .historia-year-panel {
+      transform: none;
+    }
+  }
+</style>

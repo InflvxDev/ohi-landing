@@ -85,3 +85,66 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+
+.nuestra-creencia-panel {
+   position: relative;
+   overflow: hidden;
+   border: 1px solid #d8e58a;
+   border-radius: 1rem 2rem 1.25rem 2.5rem;
+   background:
+      radial-gradient(circle at 10% 20%, rgba(194, 213, 1, 0.2) 0%, transparent 45%),
+      radial-gradient(circle at 88% 80%, rgba(5, 46, 135, 0.15) 0%, transparent 40%),
+      linear-gradient(135deg, #fcfdf2 0%, #f4f7ff 100%);
+   box-shadow: 0 18px 40px -26px rgba(3, 28, 81, 0.55);
+}
+
+.nuestra-creencia-panel::before,
+.nuestra-creencia-panel::after {
+   content: "";
+   position: absolute;
+   pointer-events: none;
+   border-radius: 9999px;
+}
+
+.nuestra-creencia-panel::before {
+   top: -38px;
+   right: -36px;
+   width: 124px;
+   height: 124px;
+   background: rgba(194, 213, 1, 0.16);
+}
+
+.nuestra-creencia-panel::after {
+   bottom: -46px;
+   left: -20px;
+   width: 108px;
+   height: 108px;
+   background: rgba(5, 46, 135, 0.1);
+}
+
+.diferencial-card {
+   position: relative;
+   overflow: hidden;
+   border: 1px solid rgba(5, 46, 135, 0.2);
+   background:
+      linear-gradient(135deg, rgba(5, 46, 135, 0.06) 0%, rgba(5, 46, 135, 0.02) 55%, #ffffff 100%);
+   color: #04256c;
+   box-shadow: 0 8px 18px -14px rgba(3, 28, 81, 0.55);
+   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.diferencial-card::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 4px;
+   height: 100%;
+   background: linear-gradient(180deg, #052e87 0%, #6982b7 100%);
+}
+
+.diferencial-card:hover {
+   border-color: rgba(5, 46, 135, 0.35);
+   box-shadow: 0 14px 24px -16px rgba(3, 28, 81, 0.65);
+   transform: translateY(-1px);
+}
