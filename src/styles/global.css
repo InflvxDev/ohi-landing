@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  /* =====================================================
+     PALETA OHI — 3 colores base
+     #052e87  →  primary  (azul corporativo)
+     #c2d501  →  accent   (lima/amarillo)
+     #ffffff  →  neutral  (blanco con tono frío)
+  ===================================================== */
+
+  /* ── Primary: Azul #052e87 ─────────────────────────
+     Tints mezclados con blanco | Shades mezclados con negro */
+  --color-primary-50:  #f3f5f9;
+  --color-primary-100: #e6eaf3;
+  --color-primary-200: #c1cbe1;
+  --color-primary-300: #9babcf;
+  --color-primary-400: #6982b7;
+  --color-primary-500: #052e87;   /* base */
+  --color-primary-600: #04256c;
+  --color-primary-700: #031c51;
+  --color-primary-800: #021236;
+  --color-primary-900: #01091b;
+  --color-primary-950: #01050e;
+
+  /* ── Accent: Lima #c2d501 ───────────────────────────*/
+  --color-accent-50:  #fcfdf2;
+  --color-accent-100: #f9fbe6;
+  --color-accent-200: #f0f5c0;
+  --color-accent-300: #e7ee99;
+  --color-accent-400: #dae667;
+  --color-accent-500: #c2d501;    /* base */
+  --color-accent-600: #9baa01;
+  --color-accent-700: #748001;
+  --color-accent-800: #4e5500;
+  --color-accent-900: #272b00;
+  --color-accent-950: #131500;
+
+  /* ── Neutral: Grises con tono frío (derivados de #ffffff + tinte azul) */
+  --color-neutral-50:  #f4f6fa;
+  --color-neutral-100: #e8ecf5;
+  --color-neutral-200: #d1d9e9;
+  --color-neutral-300: #adb8d0;
+  --color-neutral-400: #7d90b0;
+  --color-neutral-500: #566d8e;
+  --color-neutral-600: #3d5270;
+  --color-neutral-700: #283851;
+  --color-neutral-800: #162133;
+  --color-neutral-900: #0b1220;
+  --color-neutral-950: #050910;
+
+  /* =====================================================
+     TOKENS SEMÁNTICOS
+  ===================================================== */
+
+  /* Superficie y fondo */
+  --color-background:      #ffffff;
+  --color-surface:         #f4f6fa;
+  --color-surface-raised:  #e8ecf5;
+
+  /* Texto */
+  --color-text-base:       #162133;   /* neutral-800 — cuerpo */
+  --color-text-muted:      #3d5270;   /* neutral-600 — secundario */
+  --color-text-subtle:     #566d8e;   /* neutral-500 — placeholders */
+  --color-text-on-primary: #ffffff;   /* texto sobre azul */
+  --color-text-on-accent:  #031c51;   /* texto oscuro sobre lima */
+
+  /* Borde */
+  --color-border:          #d1d9e9;   /* neutral-200 */
+  --color-border-strong:   #adb8d0;   /* neutral-300 */
+
+  /* CTA / botones primarios */
+  --color-cta:             #c2d501;
+  --color-cta-hover:       #9baa01;
+  --color-cta-active:      #748001;
+  --color-cta-text:        #031c51;
+
+  /* Interactivo / links */
+  --color-link:            #052e87;
+  --color-link-hover:      #04256c;
+
+  /* Foco / outline */
+  --color-focus-ring:      #dae667;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
