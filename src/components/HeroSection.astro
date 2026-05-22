@@ -1,29 +1,40 @@
-<section id="inicio" class="bg-gradient-to-br from-primary-50 via-background to-accent-50">
-  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-24">
-    <div class="space-y-6">
-      <p class="text-sm font-bold uppercase tracking-[0.18em] text-primary-500">Placeholder categoria principal</p>
-      <div class="space-y-4">
-        <h1 class="max-w-3xl text-4xl font-black leading-tight text-primary-700 sm:text-5xl lg:text-6xl">
-          Placeholder del mensaje principal de la landing page
-        </h1>
-        <p class="max-w-2xl text-lg leading-8 text-text-muted">
-          Texto provisional para explicar la propuesta de valor de la clinica, sus servicios y el acompanamiento que se comunicara en esta seccion.
-        </p>
-      </div>
-      <div class="flex flex-col gap-3 sm:flex-row">
-        <a href="#servicios" class="rounded bg-primary-500 px-5 py-3 text-center text-sm font-bold text-text-on-primary transition hover:bg-primary-400">
-          Placeholder boton primario
-        </a>
-        <a href="#sedes" class="rounded border border-primary-200 bg-background/70 px-5 py-3 text-center text-sm font-bold text-link transition hover:border-accent-400 hover:bg-accent-50">
-          Placeholder boton secundario
-        </a>
-      </div>
-    </div>
+<section id="inicio" class="hero-home relative overflow-hidden border border-primary-800 bg-link">
+  <div class="pointer-events-none absolute -left-24 top-10 h-64 w-64 rounded-full bg-accent-500/12 blur-3xl"></div>
+  <div class="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
 
-    <div class="min-h-[340px] rounded bg-primary-100 p-4 shadow-sm ring-1 ring-primary-200">
-      <div class="grid h-full min-h-[308px] place-items-center rounded border border-dashed border-accent-400 bg-background text-center text-sm font-semibold uppercase tracking-[0.2em] text-primary-400">
-        Placeholder imagen hero
+  <div class="mx-auto max-w-7xl px-5 py-16 lg:py-24">
+    <article class="relative z-10 max-w-4xl space-y-6">
+      <p class="inline-flex rounded border border-accent-400/50 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.18em] text-accent-300">
+        Organización Humana Integral
+      </p>
+      <h1 class="max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+        Cuidamos la salud de la región con calidad humana, experiencia y alta complejidad.
+      </h1>
+      <p class="max-w-3xl text-base leading-8 text-white/85 md:text-lg">
+        Somos una institución comprometida con una atención integral, segura y oportuna, con tecnología médica avanzada y un talento humano que acompaña cada etapa de cuidado.
+      </p>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href="#servicios" class="rounded bg-cta px-5 py-3 text-center text-sm font-bold text-primary-800 transition hover:bg-accent-400">
+          Ver servicios
+        </a>
+        <a href="/quienes-somos" class="rounded border border-white/35 bg-white/10 px-5 py-3 text-center text-sm font-bold text-white transition hover:border-accent-300 hover:bg-white/15">
+          Conoce OHI
+        </a>
       </div>
-    </div>
+    </article>
+
   </div>
 </section>
+
+<style>
+  .hero-home {
+    background:
+      linear-gradient(112deg, rgba(3, 28, 81, 0.82) 0%, rgba(4, 37, 108, 0.74) 45%, rgba(5, 46, 135, 0.66) 100%),
+      url('/img/OHI-entrada.webp') center / cover no-repeat;
+  }
+
+  .hero-home h1,
+  .hero-home p {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+</style>
