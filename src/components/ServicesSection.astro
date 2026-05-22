@@ -1,0 +1,30 @@
+---
+const services = ['Servicio placeholder', 'Servicio placeholder', 'Servicio placeholder', 'Servicio placeholder'];
+---
+
+<section id="servicios" class="bg-background py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-5">
+    <div class="max-w-2xl space-y-3">
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-primary-500">Servicios ofrecidos</p>
+      <h2 class="text-3xl font-black text-primary-700 sm:text-4xl">Placeholder titulo de servicios</h2>
+      <p class="text-base leading-7 text-text-muted">
+        Texto provisional para describir el portafolio de servicios y orientar al visitante sobre lo que encontrara aqui.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {services.map((service, index) => (
+        <article class="rounded border border-primary-100 bg-primary-50 p-5">
+          <div class="mb-5 grid aspect-[4/3] place-items-center rounded border border-dashed border-accent-400 bg-background text-center text-xs font-semibold uppercase tracking-[0.18em] text-primary-400">
+            Placeholder imagen
+          </div>
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-accent-700">Servicio {index + 1}</p>
+          <h3 class="mt-2 text-xl font-black text-primary-700">{service}</h3>
+          <p class="mt-3 text-sm leading-6 text-text-muted">
+            Texto placeholder para explicar este servicio, beneficios y detalles que se completaran despues.
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

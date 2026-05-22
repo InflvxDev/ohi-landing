@@ -1,0 +1,30 @@
+---
+const locations = ['Sede placeholder', 'Sede placeholder', 'Sede placeholder'];
+---
+
+<section id="sedes" class="bg-primary-50 py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-5">
+    <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+      <div class="space-y-3">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-primary-500">Sedes</p>
+        <h2 class="text-3xl font-black text-primary-700 sm:text-4xl">Placeholder sedes de atencion</h2>
+      </div>
+      <p class="text-base leading-7 text-text-muted">
+        Texto provisional para presentar las sedes, ubicaciones principales, accesos y datos de contacto que se agregaran mas adelante.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {locations.map((location, index) => (
+        <article class="rounded border border-primary-100 bg-background p-5">
+          <div class="grid aspect-video place-items-center rounded border border-dashed border-accent-400 bg-accent-50 text-center text-xs font-semibold uppercase tracking-[0.18em] text-primary-400">
+            Placeholder mapa o sede
+          </div>
+          <h3 class="mt-5 text-xl font-black text-primary-700">{location} {index + 1}</h3>
+          <p class="mt-2 text-sm leading-6 text-text-muted">Direccion placeholder, barrio placeholder, ciudad placeholder.</p>
+          <p class="mt-4 text-sm font-bold text-link">Horario placeholder</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,149 +1,24 @@
 ---
+import MiniHeader from '../components/MiniHeader.astro';
+import MainHeader from '../components/MainHeader.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import LocationsSection from '../components/LocationsSection.astro';
+import GallerySection from '../components/GallerySection.astro';
+import SiauSection from '../components/SiauSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <div class="min-h-screen bg-background text-text-base font-sans p-8 space-y-12">
-
-    <!-- HEADER -->
-    <header class="bg-primary-500 text-text-on-primary rounded-2xl p-8 flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold tracking-tight">OHI Landing</h1>
-        <p class="text-primary-200 mt-1 text-sm">Organización Humana Integral</p>
-      </div>
-      <button class="bg-cta text-cta-text font-semibold px-5 py-2 rounded-lg hover:bg-cta-hover transition-colors">
-        Contáctanos
-      </button>
-    </header>
-
-    <!-- PALETA PRIMARY -->
-    <section>
-      <h2 class="text-lg font-semibold text-text-muted uppercase tracking-widest mb-4">Primary — Azul #052e87</h2>
-      <div class="grid grid-cols-6 gap-2 sm:grid-cols-11">
-        {[
-          { name: '50',  bg: 'bg-primary-50',  text: 'text-primary-900' },
-          { name: '100', bg: 'bg-primary-100', text: 'text-primary-900' },
-          { name: '200', bg: 'bg-primary-200', text: 'text-primary-900' },
-          { name: '300', bg: 'bg-primary-300', text: 'text-primary-900' },
-          { name: '400', bg: 'bg-primary-400', text: 'text-white'       },
-          { name: '500', bg: 'bg-primary-500', text: 'text-white'       },
-          { name: '600', bg: 'bg-primary-600', text: 'text-white'       },
-          { name: '700', bg: 'bg-primary-700', text: 'text-white'       },
-          { name: '800', bg: 'bg-primary-800', text: 'text-white'       },
-          { name: '900', bg: 'bg-primary-900', text: 'text-white'       },
-          { name: '950', bg: 'bg-primary-950', text: 'text-white'       },
-        ].map(({ name, bg, text }) => (
-          <div class={`${bg} ${text} rounded-lg p-3 text-center text-xs font-mono font-semibold aspect-square flex items-center justify-center`}>
-            {name}
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- PALETA ACCENT -->
-    <section>
-      <h2 class="text-lg font-semibold text-text-muted uppercase tracking-widest mb-4">Accent — Lima #c2d501</h2>
-      <div class="grid grid-cols-6 gap-2 sm:grid-cols-11">
-        {[
-          { name: '50',  bg: 'bg-accent-50',  text: 'text-accent-900' },
-          { name: '100', bg: 'bg-accent-100', text: 'text-accent-900' },
-          { name: '200', bg: 'bg-accent-200', text: 'text-accent-900' },
-          { name: '300', bg: 'bg-accent-300', text: 'text-accent-900' },
-          { name: '400', bg: 'bg-accent-400', text: 'text-accent-900' },
-          { name: '500', bg: 'bg-accent-500', text: 'text-accent-950' },
-          { name: '600', bg: 'bg-accent-600', text: 'text-white'      },
-          { name: '700', bg: 'bg-accent-700', text: 'text-white'      },
-          { name: '800', bg: 'bg-accent-800', text: 'text-white'      },
-          { name: '900', bg: 'bg-accent-900', text: 'text-white'      },
-          { name: '950', bg: 'bg-accent-950', text: 'text-white'      },
-        ].map(({ name, bg, text }) => (
-          <div class={`${bg} ${text} rounded-lg p-3 text-center text-xs font-mono font-semibold aspect-square flex items-center justify-center`}>
-            {name}
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- PALETA NEUTRAL -->
-    <section>
-      <h2 class="text-lg font-semibold text-text-muted uppercase tracking-widest mb-4">Neutral — Grises fríos</h2>
-      <div class="grid grid-cols-6 gap-2 sm:grid-cols-11">
-        {[
-          { name: '50',  bg: 'bg-neutral-50',  text: 'text-neutral-900', border: true },
-          { name: '100', bg: 'bg-neutral-100', text: 'text-neutral-900', border: true },
-          { name: '200', bg: 'bg-neutral-200', text: 'text-neutral-900', border: false },
-          { name: '300', bg: 'bg-neutral-300', text: 'text-neutral-900', border: false },
-          { name: '400', bg: 'bg-neutral-400', text: 'text-white',       border: false },
-          { name: '500', bg: 'bg-neutral-500', text: 'text-white',       border: false },
-          { name: '600', bg: 'bg-neutral-600', text: 'text-white',       border: false },
-          { name: '700', bg: 'bg-neutral-700', text: 'text-white',       border: false },
-          { name: '800', bg: 'bg-neutral-800', text: 'text-white',       border: false },
-          { name: '900', bg: 'bg-neutral-900', text: 'text-white',       border: false },
-          { name: '950', bg: 'bg-neutral-950', text: 'text-white',       border: false },
-        ].map(({ name, bg, text, border }) => (
-          <div class={`${bg} ${text} ${border ? 'border border-border' : ''} rounded-lg p-3 text-center text-xs font-mono font-semibold aspect-square flex items-center justify-center`}>
-            {name}
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- TOKENS SEMÁNTICOS -->
-    <section>
-      <h2 class="text-lg font-semibold text-text-muted uppercase tracking-widest mb-4">Tokens semánticos</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
-        <!-- Botones -->
-        <div class="bg-surface rounded-xl p-5 space-y-3 border border-border">
-          <p class="text-xs font-semibold text-text-subtle uppercase tracking-wider">Botones</p>
-          <button class="w-full bg-cta text-cta-text font-semibold py-2 rounded-lg hover:bg-cta-hover transition-colors">
-            CTA Principal
-          </button>
-          <button class="w-full bg-primary-500 text-text-on-primary font-semibold py-2 rounded-lg hover:bg-primary-600 transition-colors">
-            Acción primaria
-          </button>
-          <button class="w-full border-2 border-primary-500 text-primary-500 font-semibold py-2 rounded-lg hover:bg-primary-50 transition-colors">
-            Secundario
-          </button>
-        </div>
-
-        <!-- Tipografía -->
-        <div class="bg-surface rounded-xl p-5 space-y-2 border border-border">
-          <p class="text-xs font-semibold text-text-subtle uppercase tracking-wider mb-3">Tipografía</p>
-          <p class="text-text-base font-semibold text-lg">Título principal</p>
-          <p class="text-text-base">Texto base del cuerpo.</p>
-          <p class="text-text-muted text-sm">Texto secundario / muted.</p>
-          <p class="text-text-subtle text-xs">Texto sutil / placeholder.</p>
-          <a href="#" class="text-link hover:text-link-hover underline text-sm">Enlace</a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CARD EJEMPLO -->
-    <section>
-      <h2 class="text-lg font-semibold text-text-muted uppercase tracking-widest mb-4">Ejemplo de card</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-primary-500 text-text-on-primary rounded-2xl p-6 space-y-3">
-          <div class="bg-accent-500 text-cta-text rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">1</div>
-          <h3 class="font-semibold text-lg">Card sobre azul</h3>
-          <p class="text-primary-200 text-sm">Texto secundario con tono primary-200.</p>
-          <button class="bg-cta text-cta-text text-sm font-semibold px-4 py-1.5 rounded-lg hover:bg-cta-hover transition-colors">Ver más</button>
-        </div>
-        <div class="bg-accent-500 text-cta-text rounded-2xl p-6 space-y-3">
-          <div class="bg-primary-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">2</div>
-          <h3 class="font-semibold text-lg">Card sobre lima</h3>
-          <p class="text-accent-800 text-sm">Texto secundario accent-800.</p>
-          <button class="bg-primary-500 text-white text-sm font-semibold px-4 py-1.5 rounded-lg hover:bg-primary-600 transition-colors">Ver más</button>
-        </div>
-        <div class="bg-surface border border-border rounded-2xl p-6 space-y-3">
-          <div class="bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">3</div>
-          <h3 class="font-semibold text-lg text-text-base">Card sobre surface</h3>
-          <p class="text-text-muted text-sm">Texto secundario text-muted.</p>
-          <button class="bg-cta text-cta-text text-sm font-semibold px-4 py-1.5 rounded-lg hover:bg-cta-hover transition-colors">Ver más</button>
-        </div>
-      </div>
-    </section>
-
-  </div>
+	<MiniHeader />
+	<MainHeader />
+	<main>
+		<HeroSection />
+		<ServicesSection />
+		<LocationsSection />
+		<GallerySection />
+		<SiauSection />
+	</main>
+	<SiteFooter />
 </Layout>
