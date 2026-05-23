@@ -1,0 +1,272 @@
+---
+import MainHeader from '../components/MainHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Layout from '../layouts/Layout.astro';
+
+type ServiceItem = {
+  title: string;
+  image: string;
+  text?: string[];
+  bullets?: string[];
+  groups?: Array<{
+    title: string;
+    items: string[];
+  }>;
+};
+
+const services: ServiceItem[] = [
+  {
+    title: 'Urgencias 24 horas',
+    image: '/img/servicios/Urgencias-Santa-Isabel-OHI.webp',
+    text: ['El servicio esta conformado por:'],
+    bullets: [
+      'Consultorio de Triage.',
+      'Sala de procedimientos.',
+      'Sala de reanimación.',
+      'Sala de yeso.',
+      'Sala de observación.',
+      'Áreas dotadas con equipos biomédicos y tecnología acorde al nivel de complejidad que se ofrece.',
+    ],
+  },
+  {
+    title: 'Cirugías de mediana y alta complejidad',
+    image: '/img/servicios/Cirugia-OHI-2.webp',
+    text: [
+      'Contamos con quirófanos construidos con los más altos estándares de calidad. los cuales se encuentran perfectamente equipados, dotados y habilitados para realizar cirugías congruentes con el nivel de complejidad; además de contar con un sistema seguro, eficaz, eficiente y efectivo para practicar las intervenciones quirúrgicas.',
+      'Sala de recuperación post-quirúrgica con monitoreo cardiorrespiratorio electrónico individual y camillas confortables.',
+      'Central de esterilización con alta tecnología y diseño que contribuye al proceso general de asepsia y antisepsia; integrada por procedimientos de limpieza, desinfección y esterilización a todos los servicios de la institución.',
+      'La Clínica Santa Isabel brinda disponibilidad permanente de especialistas en:',
+    ],
+    bullets: [
+      'Cirugia General.',
+      'Neurocirugía.',
+      'Ortopedia adulto.',
+      'Cirugía Plástica y Estética.',
+      'Cirugía Gastrointestinal.',
+      'Cirugía Maxilofacial.',
+      'Cirugía Vascular y Angiológica.',
+      'Cirugía Urológica.',
+      'Cirugía Reconstructiva.',
+      'Cirugía Artroscopica.',
+      'Cirugía de Mano.',
+      'Cirugía de Pelvis.',
+      'Cirugía de Columna.',
+    ],
+  },
+  {
+    title: 'Hospitalización unipersonal y bipersonal adulto',
+    image: '/img/servicios/Hospitalizacion-adulto-OHI-1.webp',
+    text: [
+      'Dispone de habitaciones en condiciones óptimas para recibir a pacientes con diferentes tipos de patología, enfatizando en los pacientes quienes bajo el cuidado de médicos y enfermeras, reciben el tratamiento adecuado según su enfermedad.',
+    ],
+  },
+  {
+    title: 'Unidad de Cuidados Críticos Adultos',
+    image: '/img/servicios/UCI-OHI-1.webp',
+    text: [
+      'En la Unidad de Cuidados Intermedios e Intensivos contamos con cubículos equipados para atender al paciente crítico, coordinada por médicos intensivistas que brindan atención inmediata aquellos que padecen patologías catastróficas urgentes, apoyados en el cuidado posoperatorio de cirugías de alta complejidad y se da soporte a pacientes con disfunción orgánica severa.',
+    ],
+  },
+  {
+    title: 'Apoyo Terapéutico',
+    image: '/img/servicios/SI-Terapeutico-OHI.webp',
+    text: [
+      'En el área de terapia física se brinda atención en rehabilitación enfocada al control del dolor causado por lesión y tratamiento por incapacidad física. El servicio de terapia respiratoria realiza actividades de prevención diagnóstico y tratamiento como parte del manejo integral del paciente. Así mismo, Psicología, Nutrición y Servicio Transfusional.',
+    ],
+  },
+  {
+    title: 'Apoyo Diagnóstico',
+    image: '/img/servicios/Apoyo-Diagnostico-OHI.webp',
+    text: [
+      'En la Clínica Santa Isabel , ofrecemos el servicio de imágenes diagnosticas convencionales y especializadas como soporte para el manejo integral del paciente, con alta tecnología y un equipohumano calificado y comprometido, contamos con:',
+    ],
+    groups: [
+      { title: 'Imagenología', items: ['Ecografía.', 'Radiología convencional.', 'Tomografia Axial Computarizada.'] },
+      {
+        title: 'Laboratorio Clínico',
+        items: [
+          'Contamos con equipos de última tecnología para realizar exámenes especializados y un equipo de profesionales calificados que nos permite generar confianza en los resultados de los procesos de que se llevan a cabo en el servicio.',
+        ],
+      },
+    ],
+  },
+];
+---
+
+<Layout>
+  <MainHeader />
+
+  <main class="bg-background text-text-base">
+    <section class="santa-hero relative min-h-[calc(100vh-76px)] overflow-hidden bg-primary-900 text-white">
+      <img
+        src="/img/SANTA-ISABEL-entrada.webp"
+        alt="Entrada de la Clínica OHI Sede Santa Isabel"
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-linear-to-r from-primary-700/78 via-primary-500/42 to-white/8"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-primary-500/35 to-transparent"></div>
+
+      <div class="relative z-10 mx-auto flex min-h-[calc(100vh-76px)] max-w-7xl flex-col justify-end px-5 py-12 md:py-16">
+        <article class="max-w-4xl pb-4">
+          <span class="inline-flex rounded-full border border-accent-400/60 bg-accent-500/12 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-accent-200 shadow-sm backdrop-blur">
+            Clínica OHI
+          </span>
+          <h1 class="mt-6 max-w-4xl text-5xl font-black leading-[0.95] text-white md:text-7xl lg:text-8xl">Sede Santa Isabel</h1>
+          <p class="mt-7 max-w-3xl text-lg leading-8 text-white/84 md:text-xl md:leading-9">
+            En una instalación física diferente, ubicada en un sitio estratégico de la ciudad, funciona la sede Clínica Santa Isabel, en la cual se presta servicios de salud de mediana y alta complejidad, donde se brinda un abordaje integral al paciente politraumatizado.
+          </p>
+          <p class="mt-4 max-w-3xl text-base leading-7 text-white/74 md:text-lg md:leading-8">
+            La Clínica cuenta con un grupo de ortopedistas idóneos con amplia experiencia en el manejo del paciente con trauma o patologías ortopédicas.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#servicios" class="rounded bg-accent-500 px-5 py-3 text-sm font-extrabold text-primary-800 shadow-lg shadow-primary-950/30 transition hover:bg-accent-300 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900">
+              Ver servicios
+            </a>
+            <a href="/#sedes" class="rounded border border-white/35 px-5 py-3 text-sm font-extrabold text-white transition hover:border-accent-300 hover:text-accent-200 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900">
+              Volver a sedes
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="border-b border-primary-100 bg-primary-50/45">
+      <div class="mx-auto grid max-w-7xl gap-8 px-5 py-12 md:py-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-primary-600">Servicios principales</p>
+          <h2 class="mt-3 text-3xl font-black leading-tight text-primary-700 md:text-4xl">Atención integral para trauma y alta complejidad</h2>
+        </div>
+        <p class="text-base leading-7 text-text-muted md:text-lg md:leading-8">
+          Santa Isabel concentra servicios asistenciales orientados al paciente adulto, con soporte quirúrgico, hospitalario, diagnóstico y terapéutico para responder a necesidades de mediana y alta complejidad.
+        </p>
+      </div>
+    </section>
+
+    <section id="servicios" class="santa-services scroll-mt-32 py-14 md:py-20">
+      <div class="mx-auto max-w-7xl px-5">
+        <div class="space-y-10">
+          {services.map((service, index) => (
+            <article class={`santa-service ${index % 2 === 1 ? 'santa-service-reverse' : ''} ${service.title === 'Cirugías de mediana y alta complejidad' ? 'santa-service-featured' : ''}`}>
+              <img src={service.image} alt={service.title} class="santa-service-image" loading="lazy" decoding="async" />
+              <div class="santa-service-body">
+                <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-accent-700">Servicio {String(index + 1).padStart(2, '0')}</p>
+                <h3 class="mt-3 text-3xl font-black leading-tight text-primary-800 md:text-4xl">{service.title}</h3>
+                <div class="mt-5 space-y-4 text-sm leading-6 text-text-muted md:text-base md:leading-7">
+                  {service.text?.map((paragraph) => <p>{paragraph}</p>)}
+                  {service.bullets && (
+                    <ul class="santa-list grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                      {service.bullets.map((item) => <li>{item}</li>)}
+                    </ul>
+                  )}
+                  {service.groups && (
+                    <div class="grid gap-3 md:grid-cols-2">
+                      {service.groups.map((group) => (
+                        <section class="rounded-xl border border-primary-100 bg-white/78 p-4">
+                          <h4 class="text-sm font-extrabold text-primary-700">{group.title}</h4>
+                          <ul class="mt-3 space-y-2">
+                            {group.items.map((item) => <li>{item}</li>)}
+                          </ul>
+                        </section>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .santa-hero {
+    isolation: isolate;
+  }
+
+  .santa-services {
+    background:
+      radial-gradient(circle at 8% 10%, rgba(194, 213, 1, 0.12) 0%, transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, #f4f6fa 100%);
+  }
+
+  .santa-service {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid rgba(5, 46, 135, 0.14);
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 20px 44px -34px rgba(3, 28, 81, 0.58);
+    backdrop-filter: blur(10px);
+  }
+
+  .santa-service {
+    grid-template-columns: minmax(18rem, 0.42fr) 1fr;
+  }
+
+  .santa-service-reverse {
+    grid-template-columns: 1fr minmax(18rem, 0.42fr);
+  }
+
+  .santa-service-reverse .santa-service-image {
+    order: 2;
+  }
+
+  .santa-service-reverse .santa-service-body {
+    order: 1;
+  }
+
+  .santa-service-image {
+    height: 100%;
+    min-height: 20rem;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .santa-service-body {
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .santa-service-featured {
+    border-color: rgba(194, 213, 1, 0.42);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(249, 251, 230, 0.84));
+  }
+
+  .santa-list li {
+    border: 1px solid rgba(5, 46, 135, 0.12);
+    background: rgba(243, 245, 249, 0.72);
+    padding: 0.62rem 0.75rem;
+    color: #031c51;
+  }
+
+  @media (max-width: 760px) {
+    .santa-service,
+    .santa-service-reverse {
+      grid-template-columns: 1fr;
+    }
+
+    .santa-service-reverse .santa-service-image,
+    .santa-service-reverse .santa-service-body {
+      order: initial;
+    }
+
+    .santa-service-image {
+      height: 14rem;
+      min-height: 14rem;
+    }
+
+    .santa-service-body {
+      min-height: auto;
+      padding: 1.35rem;
+    }
+  }
+</style>
