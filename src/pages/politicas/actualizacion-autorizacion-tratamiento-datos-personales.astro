@@ -1,0 +1,474 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MainHeader from '../../components/MainHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+
+const policyPurposes = [
+  'Validar la informacion en cumplimiento de la exigencia legal de conocimiento del cliente o el usuario aplicable a la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D.',
+  'Para el tratamiento de los datos personales protegidos por nuestro ordenamiento juridico.',
+  'Para el tratamiento y proteccion de los datos de contacto (direcciones de correo fisico, de residencia, electronico, redes sociales y telefono).',
+  'Para confirmar, solicitar y recibir de empresas de caracter publico o privado la informacion personal, academica, laboral y de seguridad social, que reposa en sus bases de datos.',
+  'Para utilizar y enviar a traves de las herramientas tecnologicas, como WhatsApp, correos electronicos y cualquier otro medio de comunicacion, las citaciones a procesos disciplinarios y envio de pruebas cuando se le impute alguna falta disciplinaria al numero de celular aportado en hoja de vida.',
+  'Verificacion del sistema de administracion del riesgo de lavado de activos y financiacion del terrorismo (SARLAFT), antecedentes disciplinarios, policiales y demas.',
+];
+
+const holderRights = [
+  'Conocer, actualizar, rectificar y suprimir su informacion personal.',
+  'Revocar el consentimiento otorgado para el tratamiento de datos personales.',
+  'Presentar requerimientos a traves de los canales dispuestos por la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D.',
+];
+
+const pdfDownloadUrl = 'https://drive.google.com/file/d/1dX09yJvN8rqh5sg4xkeFqWxwFNvTIRvc/view';
+---
+
+<Layout>
+  <MainHeader />
+
+  <main class="bg-background text-text-base">
+    <section class="policy-hero relative overflow-hidden border-b border-primary-100">
+      <div class="mx-auto max-w-7xl px-5 py-14 md:py-18">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_20rem] lg:items-end">
+          <div class="relative z-10 max-w-3xl">
+            <span class="inline-flex rounded-full border border-accent-400/40 bg-white/70 px-4 py-1 text-xs font-extrabold uppercase tracking-[0.22em] text-primary-700 shadow-sm backdrop-blur">
+              Politicas institucionales
+            </span>
+            <h1 class="mt-5 max-w-4xl text-3xl font-black leading-[1.05] text-primary-800 md:text-5xl">
+              Actualizacion y/o Autorizacion de Tratamiento de Datos Personales
+            </h1>
+            <p class="mt-5 max-w-3xl text-base leading-7 text-text-muted md:text-lg md:leading-8">
+              Documento informativo presentado en formato de lectura institucional, con la informacion de autorizacion, finalidades del tratamiento y derechos del titular de los datos.
+            </p>
+          </div>
+
+          <aside class="doc-meta-card relative z-10 overflow-hidden rounded-[1.75rem] border border-primary-100 bg-white/88 p-5 shadow-[0_22px_48px_-32px_rgba(3,28,81,0.55)] backdrop-blur">
+            <p class="text-[0.72rem] font-extrabold uppercase tracking-[0.18em] text-primary-600">Referencia documental</p>
+            <dl class="mt-4 grid gap-3 text-sm">
+              <div class="rounded-2xl border border-primary-100 bg-primary-50/60 px-4 py-3">
+                <dt class="font-bold text-text-subtle">Codigo</dt>
+                <dd class="mt-1 font-black text-primary-800">GH-BO-RS-F-54</dd>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Version</dt>
+                  <dd class="mt-1 font-black text-primary-800">3</dd>
+                </div>
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Pagina</dt>
+                  <dd class="mt-1 font-black text-primary-800">1 de 2</dd>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Emision</dt>
+                  <dd class="mt-1 font-black text-primary-800">29-02-2020</dd>
+                </div>
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Vigencia</dt>
+                  <dd class="mt-1 font-black text-primary-800">31-10-2024</dd>
+                </div>
+              </div>
+            </dl>
+
+            <div class="mt-4 rounded-2xl border border-primary-100 bg-primary-50/45 p-3">
+              <p class="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-primary-600">Abrir documento</p>
+              <a
+                href={pdfDownloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-2 inline-flex items-center gap-2 rounded-full bg-primary-500 px-4 py-2 text-xs font-extrabold text-white shadow-[0_12px_24px_-18px_rgba(3,28,81,0.8)] transition duration-300 hover:-translate-y-0.5 hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-4 w-4"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Abrir PDF
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-b border-primary-100 bg-linear-to-b from-primary-50/45 via-white to-white">
+      <div class="mx-auto max-w-6xl px-5 py-12 md:py-16">
+        <article class="document-shell mx-auto overflow-hidden rounded-4xl border border-primary-100 bg-white shadow-[0_28px_70px_-40px_rgba(3,28,81,0.65)]">
+          <header class="document-header border-b border-primary-100 px-6 py-6 md:px-10 md:py-8">
+            <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-primary-600">Documento institucional</p>
+                <h2 class="mt-3 text-2xl font-black leading-tight text-primary-800 md:text-3xl">
+                  Autorizacion informada para el tratamiento de datos personales
+                </h2>
+              </div>
+              <div class="rounded-2xl border border-accent-400/50 bg-accent-50 px-4 py-3 text-sm font-semibold text-primary-800">
+                Uso orientado a lectura, consulta y descarga del original.
+              </div>
+            </div>
+          </header>
+
+          <div class="grid gap-0 lg:grid-cols-[minmax(0,1fr)_18rem]">
+            <div class="document-body px-6 py-7 md:px-10 md:py-10">
+              <section class="space-y-5">
+                <p>
+                  Declaro que he sido informado: (i) que la <strong>ORGANIZACION HUMANA INTEGRAL Y SU SEDE CLINICA SANTA ISABEL L.D.</strong>, como responsable de los datos personales obtenidos a traves de sus distintos canales de atencion, han puesto a mi disposicion la linea de atencion nacional <strong>+57 (5) 580 35 35</strong>, y la oficina principal a nivel nacional, cuya informacion puedo consultar en <a href="https://www.clinicaintegral.com.co/" target="_blank" rel="noopener noreferrer" class="text-link underline decoration-primary-200 underline-offset-3 hover:text-link-hover">https://www.clinicaintegral.com.co/</a>, disponibles de lunes a sabado de 8:00 a.m. a 12 p.m. y 2:00 p.m. a 06:00 p.m., para la atencion de requerimientos relacionados con el tratamiento de mis datos personales y el ejercicio de los derechos mencionados en esta autorizacion.
+                </p>
+
+                <p>
+                  Esta autorizacion permitira a la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D. recolectar, transferir, almacenar, usar, circular, suprimir, compartir, actualizar y transmitir, de acuerdo con el procedimiento para el tratamiento de los datos personales en procura de cumplir con las siguientes finalidades:
+                </p>
+
+                <ol class="policy-list list-decimal space-y-3 pl-5 marker:font-black marker:text-primary-600">
+                  {policyPurposes.map((purpose) => (
+                    <li>{purpose}</li>
+                  ))}
+                </ol>
+              </section>
+
+              <section class="mt-10 rounded-[1.6rem] border border-primary-100 bg-primary-50/55 p-6 md:p-7">
+                <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">Datos sensibles</p>
+                <p class="mt-4">
+                  A su vez se solicita a los titulares de los datos de los servicios ofrecidos, de manera expresa, libre y voluntaria, autorice el tratamiento de datos personales sensibles tales como el origen racial o etnico, poblacion especial en condicion de vulnerabilidad y aquella poblacion afectada por declaratoria de emergencia economica, social y ecologica; al tenor de lo dispuesto en el articulo 6 de la Ley 1581 de 2012 y demas disposiciones normativas vigentes.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-5">
+                <p>
+                  El alcance de la autorizacion comprende la facultad para que la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D. envie mensajes al correo electronico suministrado con contenidos institucionales, notificaciones e informacion del estado de cuentas.
+                </p>
+
+                <p>
+                  Asi mismo, autorizo a la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D. para realizar visita domiciliaria a mi residencia registrada en hoja de vida, con los pormenores que esta conlleva, en caso de que esta sea requerida por la empresa con la que me encuentro laborando; a su vez autorizo a la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D. para que actualice la direccion cuando me traslade de residencia.
+                </p>
+              </section>
+
+              <section class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+                <div class="space-y-5">
+                  <p>
+                    Mis derechos como titular del dato son los previstos en la constitucion y la ley, especialmente el derecho a conocer, actualizar, rectificar y suprimir mi informacion personal; asi como el derecho a revocar el consentimiento otorgado para el tratamiento de datos personales. Estos los puedo ejercer a traves de los canales dispuestos por la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D. para la atencion al publico.
+                  </p>
+                  <p>
+                    Otorgo mi consentimiento a la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D. para tratar mi informacion personal, de acuerdo con la politica de tratamiento de datos personales.
+                  </p>
+                </div>
+
+                <aside class="rounded-3xl border border-primary-100 bg-white p-5 shadow-[0_18px_38px_-30px_rgba(3,28,81,0.5)]">
+                  <p class="text-sm font-black text-primary-800">Derechos del titular</p>
+                  <ul class="mt-4 space-y-3 text-sm leading-6 text-text-muted">
+                    {holderRights.map((right) => (
+                      <li class="flex gap-3">
+                        <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
+                        <span>{right}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </aside>
+              </section>
+
+              <section class="mt-10 space-y-5">
+                <p>
+                  Autorizo a la Organizacion Humana Integral y su sede Clinica Santa Isabel L.D. a modificar o actualizar su contenido, a fin de atender reformas legislativas, politicas internas o nuevos requerimientos para la prestacion u ofrecimiento de servicios o productos, dando aviso previo por medio de la pagina web de la compania y/o correo electronico.
+                </p>
+                <p>
+                  La informacion del formato del cual forma parte la presente autorizacion la he suministrado de forma voluntaria y es veridica.
+                </p>
+              </section>
+            </div>
+
+            <aside class="document-rail border-t border-primary-100 bg-primary-50/45 px-6 py-7 lg:border-l lg:border-t-0">
+              <div class="sticky top-28 space-y-4">
+                <div class="rounded-3xl border border-primary-100 bg-white p-5 shadow-[0_18px_40px_-34px_rgba(3,28,81,0.5)]">
+                  <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">Canales de atencion</p>
+                  <p class="mt-3 text-lg font-black text-primary-800">+57 (5) 580 35 35</p>
+                  <p class="mt-3 text-sm leading-6 text-text-muted">Lunes a sabado de 8:00 a.m. a 12 p.m. y de 2:00 p.m. a 06:00 p.m.</p>
+                </div>
+
+                <div class="rounded-3xl border border-primary-100 bg-white p-5 shadow-[0_18px_40px_-34px_rgba(3,28,81,0.5)]">
+                  <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">Nota</p>
+                  <p class="mt-3 text-sm leading-6 text-text-muted">
+                    Este contenido reproduce la informacion del documento institucional en un formato digital de consulta para el sitio web.
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="border-b border-primary-100 bg-white">
+      <div class="mx-auto max-w-6xl px-5 py-14 md:py-16">
+        <div class="form-shell overflow-hidden rounded-4xl border border-primary-100 bg-white shadow-[0_24px_58px_-36px_rgba(3,28,81,0.55)]">
+          <div class="border-b border-primary-100 bg-linear-to-r from-primary-700 via-primary-600 to-primary-700 px-6 py-5 text-white md:px-8">
+            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-accent-300">Campos del formato</p>
+            <h2 class="mt-2 text-2xl font-black">Resumen visual del diligenciamiento</h2>
+          </div>
+
+          <div class="form-preview px-4 py-5 md:px-6 md:py-6">
+            <div class="paper-form" role="presentation" aria-hidden="true">
+              <div class="paper-row paper-row-full">
+                <p><strong>Fecha de diligenciamiento:</strong> DD / MM / AAAA</p>
+              </div>
+
+              <div class="paper-row paper-row-split">
+                <div class="paper-cell"><span>P. Apellido:</span><i></i></div>
+                <div class="paper-cell"><span>S. Apellido:</span><i></i></div>
+              </div>
+
+              <div class="paper-row paper-row-split">
+                <div class="paper-cell"><span>P. nombre:</span><i></i></div>
+                <div class="paper-cell"><span>S. nombre:</span><i></i></div>
+              </div>
+
+              <div class="paper-row paper-row-split paper-row-doc">
+                <div class="paper-cell paper-doc-types">
+                  <span>Tipo de documento:</span>
+                  <div class="doc-options">
+                    <em></em><b>C.C</b>
+                    <em></em><b>C.E</b>
+                    <em></em><b>T.I</b>
+                    <em></em><b>R.C</b>
+                    <em></em><b>P.S</b>
+                  </div>
+                </div>
+                <div class="paper-cell"><span>Numero de documento:</span><i></i></div>
+              </div>
+
+              <div class="paper-row paper-row-split">
+                <div class="paper-cell"><span>Ciudad:</span><i></i></div>
+                <div class="paper-cell"><span>Telefono:</span><i></i></div>
+              </div>
+
+              <div class="paper-row paper-row-full">
+                <div class="paper-cell"><span>E mail de contacto:</span><i></i></div>
+              </div>
+
+              <div class="paper-row paper-row-full paper-row-consent">
+                <div class="paper-cell paper-consent-options">
+                  <span>Autorizo a circular la informacion:</span>
+                  <div class="consent-options">
+                    <em></em><b>SI</b>
+                    <em></em><b>NO</b>
+                  </div>
+                </div>
+              </div>
+
+              <div class="paper-row paper-row-full paper-row-signature">
+                <div class="paper-cell"><span>Firma del titular:</span><i class="signature-line"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .policy-hero {
+    background:
+      radial-gradient(circle at 14% 16%, rgba(194, 213, 1, 0.16), transparent 34%),
+      radial-gradient(circle at 88% 20%, rgba(5, 46, 135, 0.12), transparent 28%),
+      linear-gradient(180deg, rgba(243, 245, 249, 0.8), rgba(255, 255, 255, 0.92));
+  }
+
+  .doc-meta-card::before {
+    content: "";
+    position: absolute;
+    inset: auto -2rem -2rem auto;
+    height: 8rem;
+    width: 8rem;
+    border-radius: 9999px;
+    background: rgba(194, 213, 1, 0.16);
+    filter: blur(10px);
+  }
+
+  .document-shell,
+  .form-shell {
+    position: relative;
+  }
+
+  .document-shell::before,
+  .form-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to bottom, rgba(5, 46, 135, 0.025) 1px, transparent 1px);
+    background-size: 100% 2.1rem;
+    opacity: 0.5;
+  }
+
+  .document-header {
+    background:
+      linear-gradient(180deg, rgba(243, 245, 249, 0.85), rgba(255, 255, 255, 0.96)),
+      linear-gradient(90deg, rgba(5, 46, 135, 0.06), transparent 35%);
+  }
+
+  .document-body,
+  .document-rail,
+  .form-shell > div {
+    position: relative;
+    z-index: 1;
+  }
+
+  .document-body p,
+  .policy-list li {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #283851;
+  }
+
+  .paper-form {
+    overflow: hidden;
+    border: 1px solid rgba(193, 203, 225, 0.95);
+    border-radius: 1.2rem;
+    background:
+      radial-gradient(circle at 96% 6%, rgba(194, 213, 1, 0.12), transparent 22%),
+      linear-gradient(180deg, rgba(250, 252, 255, 0.98), rgba(246, 249, 253, 0.98));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+  }
+
+  .paper-row {
+    display: grid;
+    border-top: 1px solid rgba(208, 218, 236, 0.9);
+  }
+
+  .paper-row:first-child {
+    border-top: 0;
+  }
+
+  .paper-row-split {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .paper-row-full {
+    grid-template-columns: 1fr;
+  }
+
+  .paper-row > p,
+  .paper-cell {
+    margin: 0;
+    min-height: 3.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    color: #1f3454;
+    font-size: 0.94rem;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+
+  .paper-row > p strong,
+  .paper-cell > span {
+    white-space: nowrap;
+    color: #233d63;
+    font-weight: 800;
+  }
+
+  .paper-row-split > .paper-cell:first-child {
+    border-right: 1px solid rgba(208, 218, 236, 0.9);
+  }
+
+  .paper-cell i {
+    height: 1.95rem;
+    flex: 1;
+    border: 1px solid rgba(160, 179, 212, 0.95);
+    border-radius: 0.55rem;
+    background: rgba(255, 255, 255, 0.88);
+    display: block;
+  }
+
+  .paper-row-doc .paper-cell {
+    min-height: 3.35rem;
+  }
+
+  .doc-options,
+  .consent-options {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin-left: 0.2rem;
+    flex-wrap: wrap;
+  }
+
+  .doc-options em,
+  .consent-options em {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 9999px;
+    border: 1.2px solid rgba(74, 100, 147, 0.75);
+    background: rgba(255, 255, 255, 0.92);
+    display: inline-block;
+    margin-left: 0.35rem;
+  }
+
+  .doc-options b,
+  .consent-options b {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #334f76;
+    margin-right: 0.2rem;
+  }
+
+  .paper-row-consent .paper-cell,
+  .paper-row-signature .paper-cell {
+    min-height: 3rem;
+  }
+
+  .paper-row-signature .paper-cell {
+    align-items: center;
+  }
+
+  .paper-row-signature .signature-line {
+    height: 2.1rem;
+  }
+
+  @media (max-width: 1023px) {
+    .document-shell::before,
+    .form-shell::before {
+      background-size: 100% 2.35rem;
+    }
+
+    .paper-row-split {
+      grid-template-columns: 1fr;
+    }
+
+    .paper-row-split > .paper-cell:first-child {
+      border-right: 0;
+      border-bottom: 1px solid rgba(208, 218, 236, 0.9);
+    }
+
+    .paper-row > p,
+    .paper-cell {
+      min-height: 3rem;
+      font-size: 0.87rem;
+      padding: 0.55rem 0.75rem;
+    }
+
+    .paper-row > p strong,
+    .paper-cell > span {
+      white-space: normal;
+    }
+
+    .doc-options b,
+    .consent-options b {
+      font-size: 0.78rem;
+    }
+
+    .doc-options em,
+    .consent-options em {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .doc-meta-card,
+    .document-shell,
+    .form-shell {
+      scroll-behavior: auto;
+    }
+  }
+</style>

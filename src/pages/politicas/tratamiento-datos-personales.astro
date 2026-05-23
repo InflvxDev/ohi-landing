@@ -1,0 +1,748 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MainHeader from '../../components/MainHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+
+const pdfDownloadUrl = 'https://drive.google.com/file/d/101poOsYcoe90pSRMQcV3KVnDMHlNdsAc/view?usp=sharing';
+
+const tocItems = [
+  'Objetivo',
+  'Alcance',
+  'Responsable del tratamiento',
+  'Definiciones',
+  'Principios',
+  'Tipo de informacion registrada',
+  'Derechos de los titulares',
+  'Redes sociales',
+  'Finalidad del tratamiento',
+  'Autorizacion del titular',
+  'Derechos de los titulares',
+  'Datos de ninos y adolescentes',
+  'Revocatoria y supresion',
+  'Deberes de responsables y encargados',
+  'Procedimiento de consultas',
+  'Procedimiento de reclamos',
+  'Requisito de procedibilidad',
+  'Transferencia y transmision internacional',
+  'Seguridad de la informacion',
+  'Vigencia de la politica',
+  'Revision historica',
+];
+
+const definitions = [
+  {
+    term: 'Autorizacion',
+    desc: 'Consentimiento previo, expreso e informado del titular para llevar a cabo el tratamiento de datos personales.',
+  },
+  {
+    term: 'Base de datos',
+    desc: 'Conjunto organizado de datos personales que sea objeto de tratamiento.',
+  },
+  {
+    term: 'Aviso de privacidad',
+    desc: 'Comunicacion verbal o escrita generada por el responsable, dirigida al titular para el tratamiento de sus datos personales, mediante la cual se informa la existencia de las politicas aplicables, la forma de acceder a ellas y las finalidades del tratamiento.',
+  },
+  {
+    term: 'Dato publico',
+    desc: 'Dato que no sea semiprivado, privado o sensible. Incluye, entre otros, datos sobre estado civil, profesion u oficio, calidad de comerciante o servidor publico y aquellos contenidos en registros y documentos publicos.',
+  },
+  {
+    term: 'Datos sensibles',
+    desc: 'Datos que afectan la intimidad del titular o cuyo uso indebido puede generar discriminacion, como origen racial o etnico, orientacion politica, convicciones religiosas o filosoficas, afiliacion sindical, salud, vida sexual y datos biometricos.',
+  },
+  {
+    term: 'Dato personal semiprivado',
+    desc: 'Dato sin naturaleza intima, reservada o publica, cuyo conocimiento puede interesar a su titular y a un grupo de personas o a la sociedad. Requiere autorizacion expresa del titular.',
+  },
+  {
+    term: 'Dato personal privado',
+    desc: 'Dato personal de naturaleza intima o reservada que solo interesa a su titular y requiere autorizacion expresa para su tratamiento.',
+  },
+  {
+    term: 'Dato personal publico',
+    desc: 'Dato personal determinado expresamente por la constitucion y las normas como publico, para cuyo tratamiento no se requiere autorizacion del titular.',
+  },
+  {
+    term: 'Tratamiento',
+    desc: 'Cualquier operacion o conjunto de operaciones sobre datos personales, como recoleccion, almacenamiento, uso, circulacion o supresion.',
+  },
+  {
+    term: 'Transferencia',
+    desc: 'Envio de informacion o datos personales por parte del responsable y/o encargado ubicado en Colombia a otro responsable dentro o fuera del pais.',
+  },
+  {
+    term: 'Transmision',
+    desc: 'Tratamiento de datos personales que implica su comunicacion dentro o fuera de Colombia para que el encargado trate los datos por cuenta del responsable.',
+  },
+  {
+    term: 'Habeas data',
+    desc: 'Derecho de los titulares a conocer, actualizar y rectificar la informacion recogida sobre ellos en bancos de datos y archivos de entidades publicas y privadas.',
+  },
+  {
+    term: 'Titular',
+    desc: 'Persona natural cuyos datos personales son objeto de tratamiento.',
+  },
+];
+
+const principles = [
+  {
+    title: 'Principio de legalidad en materia de tratamiento de datos',
+    desc: 'El tratamiento de datos personales es una actividad reglada que debe sujetarse a las disposiciones vigentes y aquellas que las desarrollen.',
+  },
+  {
+    title: 'Principio de libertad',
+    desc: 'El tratamiento solo puede realizarse con autorizacion previa, expresa e informada del titular. Los datos no podran ser obtenidos ni divulgados sin autorizacion, salvo disposicion legal o judicial.',
+  },
+  {
+    title: 'Principio de finalidad',
+    desc: 'El tratamiento obedecera a una finalidad legitima de acuerdo con la Constitucion y la Ley, previamente informada al titular.',
+  },
+  {
+    title: 'Principio de veracidad o calidad',
+    desc: 'La informacion sujeta a tratamiento debe ser exacta, comprobable, comprensible y actualizada, evitando datos parciales o fraccionados que induzcan a error.',
+  },
+  {
+    title: 'Principio de transparencia',
+    desc: 'Se garantizara al titular el derecho a obtener del responsable, en cualquier momento y sin restricciones, informacion acerca de la existencia de sus datos.',
+  },
+  {
+    title: 'Principio de acceso y circulacion restringida',
+    desc: 'El tratamiento se sujeta a los limites derivados de la naturaleza de los datos personales, la ley y la Constitucion. Solo podran acceder personas autorizadas por el titular o previstas en la ley.',
+  },
+  {
+    title: 'Principio de seguridad',
+    desc: 'Se aplicaran medidas tecnicas, humanas y administrativas necesarias para proteger los registros y evitar adulteracion, perdida, consulta o acceso no autorizado.',
+  },
+  {
+    title: 'Principio de confidencialidad',
+    desc: 'Las personas que intervengan en el tratamiento estan obligadas a garantizar la reserva de la informacion incluso despues de finalizada la relacion con las labores del tratamiento.',
+  },
+];
+
+const infoTypes = [
+  'Nombres y apellidos completos.',
+  'Tipo y numero del documento de identidad (registro civil, tarjeta de identidad, cedula de ciudadania, pasaporte, cedula de extranjeria o carne diplomatico).',
+  'Lugar y fecha de nacimiento, nacionalidad.',
+  'Edad, sexo, estado civil, idiomas que habla y creencias religiosas.',
+  'Escolaridad, profesion y ocupacion.',
+  'Direccion fisica habitual, direccion de correo electronico, numero de telefono fijo y celular.',
+  'Empleador, su ubicacion y sus datos de contacto.',
+  'Informacion clinica del paciente, incluyendo antecedentes personales, familiares y epidemiologicos, resultados de examenes, consultas realizadas, medicamentos, diagnosticos, valoraciones y procedimientos.',
+  'Datos de contacto de familiares, responsables o representantes legales.',
+  'Habitos personales.',
+  'Informacion obtenida durante la revision de peticiones o quejas.',
+  'Informacion brindada a traves de encuestas u otros instrumentos institucionales.',
+];
+
+const rightsSection7 = [
+  'Conocer, actualizar y rectificar sus datos personales frente a responsables o encargados del tratamiento.',
+  'Solicitar prueba de la autorizacion otorgada al responsable, salvo excepciones legales.',
+  'Ser informado por el responsable o encargado, previa solicitud, respecto del uso dado a sus datos personales.',
+  'Presentar ante la Superintendencia de Industria y Comercio quejas por infracciones a la normativa aplicable.',
+  'Revocar la autorizacion y/o solicitar la supresion del dato cuando no se respeten principios, derechos y garantias constitucionales y legales.',
+  'Acceder en forma gratuita a sus datos personales que hayan sido objeto de tratamiento.',
+];
+
+const treatmentPurposes = [
+  'Prestacion adecuada de los servicios ofrecidos por la organizacion.',
+  'Evaluar la calidad de los servicios.',
+  'Prevenir, monitorear, detectar, investigar, analizar y controlar amenazas o incidentes de seguridad informatica o de la informacion.',
+  'Enviar informacion institucional, publicitaria o comercial por correo fisico, correo electronico, mensajes de texto o cualquier otro medio de comunicacion.',
+  'Controlar el acceso a la organizacion apoyado en medidas de seguridad y zonas de videovigilancia.',
+  'Reglamentar la firma del acuerdo de confidencialidad para la entrega de datos con proveedores.',
+  'Gestionar la seguridad de personas, bienes y activos de informacion en custodia de la organizacion.',
+  'Suministrar informacion a autoridades y/o cooperar con ellas cuando sea requerido.',
+  'Prevenir, detectar, monitorear y controlar el lavado de activos y la financiacion del terrorismo.',
+];
+
+const noAuthCases = [
+  'Informacion requerida por una entidad publica o administrativa en ejercicio de sus funciones legales o por orden judicial.',
+  'Datos de naturaleza publica.',
+  'Casos de urgencia medica o sanitaria.',
+  'Tratamiento de informacion autorizado por la ley para fines historicos, estadisticos o cientificos.',
+  'Datos relacionados con el Registro Civil de las personas.',
+];
+
+const sensitiveDataRules = [
+  'Informar al titular que, por tratarse de datos sensibles, no esta obligado a autorizar su tratamiento.',
+  'Informar de forma explicita y previa cuales datos seran sensibles y su finalidad, obteniendo consentimiento expreso.',
+  'Ninguna actividad podra condicionarse al suministro de datos personales sensibles.',
+];
+
+const rightsSection11 = [
+  'Conocer, actualizar y rectificar sus datos personales frente a responsables o encargados del tratamiento.',
+  'Solicitar prueba de la autorizacion otorgada a la Organizacion Humana Integral S.A. para el tratamiento de sus datos personales.',
+  'Presentar ante la Superintendencia de Industria y Comercio quejas por infracciones a la Ley 1581 de 2012.',
+  'Solicitar la supresion de sus datos y/o revocar la autorizacion cuando no se respeten los principios, derechos y garantias constitucionales y legales.',
+  'Abstenerse de responder preguntas sobre datos sensibles, incluyendo aquellas sobre ninos, ninas y adolescentes.',
+  'Acceder en forma gratuita, en las condiciones definidas en este documento, a sus datos personales objeto de tratamiento.',
+  'Exigir que la informacion sea conservada con condiciones de seguridad para impedir adulteracion, perdida, consulta, uso o acceso no autorizado.',
+];
+
+const childrenRules = [
+  'Que el tratamiento responda y respete el interes superior de los ninos y adolescentes.',
+  'Que se asegure el respeto de sus derechos fundamentales.',
+  'Que se cumplan los requisitos legales para el tratamiento, como autorizacion, finalidad e informacion de deberes y derechos del titular.',
+  'Cumplidos los anteriores requisitos, el representante legal otorgara la autorizacion a la organizacion.',
+];
+
+const revocationChannels = [
+  'Por medio fisico, solicitud radicada en correspondencia en la Carrera 19 #14-47, barrio San Vicente, Valledupar, Cesar.',
+  'Horario de oficina: lunes a viernes de 08:00 AM a 12:00 PM y de 02:00 PM a 06:00 PM; sabados de 08:00 AM a 12:00 PM.',
+  'Por medio electronico al correo: lineadenuncias@ohisalud.com. La organizacion respondera por el mismo medio en que fue formulada la solicitud.',
+];
+
+const dutiesResponsible = [
+  'Garantizar al titular, en todo tiempo, el pleno y efectivo ejercicio del derecho de habeas data.',
+  'Solicitar y conservar copia de la autorizacion otorgada por el titular.',
+  'Informar debidamente al titular sobre la finalidad de la recoleccion y los derechos que le asisten.',
+  'Conservar la informacion bajo condiciones de seguridad adecuadas.',
+  'Garantizar que la informacion suministrada al encargado sea veraz, completa, exacta, actualizada y comprensible.',
+  'Actualizar la informacion y comunicar oportunamente novedades al encargado del tratamiento.',
+  'Rectificar la informacion cuando sea incorrecta.',
+  'Suministrar al encargado unicamente datos cuyo tratamiento este previamente autorizado.',
+  'Exigir al encargado el respeto de las condiciones de seguridad y privacidad.',
+  'Tramitar las consultas y reclamos en los terminos legales.',
+  'Informar al encargado cuando determinada informacion este en discusion por parte del titular.',
+  'Informar al titular sobre el uso dado a sus datos cuando sea solicitado.',
+  'Informar a la autoridad de proteccion de datos sobre violaciones de seguridad que impliquen riesgos para titulares.',
+  'Cumplir las instrucciones y requerimientos de la Superintendencia de Industria y Comercio.',
+];
+
+const dutiesProcessor = [
+  'Garantizar al titular el pleno y efectivo ejercicio del derecho de habeas data.',
+  'Conservar la informacion bajo condiciones de seguridad para impedir adulteracion, perdida, consulta, uso o acceso no autorizado.',
+  'Realizar oportunamente la actualizacion, rectificacion o supresion de los datos en terminos de ley.',
+  'Actualizar la informacion reportada por los responsables dentro de los cinco (5) dias habiles siguientes a su recibo.',
+  'Tramitar consultas y reclamos formulados por los titulares en los terminos legales.',
+  'Adoptar politicas y procedimientos para garantizar el cumplimiento de la ley y la atencion de consultas y reclamos.',
+  'Registrar en la base de datos la leyenda "reclamo en tramite" en la forma establecida por la ley.',
+  'Insertar la leyenda "informacion en discusion judicial" cuando corresponda por orden de autoridad competente.',
+  'Abstenerse de circular informacion controvertida por el titular cuando su bloqueo haya sido ordenado por la autoridad.',
+  'Permitir el acceso a la informacion unicamente a personas autorizadas.',
+  'Informar a la Superintendencia de Industria y Comercio sobre violaciones de seguridad que impliquen riesgos para titulares.',
+  'Cumplir las instrucciones y requerimientos de la Superintendencia de Industria y Comercio.',
+];
+
+const claimRequirements = [
+  'Nombre del peticionario o solicitante.',
+  'Numero de identificacion del solicitante o peticionario.',
+  'Direccion del domicilio.',
+  'Descripcion clara y precisa de los hechos que fundamentan la solicitud.',
+  'Documentos que requiera sean validados.',
+];
+
+const transferCases = [
+  'Informacion respecto de la cual el titular haya otorgado su autorizacion expresa e inequivoca para la transferencia.',
+  'Intercambio de datos de caracter medico cuando el tratamiento del titular lo exija por razones de salud o higiene publica.',
+  'Transferencias bancarias o bursatiles, conforme a la legislacion aplicable.',
+  'Transferencias acordadas en el marco de tratados internacionales en los cuales la Republica de Colombia sea parte, con fundamento en el principio de reciprocidad.',
+  'Transferencias necesarias para la ejecucion de un contrato entre el titular y la organizacion, o para medidas precontractuales, con autorizacion del titular.',
+];
+---
+
+<Layout>
+  <MainHeader />
+
+  <main class="bg-background text-text-base">
+    <section class="policy-hero relative overflow-hidden border-b border-primary-100">
+      <div class="mx-auto max-w-7xl px-5 py-14 md:py-18">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_20rem] lg:items-end">
+          <div class="relative z-10 max-w-3xl">
+            <span class="inline-flex rounded-full border border-accent-400/40 bg-white/70 px-4 py-1 text-xs font-extrabold uppercase tracking-[0.22em] text-primary-700 shadow-sm backdrop-blur">
+              Politicas institucionales
+            </span>
+            <h1 class="mt-5 max-w-4xl text-3xl font-black leading-[1.05] text-primary-800 md:text-5xl">
+              Politica de Tratamiento de Datos Personales
+            </h1>
+            <p class="mt-5 max-w-3xl text-base leading-7 text-text-muted md:text-lg md:leading-8">
+              Documento institucional que define lineamientos, principios, finalidades y procedimientos para el tratamiento de datos personales.
+            </p>
+          </div>
+
+          <aside class="doc-meta-card relative z-10 overflow-hidden rounded-[1.75rem] border border-primary-100 bg-white/88 p-5 shadow-[0_22px_48px_-32px_rgba(3,28,81,0.55)] backdrop-blur">
+            <p class="text-[0.72rem] font-extrabold uppercase tracking-[0.18em] text-primary-600">Referencia documental</p>
+            <dl class="mt-4 grid gap-3 text-sm">
+              <div class="rounded-2xl border border-primary-100 bg-primary-50/60 px-4 py-3">
+                <dt class="font-bold text-text-subtle">Codigo</dt>
+                <dd class="mt-1 font-black text-primary-800">GG-CI-L-01</dd>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Version</dt>
+                  <dd class="mt-1 font-black text-primary-800">1</dd>
+                </div>
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Pagina</dt>
+                  <dd class="mt-1 font-black text-primary-800">1 de 9</dd>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Emision</dt>
+                  <dd class="mt-1 font-black text-primary-800">22-07-2025</dd>
+                </div>
+                <div class="rounded-2xl border border-primary-100 bg-white px-4 py-3">
+                  <dt class="font-bold text-text-subtle">Vigencia</dt>
+                  <dd class="mt-1 font-black text-primary-800">22-07-2025</dd>
+                </div>
+              </div>
+            </dl>
+
+            <div class="mt-4 rounded-2xl border border-primary-100 bg-primary-50/45 p-3">
+              <p class="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-primary-600">Descarga oficial</p>
+              <a
+                href={pdfDownloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-2 inline-flex items-center gap-2 rounded-full bg-primary-500 px-4 py-2 text-xs font-extrabold text-white shadow-[0_12px_24px_-18px_rgba(3,28,81,0.8)] transition duration-300 hover:-translate-y-0.5 hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-4 w-4"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Abrir PDF
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-b border-primary-100 bg-linear-to-b from-primary-50/45 via-white to-white">
+      <div class="mx-auto max-w-6xl px-5 py-12 md:py-16">
+        <article class="document-shell mx-auto overflow-hidden rounded-4xl border border-primary-100 bg-white shadow-[0_28px_70px_-40px_rgba(3,28,81,0.65)]">
+          <header class="document-header border-b border-primary-100 px-6 py-6 md:px-10 md:py-8">
+            <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-primary-600">Documento institucional</p>
+                <h2 class="mt-3 text-2xl font-black leading-tight text-primary-800 md:text-3xl">
+                  Politica de tratamientos de datos personales
+                </h2>
+              </div>
+              <div class="rounded-2xl border border-accent-400/50 bg-accent-50 px-4 py-3 text-sm font-semibold text-primary-800">
+                Uso orientado a lectura, consulta y descarga del original.
+              </div>
+            </div>
+          </header>
+
+          <div class="grid gap-0 lg:grid-cols-[minmax(0,1fr)_18rem]">
+            <div class="document-body px-6 py-7 md:px-10 md:py-10">
+              <section class="space-y-4">
+                <h3 class="policy-title">1. Objetivo</h3>
+                <p>
+                  Establecer los lineamientos y principios que guian el tratamiento, almacenamiento, uso, circulacion, transferencia y proteccion de los datos personales recolectados por Organizacion Humana Integral S.A, garantizando el respeto de los derechos de privacidad, intimidad y proteccion de datos personales de los titulares, conforme a la normativa vigente.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">2. Alcance</h3>
+                <p>
+                  De acuerdo con la Ley 1581 de 2012, esta politica se adopta para el uso adecuado de los datos personales adquiridos de usuarios, proveedores, empleados, contratistas, personas naturales y juridicas que presten servicios a la organizacion bajo cualquier modalidad comercial o laboral, siempre que exista tratamiento de datos personales.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">3. Responsable del tratamiento de datos</h3>
+                <p>
+                  La ORGANIZACION HUMANA INTEGRAL S.A., identificada con NIT 900008328-1, con domicilio principal en Valledupar, Carrera 19 #14-47 barrio San Vicente, correo electronico lineadenuncias@ohisalud.com, es responsable del tratamiento y proteccion de los datos personales.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">4. Definiciones</h3>
+                <dl class="definition-list">
+                  {definitions.map((item) => (
+                    <div class="definition-item">
+                      <dt>{item.term}</dt>
+                      <dd>{item.desc}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">5. Principios</h3>
+                <p>
+                  La Organizacion Humana Integral S.A., en busca de garantizar la proteccion de los datos personales, aplicara los siguientes principios que constituyen reglas para el tratamiento (recoleccion, almacenamiento, uso, circulacion, supresion, transferencia y transmision):
+                </p>
+                <ul class="policy-list">
+                  {principles.map((item) => (
+                    <li><strong>{item.title}:</strong> {item.desc}</li>
+                  ))}
+                </ul>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">6. Tipo de informacion registrada</h3>
+                <p>Los datos personales recolectados podran incluir, sin limitarse, a:</p>
+                <ul class="policy-list">
+                  {infoTypes.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">7. Derechos de los titulares</h3>
+                <ol class="policy-list list-lower-alpha">
+                  {rightsSection7.map((item) => <li>{item}</li>)}
+                </ol>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">8. Redes sociales</h3>
+                <p>
+                  Las redes sociales como Facebook, Instagram y X/Twitter constituyen plataformas complementarias de divulgacion de informacion y no se encuentran bajo la responsabilidad de la ORGANIZACION HUMANA INTEGRAL S.A. La informacion que los usuarios suministren en estas plataformas no forma parte de los datos personales sujetos a esta politica, siendo responsabilidad de la plataforma correspondiente.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">9. Finalidad del tratamiento</h3>
+                <p>
+                  Conforme al objeto social de la organizacion, la informacion suministrada por el titular se requiere para recolectar, circular, almacenar, recaudar, procesar, actualizar y disponer de los datos con o sin ayuda de tecnologia.
+                </p>
+                <ul class="policy-list">
+                  {treatmentPurposes.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">10. Autorizacion del titular</h3>
+                <p>
+                  La ORGANIZACION HUMANA INTEGRAL requiere autorizacion previa, expresa e informada para el tratamiento de datos personales, en medio fisico o electronico, salvo casos autorizados por la Ley 1581 de 2012.
+                </p>
+
+                <div class="subsection-card">
+                  <h4>10.1 Informacion que no requiere autorizacion para su tratamiento</h4>
+                  <ul class="policy-list">
+                    {noAuthCases.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+
+                <div class="subsection-card">
+                  <h4>10.2 Autorizacion para el tratamiento de datos personales sensibles</h4>
+                  <p>
+                    Cuando dicho tratamiento sea posible conforme al articulo 6 de la Ley 1581 de 2012, la ORGANIZACION HUMANA INTEGRAL S.A. cumplira las siguientes obligaciones:
+                  </p>
+                  <ul class="policy-list">
+                    {sensitiveDataRules.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">11. Derechos de los titulares</h3>
+                <ul class="policy-list">
+                  {rightsSection11.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">12. Tratamiento de datos personales de ninos y adolescentes</h3>
+                <p>
+                  La Organizacion Humana Integral asegurara el respeto de los derechos prevalentes de ninos, ninas y adolescentes, excepto cuando se trate de datos de caracter publico y siempre que se cumplan los siguientes requisitos:
+                </p>
+                <ul class="policy-list">
+                  {childrenRules.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">13. Revocatoria de la autorizacion y/o supresion de datos personales</h3>
+                <p>
+                  Los titulares podran solicitar en todo momento la supresion de sus datos personales y/o revocar la autorizacion otorgada para su tratamiento. Esto no procedera cuando exista deber legal u obligacion contractual que requiera la permanencia de los datos en las bases de la organizacion.
+                </p>
+                <p>La solicitud debe presentarse por escrito a traves de:</p>
+                <ul class="policy-list">
+                  {revocationChannels.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+
+              <section class="mt-10 space-y-6">
+                <h3 class="policy-title">14. Deberes de los responsables y encargados del tratamiento</h3>
+
+                <div class="subsection-card">
+                  <h4>14.1 Deberes de los responsables del tratamiento</h4>
+                  <ul class="policy-list">
+                    {dutiesResponsible.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+
+                <div class="subsection-card">
+                  <h4>14.2 Deberes de los encargados del tratamiento</h4>
+                  <ul class="policy-list">
+                    {dutiesProcessor.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">15. Procedimiento para la realizacion de consultas</h3>
+                <p>
+                  Los titulares o causahabientes podran consultar sus datos personales que reposen en las bases de datos de la organizacion. El termino maximo para responder consultas es de quince (15) dias habiles contados desde la fecha de recibo.
+                </p>
+                <p>
+                  Si no es posible atender la consulta dentro de ese termino, se informaran los motivos de la demora y la nueva fecha de respuesta, que no podra superar cinco (5) dias habiles siguientes al vencimiento del primer termino.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">16. Procedimiento para la realizacion de reclamos</h3>
+                <p>
+                  Cuando el titular considere que la informacion deba corregirse, actualizarse, suprimirse o revocarse por presunto incumplimiento de la Ley 1581 de 2012, podra presentar solicitud con:
+                </p>
+                <ul class="policy-list">
+                  {claimRequirements.map((item) => <li>{item}</li>)}
+                </ul>
+                <p>
+                  Si la solicitud resulta incompleta, la organizacion requerira al interesado dentro de los cinco (5) dias siguientes para subsanar. Transcurridos dos (2) meses sin respuesta, se entendera desistido el reclamo.
+                </p>
+                <p>
+                  Si quien recibe el reclamo no es competente, lo trasladara a quien corresponda dentro de dos (2) dias habiles e informara al interesado.
+                </p>
+                <p>
+                  Una vez recibido el reclamo completo, se incluira en la base de datos la leyenda "reclamo en tramite" y su motivo dentro de dos (2) dias habiles, y se mantendra hasta su decision.
+                </p>
+                <p>
+                  El termino maximo para atender el reclamo sera de quince (15) dias habiles desde el dia siguiente al recibo. Si no fuere posible, se informaran los motivos de la demora y la nueva fecha, que no podra superar ocho (8) dias habiles siguientes al vencimiento del primer termino.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">17. Requisito de procedibilidad</h3>
+                <p>
+                  El titular o causahabiente solo podra elevar queja ante la Superintendencia de Industria y Comercio una vez haya agotado el tramite de consulta o reclamo ante el responsable o encargado del tratamiento de datos personales.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">18. Transferencia y transmision internacional de datos personales</h3>
+                <p>
+                  Las transmisiones internacionales de datos personales entre responsable y encargado para realizar tratamiento por cuenta del responsable no requeriran informacion al titular ni su consentimiento cuando exista contrato en los terminos del articulo 25 de la Ley 1581 de 2012.
+                </p>
+                <p>La Organizacion Humana Integral S.A podra hacer transferencia de datos en los siguientes casos:</p>
+                <ul class="policy-list">
+                  {transferCases.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">19. Seguridad de la informacion</h3>
+                <p>
+                  La organizacion, a traves de esta politica, garantiza el cumplimiento del principio de seguridad de la Ley 1581 de 2012 mediante medidas fisicas, tecnologicas y administrativas. Ademas, asegura el tratamiento con terceros por medio de obligaciones contractuales con proveedores y contratistas que apoyen la prestacion de servicios de salud.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">20. Vigencia de la politica</h3>
+                <p>
+                  Esta politica rige desde su fecha de publicacion y es de obligatorio cumplimiento para encargados y colaboradores de la Organizacion Humana Integral S.A.
+                </p>
+              </section>
+
+              <section class="mt-10 space-y-4">
+                <h3 class="policy-title">21. Revision historica</h3>
+                <div class="history-card" role="presentation" aria-hidden="true">
+                  <div><span>Fecha</span><strong>22-07-2025</strong></div>
+                  <div><span>Descripcion del cambio</span><strong>Creacion del documento</strong></div>
+                  <div><span>Version</span><strong>1</strong></div>
+                  <div><span>Elaborador</span><strong>Maria Angelica Daza (Analista de Control Interno)</strong></div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="document-rail border-t border-primary-100 bg-primary-50/45 px-6 py-7 lg:border-l lg:border-t-0">
+              <div class="sticky top-28 space-y-4">
+                <div class="rounded-3xl border border-primary-100 bg-white p-5 shadow-[0_18px_40px_-34px_rgba(3,28,81,0.5)]">
+                  <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">Indice rapido</p>
+                  <ul class="toc-list mt-3">
+                    {tocItems.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+
+                <div class="rounded-3xl border border-primary-100 bg-white p-5 shadow-[0_18px_40px_-34px_rgba(3,28,81,0.5)]">
+                  <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">Canales de atencion</p>
+                  <p class="mt-3 text-sm leading-6 text-text-muted">
+                    Correo: lineadenuncias@ohisalud.com<br />
+                    Carrera 19 #14-47, barrio San Vicente, Valledupar
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .policy-hero {
+    background:
+      radial-gradient(circle at 14% 16%, rgba(194, 213, 1, 0.16), transparent 34%),
+      radial-gradient(circle at 88% 20%, rgba(5, 46, 135, 0.12), transparent 28%),
+      linear-gradient(180deg, rgba(243, 245, 249, 0.8), rgba(255, 255, 255, 0.92));
+  }
+
+  .doc-meta-card::before {
+    content: "";
+    position: absolute;
+    inset: auto -2rem -2rem auto;
+    height: 8rem;
+    width: 8rem;
+    border-radius: 9999px;
+    background: rgba(194, 213, 1, 0.16);
+    filter: blur(10px);
+  }
+
+  .document-shell {
+    position: relative;
+  }
+
+  .document-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to bottom, rgba(5, 46, 135, 0.022) 1px, transparent 1px);
+    background-size: 100% 2.1rem;
+    opacity: 0.45;
+  }
+
+  .document-header {
+    background:
+      linear-gradient(180deg, rgba(243, 245, 249, 0.85), rgba(255, 255, 255, 0.96)),
+      linear-gradient(90deg, rgba(5, 46, 135, 0.06), transparent 35%);
+  }
+
+  .document-body,
+  .document-rail {
+    position: relative;
+    z-index: 1;
+  }
+
+  .document-body p,
+  .document-body li,
+  .document-body dd {
+    font-size: 1rem;
+    line-height: 1.82;
+    color: #283851;
+  }
+
+  .policy-title {
+    font-size: 1.15rem;
+    line-height: 1.35;
+    font-weight: 900;
+    color: #052e87;
+  }
+
+  .policy-list {
+    display: grid;
+    gap: 0.55rem;
+    padding-left: 1.2rem;
+    list-style: disc;
+  }
+
+  .list-lower-alpha {
+    list-style: lower-alpha;
+  }
+
+  .definition-list {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .definition-item {
+    border-radius: 1rem;
+    border: 1px solid rgba(199, 210, 232, 0.8);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(247, 250, 255, 0.9));
+    padding: 0.95rem 1rem;
+  }
+
+  .definition-item dt {
+    color: #052e87;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
+
+  .definition-item dd {
+    margin-top: 0.35rem;
+  }
+
+  .subsection-card {
+    border-radius: 1.2rem;
+    border: 1px solid rgba(193, 203, 225, 0.92);
+    background: rgba(248, 251, 255, 0.78);
+    padding: 1rem 1.1rem;
+  }
+
+  .subsection-card h4 {
+    color: #052e87;
+    font-size: 0.95rem;
+    font-weight: 900;
+    line-height: 1.4;
+    margin: 0 0 0.45rem;
+  }
+
+  .history-card {
+    display: grid;
+    gap: 0.7rem;
+    border-radius: 1.2rem;
+    border: 1px solid rgba(193, 203, 225, 0.92);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 252, 0.94));
+    padding: 1rem;
+  }
+
+  .history-card div {
+    display: grid;
+    gap: 0.2rem;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.65rem 0.8rem;
+    border: 1px solid rgba(208, 218, 236, 0.85);
+  }
+
+  .history-card span {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #5c7292;
+    font-weight: 800;
+  }
+
+  .history-card strong {
+    font-size: 0.9rem;
+    color: #1f3454;
+    font-weight: 800;
+  }
+
+  .toc-list {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0;
+    padding-left: 1rem;
+    list-style: decimal;
+  }
+
+  .toc-list li {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: #415c83;
+  }
+
+  @media (max-width: 1023px) {
+    .document-shell::before {
+      background-size: 100% 2.3rem;
+    }
+
+    .document-body p,
+    .document-body li,
+    .document-body dd {
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .policy-title {
+      font-size: 1.02rem;
+    }
+  }
+</style>
