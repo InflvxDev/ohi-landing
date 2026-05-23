@@ -1,0 +1,903 @@
+---
+import MainHeader from '../components/MainHeader.astro';
+import PediatricServicesModal from '../components/sede-principal/PediatricServicesModal.astro';
+import PrimaryServicesCarousel from '../components/sede-principal/PrimaryServicesCarousel.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Layout from '../layouts/Layout.astro';
+
+type ServiceGroup = {
+  title: string;
+  items: string[];
+};
+
+type ServiceItem = {
+  title: string;
+  image?: string;
+  text?: string[];
+  label?: string;
+  bullets?: string[];
+  groups?: ServiceGroup[];
+};
+
+type Center = {
+  id: string;
+  kicker: string;
+  title: string;
+  theme: string;
+  intro: string[];
+  bullets?: string[];
+  outro?: string[];
+  services: ServiceItem[];
+};
+
+const primaryServices: ServiceItem[] = [
+  {
+    title: 'Urgencias Adultos 24 horas',
+    image: '/img/servicios/Urgencias-OHI-1.webp',
+    text: ['El servicio de urgencias consta de:'],
+    bullets: ['Consultorios de triage.', 'Sala de reanimación.', 'Sala de observación, Hombres / Mujeres.', 'Salas de procedimientos.'],
+  },
+  {
+    title: 'Cirugías de mediana y alta complejidad',
+    image: '/img/servicios/Cirugia-OHI-2.webp',
+    label: 'Especialidades',
+    bullets: [
+      'Cirugía General.',
+      'Neurocirugía.',
+      'Cirugía Plástica y Estética.',
+      'Cirugía Ortopédica.',
+      'Cirugía Gastrointestinal.',
+      'Cirugía Maxilofacial.',
+      'Cirugía Vascular y Angiológia.',
+      'Cirugía Urológica.',
+      'Otorrinolaringología.',
+      'Cirugía de tórax.',
+      'Cirugía cabeza y cuello.',
+      'Cirugía oftalmológica.',
+      'Dermatología.',
+      'Coloproctología.',
+      'Anestesiologia.',
+      'Cirugía laparoscopica.',
+    ],
+  },
+  {
+    title: 'Unidad de Cuidados Críticos',
+    image: '/img/servicios/UCI-OHI-1.webp',
+    text: [
+      'La Unidad de Cuidados Críticos se encuentra dotada con equipos de tecnología de punta y talento humano capacitado y entrenado para la atención y el monitoreo permanente del paciente crítico, liderado las 24 horas por:',
+    ],
+    bullets: [
+      'Especialistas en medicina de cuidado critico.',
+      'Especialistas en medicina Interna.',
+      'Profesionales de Enfermería.',
+      'Medicina general.',
+      'Terapistas respiratorios.',
+      'Terapistas físicos.',
+    ],
+  },
+  {
+    title: 'Hospitalización unipersonal y bipersonal adulto',
+    image: '/img/servicios/Hospitalizacion-adulto-OHI-1.webp',
+    text: [
+      'Cuenta con habitaciones cómodas dotadas con sistemas tecnológicos que permite mayor seguridad del paciente y seguimiento oportuno por el grupo interdisciplinario. Servicios:',
+    ],
+    bullets: [
+      'Medicina interna.',
+      'Anestesiología.',
+      'Urología.',
+      'Infectología.',
+      'Neurología.',
+      'Neurocirugía.',
+      'Psiquiatría.',
+      'Gastroenterología.',
+      'Cirugía vascular.',
+      'Cirugía de torax.',
+      'Fisiatría y rehabilitacion.',
+      'Radiología intervencionista.',
+      'Neumología.',
+      'Hemodinamia.',
+      'Dermatologia.',
+      'Ortopedia.',
+      'Cirugía Maxilofacial.',
+      'Cardiología.',
+      'Oftalmología.',
+      'Hematología.',
+      'Neumología.',
+      'Nefrología.',
+      'Medicina del dolor.',
+      'Otorrinolaringología.',
+      'Cirugía general.',
+    ],
+  },
+  {
+    title: 'Laboratorio clínico de mediana y alta complejidad',
+    image: '/img/servicios/Laboratorio-Clinico-OHI-1.webp',
+    text: ['Contamos con equipos de última tecnología y un equipo de profesionales calificados generando confianza en los resultados de los procesos. Contamos con:'],
+    groups: [
+      { title: 'Area de Microbiologia', items: ['filmArray Torch BIOFIRE.', 'BACT/ALERT 3D 240.', 'VITEK 2 Compact 60.'] },
+      { title: 'Area de Hematologia', items: ['ADVIA 2120.'] },
+      { title: 'Area de Hemostasia', items: ['CS-2500.'] },
+      { title: 'Area de Inmunoensayos', items: ['VIDAS.'] },
+      { title: 'Area Quimica', items: ['Atellica Solution.'] },
+      { title: 'Area de Microscopia', items: ['Clinitek Advantus.'] },
+      { title: 'Servicio Transfusional', items: [] },
+    ],
+  },
+  {
+    title: 'Apoyo terapéutico',
+    image: '/img/servicios/A-Terapeutico-OHI.webp',
+    text: ['Contamos con un grupo de profesionales que apoyan las diferentes especialidades médicas:'],
+    bullets: [
+      'Terapia respiratoria y física.',
+      'Profesionales en nutrición y psicología.',
+      'Servicio transfusional.',
+      'Servicio farmacéutico de alta complejidad.',
+      'Trabajo social.',
+      'Central de mezclas parenterales certificada en buenas prácticas de elaboración (BPE), avalados por el INVIMA.',
+    ],
+  },
+  {
+    title: 'Apoyo Asistencial',
+    image: '/img/servicios/Apoyo-Asistencial-OHI.webp',
+    text: [
+      'La Organización Humana Integral y sus sedes cuentan con el servicio de ambulancias para traslados asistencial básico y medicalizado en Valledupar y el territorio nacional. Ademas, cuenta con llamado gratuito al servicio de toda la población con atención las 24 horas, ante cualquier urgencias.',
+    ],
+  },
+  {
+    title: 'Terapia de Soporte Renal',
+    image: '/img/servicios/T-Renal-OHI.webp',
+    text: [
+      'La Unidad de Soporte Renal de la Organización Humana Integral, cuenta con personal altamente calificado y tecnología de punta necesaria para realizar terapias de soporte renal al paciente críticamente enfermo, así como al paciente que requiera manejo de su enfermedad renal aguda.',
+      'Se dispone de todos los tipos de terapia según la indicación de cada paciente como son: Hemodiálisis intermitente, Terapias de remplazo renal continuo (Hemo-diafiltración, Hemofiltración, SLED), Hemo-perfusión y Plasmaféresis.',
+    ],
+  },
+];
+
+const centers: Center[] = [
+  {
+    id: 'cemic',
+    kicker: 'Centro de Excelencia',
+    title: 'Materno Infantil del Cesar - CEMIC',
+    theme: 'area-cemic',
+    intro: [
+      'Somos pioneros en la región con acceso diferencial y atención especializada al binomio madre-hijo y a las patologías del sistema reproductor femenino, con atención las 24 horas de especialidades en:',
+    ],
+    bullets: [
+      'Gineco-Obstetricia.',
+      'Anestesiología.',
+      'Pediatría.',
+      'Neonatología.',
+      'Perinatología.',
+      'Ginecología con entrenamiento en piso pélvico.',
+    ],
+    outro: [
+      'En la institución se llevan a cabo estrategias exitosas como las propuestas por IAMI y el Programa de Madre Canguro intrahospitalario, buscando siempre darle un feliz término al embarazo y promoviendo la seguridad del binomio madre-hijo.',
+    ],
+    services: [
+      {
+        title: 'Urgencias 24 horas',
+        image: '/img/servicios/Urgencias-24-CEMIC-OHI.webp',
+        text: ['Presencia permanente de especialistas en ginecología y gineco-obstetricia en sala de observación para maternas.'],
+      },
+      {
+        title: 'Atención del parto y recién nacido',
+        image: '/img/servicios/Atencion-Parto-OHI-1.webp',
+        text: ['Cirugia Gineco-obstetrica con manejo del dolor en el trabajo de parto.'],
+      },
+      {
+        title: 'Unidad de Cuidados Críticos Neonatal',
+        image: '/img/servicios/UCI-Neo-OHI-1.webp',
+        text: [
+          'Contamos con la Unidad de Cuidados Críticos Neonatal más moderna de la región con estancia de cuidados intensivos e intermedio, dotada de equipos biomédicos de última generación. Con personal altamente calificado yentrenado, disponible las 24 horas, contamos con especialidades y servicios de:',
+        ],
+        bullets: [
+          'Neonatologia.',
+          'Pediatria.',
+          'Medicina general.',
+          'Estrategia de aislamiento de contacto.',
+          'Ventilacion de alta frecuencia.',
+          'Ventilacion con oxido nitrico.',
+          'Estrategia de unidad abierta.',
+          'Subespecialidaes:',
+          'Cardiologia pediatrica.',
+          'Cirugia pediatrica.',
+          'Fonoaudiologia.',
+          'Neumologia pediatrica.',
+          'Nefroogia pediatrica.',
+          'Genetica.',
+          'Odontopediatria.',
+        ],
+      },
+      {
+        title: 'Hospitalización materna',
+        image: '/img/servicios/Hospitalizacion-Materna-OHI-1.webp',
+        text: ['Cómodas habitaciones que cuentan con equipos de monitoreo fetal y monitoreo de signos vitales, acompañado con personalidóneo las 24 horas , contamos con especialidades y servicios de : Gineco obstetricia'],
+        bullets: [
+          'Pediatria.',
+          'Oftamologia para realizacion de tamizaje ocular.',
+          'Audiometria para realizacion de tamizaje audiologico.',
+          'Tamizaje cardiaco.',
+          'Asesoria preconcepcional.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'pediatria',
+    kicker: 'Unidad Integral',
+    title: 'Clínica de Pediatría',
+    theme: 'area-pediatria',
+    intro: ['En nuestro acceso diferencial para la atención de la población infantil, cuenta con urgencias las 24 horas y médicos especialistas para brindar una atención integral.'],
+    services: [
+      {
+        title: 'Urgencias 24 horas',
+        image: '/img/servicios/Pediatria-OHI.webp',
+        text: ['El servicio de urgencias cuenta con presencia permanente de médico pediatra. La unidad consta de:'],
+        bullets: ['Consultorio de triage.', 'Consultorio de procedimientos.', 'Sala de reanimación.', 'Consultorio Pediátrico.', 'Sala de observación.'],
+      },
+      {
+        title: 'Hospitalización unipersonal y bipersonal infantil',
+        image: '/img/servicios/Hospitalizacion-infantil-OHI-1.webp',
+        text: ['Cómodas habitaciones para la estancia de los usuarios pediátricos con el acompañamiento de padres o personas a cargo. Contamos con especialidades de:'],
+        bullets: [
+          'Pediatria.',
+          'Infectologia pediatrica.',
+          'Neurocirugia.',
+          'Neurologia pediatrica.',
+          'Neumologia pediatrica.',
+          'Nefrologia pediatrica.',
+          'Ortopedia pediatrica.',
+          'Oftalmologia.',
+          'Endocrinologia pediatrica.',
+          'Cirugia pediatrica.',
+          'Reumatologia pediatrica.',
+          'Cardiologia pediatrica.',
+          'Hematooncologia pediatrica.',
+          'Gastroenterologia pediatrica.',
+          'Urologia pediatrica.',
+          'Otorrinolaringología.',
+        ],
+      },
+      {
+        title: 'Unidad de Cuidados Críticos pediátricos',
+        image: '/img/servicios/UCI-Neo-OHI.webp',
+        text: [
+          'Pioneros en el servicio de Cuidado Críticos Pediátricos en la región, contamos con una unidad completa y organizada para pacientes de cuidados intermedios e intensivos. Con un grupo de profesionales altamente capacitados presentes las 24 horas, equipos y tecnología médica avanzada, atención humanizada y prestación del servicios con altos estándares de calidad, liderados por:',
+        ],
+        bullets: [
+          'Pediatra intensivista.',
+          'Pediatras.',
+          'Médicos generales.',
+          'Profesionales de enfermería.',
+          'Terapeuta respiratoria.',
+          'Terapeuta física.',
+          'Auxiliares de enfermería.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'diagnostico',
+    kicker: 'Apoyo Diagnostico',
+    title: 'Imágenes Diagnósticas',
+    theme: 'area-diagnostico',
+    intro: [
+      'La Organización Humana Integral (OHI) cuenta con un completo servicio de Apoyo Diagnóstico e Imágenes Diagnósticas, orientado a brindar soporte clínico de alta calidad para el diagnóstico, seguimiento y tratamiento de los pacientes.',
+      'El servicio dispone de equipos de tecnología avanzada y personal altamente calificado que garantizan precisión, seguridad y oportunidad en la atención. Dentro de su portafolio se incluyen los siguientes procedimientos:',
+    ],
+    services: [
+      {
+        title: 'Tomografía Axial Computarizada (TAC)',
+        text: ['Estudios de alta resolución que permiten obtener imágenes detalladas de las estructuras internas del cuerpo, facilitando diagnósticos precisos y oportunos en diferentes especialidades médicas.'],
+      },
+      {
+        title: 'Rayos X (Radiología Convencional)',
+        text: ['Realización de imágenes radiográficas digitales para evaluación de estructuras óseas, torácicas y tejidos blandos, con estándares de seguridad radiológica.'],
+      },
+      {
+        title: 'Ecografía (Ultrasonido)',
+        text: ['Exámenes no invasivos que permiten la visualización de órganos y tejidos blandos en tiempo real, apoyando el diagnóstico en áreas como medicina general, ginecología, obstetricia y otras especialidades.'],
+      },
+    ],
+    outro: ['El servicio de Apoyo Diagnóstico de la OHI se encuentra articulado con las demás áreas asistenciales, garantizando la integralidad en la atención, la oportunidad en los resultados y la calidad en la interpretación médica.'],
+  },
+  {
+    id: 'unicarc',
+    kicker: 'Unidad de Intervencionalismo',
+    title: 'Cardiovascular de la Costa UNICARC',
+    theme: 'area-unicarc',
+    intro: [
+      'La Organización Humana Integral (OHI) cuenta con un Servicio Integral de Cardiología Intervencionista y Hemodinamia, diseñado para ofrecer atención de alta complejidad en el diagnóstico y tratamiento de enfermedades cardiovasculares, neurovasculares y periféricas, con enfoque interdisciplinario, tecnología avanzada y talento humano altamente especializado.',
+      'Nuestro servicio se centra en la atención integral del paciente con patología cardiovascular, desde la evaluación clínica hasta la intervención mínimamente invasiva, garantizando seguridad, precisión diagnóstica y recuperación oportuna.',
+      'Contamos con una moderna Sala de Hemodinamia y Procedimientos Intervencionistas, dotada con equipos de última generación que permiten la realización de estudios diagnósticos y procedimientos terapéuticos guiados por imágenes en tiempo real.',
+    ],
+    services: [
+      {
+        title: 'Sala de Procedimiento',
+        image: '/img/servicios/Sala-Procedimiento-OHI.webp',
+        text: ['Cuenta con un equipo de última generación para eltratamiento de patologías cardiacas y vasculares, con el que será posible obtener imágenes de alta calidad y funcionamiento inteligente para proporcionar mayor eficacia en la realización de diferentes procedimientos, ya sea neu-rológicos, endovasculares o cardiacos.'],
+      },
+      {
+        title: 'Consulta Externa',
+        image: '/img/servicios/Consulta-Externa-OHI.webp',
+        text: ['Cardiología adulta y pediátrica.'],
+      },
+      {
+        title: 'Apoyo Diagnóstico',
+        image: '/img/servicios/Apoyo-Diagnostico-OHI.webp',
+        bullets: ['Ecocardiografia.', 'Holter de ritmos.', 'Prueba de esfuerzo.', 'Electroencefalograma.'],
+      },
+      {
+        title: 'Cardiología Clínica',
+        image: '/img/servicios/Cardiologia-Clinica-OHI.webp',
+        text: ['Diagnóstico, seguimiento y manejo médico de enfermedades del corazón, control de factores de riesgo y atención integral del paciente cardiovascular.'],
+      },
+      {
+        title: 'Cardiología Intervencionista y Hemodinamia',
+        image: '/img/servicios/Intervencionista-H-OHI.webp',
+        text: ['Realización de procedimientos diagnósticos y terapéuticos como cateterismo cardíaco, coronariografía, angioplastia coronaria, colocación de stents y otros procedimientos endovasculares.'],
+      },
+      {
+        title: 'Cirugía Vascular',
+        image: '/img/servicios/Cirugia-Vascular-OHI.webp',
+        text: ['Evaluación y tratamiento quirúrgico y endovascular de enfermedades arteriales y venosas, con énfasis en técnicas de mínima invasión y recuperación temprana.'],
+      },
+      {
+        title: 'Radiología Intervencionista',
+        image: '/img/servicios/Radiologia-intervencionista-OHI.webp',
+        text: ['Procedimientos diagnósticos y terapéuticos mínimamente invasivos guiados por imagen (angiografías, embolizaciones, drenajes, biopsias, etc.), que complementan la atención integral de pacientes complejos.'],
+      },
+      {
+        title: 'Neurointervencionismo',
+        image: '/img/servicios/Neurointervencionismo-OHI.webp',
+        text: ['Diagnóstico y tratamiento endovascular de patologías del sistema nervioso central como aneurismas, malformaciones arteriovenosas, trombectomías y oclusiones arteriales cerebrales.'],
+      },
+    ],
+  },
+  {
+    id: 'mezclas',
+    kicker: 'Central de Mezclas',
+    title: 'Preparación y control de medicamentos estériles',
+    theme: 'area-mezclas',
+    intro: [
+      'La Central de Mezclas es un servicio especializado orientado a la preparación y control de medicamentos estériles, garantizando la seguridad, eficacia y estabilidad de las formulaciones farmacéuticas administradas a los pacientes.',
+      'Contamos con infraestructura de alta tecnología, áreas certificadas bajo normas de buenas prácticas de manufactura (BPM) y un equipo multidisciplinario conformado por químicos farmacéuticos, auxiliares de farmacia y personal de apoyo capacitado en técnicas de manipulación aséptica.',
+    ],
+    services: [
+      {
+        title: 'Servicios',
+        bullets: [
+          'Elaboración de nutriciones parenterales personalizadas, ajustadas a las necesidades metabólicas y clínicas de cada paciente.',
+          'Preparación de mezclas intravenosas de medicamentos en condiciones controladas de esterilidad.',
+          'Reempaque y dosificación de fármacos bajo estándares de calidad y seguridad.',
+          'Asesoría farmacéutica y soporte técnico en la compatibilidad y estabilidad de las mezclas.',
+          'Control de calidad microbiológico y fisicoquímico de las preparaciones.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'endoscopica',
+    kicker: 'Unidad',
+    title: 'Endoscópica',
+    theme: 'area-endoscopica',
+    intro: [
+      'La Unidad Endoscópica está diseñada para ofrecer una atención segura, eficiente y de alta calidad en la evaluación y tratamiento de patologías del sistema digestivo. Contamos con equipos de última generación y un equipo médico especializado, lo que garantiza precisión en los diagnósticos y bienestar para nuestros pacientes.',
+    ],
+    services: [
+      {
+        title: 'Servicios ofrecidos',
+        bullets: [
+          'Endoscopia digestiva alta (gastroduodenoscopia)',
+          'Colonoscopia diagnóstica y terapéutica',
+          'Rectosigmoidoscopia',
+          'Extracción de cuerpos extraños',
+          'Ligadura de várices esofágicas',
+          'Toma de biopsias y muestras para análisis histopatológico',
+        ],
+      },
+    ],
+    outro: ['Nuestra unidad prioriza la seguridad del paciente, la calidad diagnóstica y la atención humanizada, asegurando un entorno controlado y confortable durante cada procedimiento.'],
+  },
+];
+
+const navItems = [
+  { href: '#servicios-principales', label: 'Servicios principales' },
+  { href: '#cemic', label: 'CEMIC' },
+  { href: '#pediatria', label: 'Pediatría' },
+  { href: '#diagnostico', label: 'Apoyo diagnóstico' },
+  { href: '#unicarc', label: 'UNICARC' },
+  { href: '#mezclas', label: 'Central de mezclas' },
+  { href: '#endoscopica', label: 'Unidad endoscópica' },
+];
+---
+
+<Layout>
+  <MainHeader />
+
+  <main class="bg-background text-text-base">
+    <section class="sede-hero relative min-h-[calc(100vh-76px)] overflow-hidden bg-primary-900 text-white">
+      <img
+        src="/img/OHI-entrada.webp"
+        alt="Entrada de la Clínica OHI Sede Principal"
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-linear-to-r from-primary-700/78 via-primary-500/42 to-white/8"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-primary-500/35 to-transparent"></div>
+
+      <div class="relative z-10 mx-auto flex min-h-[calc(100vh-76px)] max-w-7xl flex-col justify-end px-5 py-10 md:py-14">
+        <div class="grid gap-8 lg:grid-cols-[0.74fr_0.26fr] lg:items-end">
+          <article class="max-w-4xl pb-4">
+            <span class="inline-flex rounded-full border border-accent-400/60 bg-accent-500/12 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-accent-200 shadow-sm backdrop-blur">
+              Clínica OHI
+            </span>
+            <h1 class="mt-6 max-w-4xl text-5xl font-black leading-[0.95] text-white md:text-7xl lg:text-8xl">Sede Principal</h1>
+            <p class="mt-7 max-w-3xl text-lg leading-8 text-white/84 md:text-xl md:leading-9">
+              Somos una institución prestadora de servicios de salud reconocida en la región Caribe y nacionalmente con más 20 años de experiencia, ofreciendo servicios de mediana y alta complejidad a toda la comunidad.
+            </p>
+            <p class="mt-4 max-w-3xl text-base leading-7 text-white/72 md:text-lg md:leading-8">
+              Actualmente nuestro crecimiento ha sido proporcionado a la población, proyectando nuestra infraestructura a mayor capacidad logística, con tecnología de punta y talento humano idóneo capacitado y comprometido con la buena atención de nuestros usuarios en todos sus servicios.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#servicios-principales" class="rounded bg-accent-500 px-5 py-3 text-sm font-extrabold text-primary-800 shadow-lg shadow-primary-950/30 transition hover:bg-accent-300 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900">
+                Ver servicios
+              </a>
+              <a href="/#sedes" class="rounded border border-white/35 px-5 py-3 text-sm font-extrabold text-white transition hover:border-accent-300 hover:text-accent-200 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900">
+                Volver a sedes
+              </a>
+            </div>
+          </article>
+
+          <aside class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <div class="border-l-4 border-accent-500 bg-white/10 p-4 backdrop-blur">
+              <p class="text-3xl font-black text-accent-300">20+</p>
+              <p class="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-white/75">Años de experiencia</p>
+            </div>
+            <div class="border-l-4 border-accent-500 bg-white/10 p-4 backdrop-blur">
+              <p class="text-3xl font-black text-accent-300">24h</p>
+              <p class="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-white/75">Urgencias adulto</p>
+            </div>
+            <div class="border-l-4 border-accent-500 bg-white/10 p-4 backdrop-blur">
+              <p class="text-3xl font-black text-accent-300">Alta</p>
+              <p class="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-white/75">Complejidad</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <nav class="sticky top-19 z-40 border-b border-primary-700 bg-primary-500 shadow-lg shadow-primary-950/10" aria-label="Navegación de Sede Principal">
+      <div class="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3">
+        {navItems.map((item) => (
+          <a href={item.href} class="shrink-0 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-white transition hover:border-accent-300 hover:bg-accent-500 hover:text-primary-800 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-primary-500">
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+
+    <section class="border-b border-primary-100 bg-primary-50/45">
+      <div class="mx-auto max-w-7xl px-5 py-12 md:py-16">
+        <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <div>
+            <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-primary-600">Atención 24 horas</p>
+            <h2 class="mt-3 text-3xl font-black leading-tight text-primary-700 md:text-4xl">Una sede organizada para responder con integralidad y oportunidad</h2>
+          </div>
+          <p class="text-base leading-7 text-text-muted md:text-lg md:leading-8">
+            Ofrecemos atención integral en urgencias adulto las 24 horas. Contamos con un equipo interdisciplinar dispuesto a brindar la mejor atención, con integralidad y oportunidad. En esta unidad se encuentra:
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios-principales" class="scroll-mt-32 bg-background py-14 md:py-18">
+      <div class="mx-auto max-w-7xl px-5">
+        <div class="max-w-3xl">
+          <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-primary-600">Portafolio asistencial</p>
+          <h2 class="mt-3 text-3xl font-black text-primary-700 md:text-4xl">Servicios principales de la sede</h2>
+          <p class="mt-4 text-base leading-7 text-text-muted">
+            Cada servicio se presenta como un bloque expandible para facilitar la lectura y conservar el detalle completo de las prestaciones reales de la clínica.
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <PrimaryServicesCarousel services={primaryServices} />
+        </div>
+      </div>
+    </section>
+
+    <section class="areas-intro border-y border-primary-100 bg-white">
+      <div class="mx-auto grid max-w-7xl gap-8 px-5 py-14 md:py-18 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-primary-600">Áreas cruciales</p>
+          <h2 class="mt-3 text-3xl font-black leading-tight text-primary-700 md:text-5xl">Centros y unidades especializadas</h2>
+        </div>
+        <p class="max-w-3xl text-base leading-7 text-text-muted md:text-lg md:leading-8">
+          La sede integra áreas con servicios propios para acompañar necesidades materno infantiles, pediátricas, diagnósticas, cardiovasculares, farmacéuticas y endoscópicas.
+        </p>
+      </div>
+    </section>
+
+    {centers.map((center, centerIndex) => (
+      <section id={center.id} class={`area-section ${center.theme} scroll-mt-36`}>
+        <div class="mx-auto max-w-7xl px-5 py-16 md:py-20">
+          <div class="area-head grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div class="area-title-block">
+              <span class="area-number">0{centerIndex + 1}</span>
+              <p class="mt-5 text-xs font-extrabold uppercase tracking-[0.22em]">{center.kicker}</p>
+              <h3 class="mt-3 text-3xl font-black leading-tight md:text-5xl">{center.title}</h3>
+            </div>
+            <div class={`area-copy space-y-4 text-sm leading-6 md:text-base md:leading-7 ${center.id === 'diagnostico' ? 'diagnostico-copy-panel' : ''}`}>
+              {center.intro.map((paragraph) => <p>{paragraph}</p>)}
+              {center.bullets && (
+                <ul class="area-pills grid gap-2 sm:grid-cols-2">
+                  {center.bullets.map((item) => <li>{item}</li>)}
+                </ul>
+              )}
+              {center.outro?.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          </div>
+
+          {center.id === 'pediatria' ? (
+            <div class="mt-12">
+              <PediatricServicesModal services={center.services} />
+            </div>
+          ) : (
+            <div class={`area-services mt-12 grid gap-5 ${center.id === 'cemic' ? 'area-services-cemic' : center.services.length > 1 ? 'lg:grid-cols-2' : ''}`}>
+              {center.services.map((service, serviceIndex) => (
+                <article class={`area-service ${center.id === 'diagnostico' && serviceIndex === 2 ? 'diagnostico-service-wide' : ''} ${center.id === 'mezclas' ? 'mezclas-service' : ''} ${center.id === 'cemic' ? `cemic-service ${serviceIndex % 2 === 1 ? 'cemic-service-reverse' : ''} ${service.title === 'Unidad de Cuidados Críticos Neonatal' ? 'cemic-service-featured' : ''}` : ''}`}>
+                  {service.image && <img src={service.image} alt={service.title} class="area-service-image" loading="lazy" decoding="async" />}
+                  <div class="area-service-body">
+                    {!['Servicios', 'Servicios ofrecidos'].includes(service.title) && <p class="text-xs font-extrabold uppercase tracking-[0.16em]">Servicio</p>}
+                    <h4 class="mt-2 text-xl font-black md:text-2xl">{service.title}</h4>
+                    <div class="mt-4 space-y-4 text-sm leading-6">
+                      {service.text?.map((paragraph) => <p>{paragraph}</p>)}
+                      {service.bullets && (
+                        <ul class="area-list grid gap-2 sm:grid-cols-2">
+                          {service.bullets.map((item) => <li>{item}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    ))}
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .sede-hero {
+    isolation: isolate;
+  }
+
+  .area-service {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .area-service:hover {
+    border-color: rgba(5, 46, 135, 0.24);
+    box-shadow: 0 18px 34px -24px rgba(3, 28, 81, 0.58);
+  }
+
+  .areas-intro {
+    background:
+      linear-gradient(90deg, #ffffff 0%, #f3f5f9 58%, #fcfdf2 100%);
+  }
+
+  .area-section {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(5, 46, 135, 0.12);
+  }
+
+  .area-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .area-section > div {
+    position: relative;
+    z-index: 1;
+  }
+
+  .area-number {
+    display: inline-block;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+  }
+
+  .area-copy {
+    color: #283851;
+  }
+
+  .area-pills li,
+  .area-list li {
+    border: 1px solid rgba(5, 46, 135, 0.12);
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.65rem 0.8rem;
+    color: #031c51;
+  }
+
+  .area-service {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid rgba(5, 46, 135, 0.12);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(10px);
+  }
+
+  .area-service-image {
+    height: 15rem;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .area-service-body {
+    padding: 1.35rem;
+    color: #3d5270;
+  }
+
+  .area-service-body h4,
+  .area-service-body > p {
+    color: #031c51;
+  }
+
+  .area-services-cemic {
+    grid-template-columns: 1fr;
+  }
+
+  .cemic-service {
+    grid-template-columns: minmax(18rem, 0.42fr) 1fr;
+    align-items: stretch;
+  }
+
+  .cemic-service .area-service-image {
+    height: 100%;
+    min-height: 18rem;
+  }
+
+  .cemic-service .area-service-body {
+    display: flex;
+    min-height: 18rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .cemic-service-reverse .area-service-image {
+    order: 2;
+  }
+
+  .cemic-service-reverse .area-service-body {
+    order: 1;
+  }
+
+  .cemic-service-reverse {
+    grid-template-columns: 1fr minmax(18rem, 0.42fr);
+  }
+
+  .cemic-service-featured {
+    grid-template-columns: minmax(18rem, 0.42fr) 1fr;
+    border-color: rgba(194, 213, 1, 0.38);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(249, 251, 230, 0.78));
+  }
+
+  .cemic-service-featured .area-service-image {
+    order: 1;
+  }
+
+  .cemic-service-featured .area-service-body {
+    order: 2;
+  }
+
+  .cemic-service-featured .area-service-body {
+    justify-content: start;
+  }
+
+  .cemic-service-featured .area-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .cemic-service-featured .area-list li {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .area-cemic {
+    background:
+      radial-gradient(circle at 8% 12%, rgba(194, 213, 1, 0.24) 0%, transparent 34%),
+      linear-gradient(135deg, #fcfdf2 0%, #ffffff 50%, #e6eaf3 100%);
+  }
+
+  .area-cemic::before {
+    background: linear-gradient(115deg, transparent 0%, transparent 58%, rgba(194, 213, 1, 0.18) 58%, rgba(194, 213, 1, 0.18) 100%);
+  }
+
+  .area-cemic .area-number,
+  .area-cemic .area-title-block p {
+    color: #748001;
+  }
+
+  .area-cemic .area-title-block h3 {
+    color: #031c51;
+  }
+
+  .area-pediatria {
+    background:
+      radial-gradient(circle at 88% 18%, rgba(5, 46, 135, 0.12) 0%, transparent 36%),
+      linear-gradient(180deg, #ffffff 0%, #f3f5f9 100%);
+  }
+
+  .area-pediatria::before {
+    background: repeating-linear-gradient(135deg, rgba(5, 46, 135, 0.08) 0 1px, transparent 1px 18px);
+  }
+
+  .area-pediatria .area-number,
+  .area-pediatria .area-title-block p,
+  .area-pediatria .area-title-block h3 {
+    color: #052e87;
+  }
+
+  .area-diagnostico {
+    background:
+      linear-gradient(105deg, rgba(249, 251, 230, 0.94) 0%, rgba(194, 213, 1, 0.62) 46%, rgba(5, 46, 135, 0.18) 100%),
+      url('/img/servicios/Tomografia-OHI-1.webp') center / cover;
+  }
+
+  .area-diagnostico::before {
+    background:
+      radial-gradient(circle at 10% 85%, rgba(5, 46, 135, 0.18), transparent 32%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.58) 48%, rgba(255, 255, 255, 0.1) 100%);
+  }
+
+  .area-diagnostico .area-number,
+  .area-diagnostico .area-title-block p {
+    color: #748001;
+  }
+
+  .area-diagnostico .area-title-block h3 {
+    color: #021236;
+  }
+
+  .diagnostico-copy-panel {
+    border: 1px solid rgba(5, 46, 135, 0.14);
+    background: rgba(255, 255, 255, 0.84);
+    padding: 1.25rem;
+    color: #162133;
+    box-shadow: 0 18px 34px -28px rgba(3, 28, 81, 0.5);
+    backdrop-filter: blur(10px);
+  }
+
+  .area-diagnostico .area-service {
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  .diagnostico-service-wide {
+    grid-column: 1 / -1;
+  }
+
+  .diagnostico-service-wide .area-service-body {
+    max-width: 56rem;
+  }
+
+  .area-unicarc {
+    background:
+      radial-gradient(circle at 78% 18%, rgba(194, 213, 1, 0.22) 0%, transparent 28%),
+      linear-gradient(135deg, #021236 0%, #052e87 58%, #04256c 100%);
+  }
+
+  .area-unicarc .area-copy,
+  .area-unicarc .area-service-body {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .area-unicarc .area-number,
+  .area-unicarc .area-title-block p {
+    color: #c2d501;
+  }
+
+  .area-unicarc .area-title-block h3,
+  .area-unicarc .area-service-body h4,
+  .area-unicarc .area-service-body > p {
+    color: #ffffff;
+  }
+
+  .area-unicarc .area-service,
+  .area-unicarc .area-pills li,
+  .area-unicarc .area-list li {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.09);
+    color: #ffffff;
+  }
+
+  .area-mezclas {
+    background:
+      linear-gradient(90deg, rgba(194, 213, 1, 0.18) 0 32%, transparent 32%),
+      linear-gradient(135deg, #ffffff 0%, #f4f6fa 100%);
+  }
+
+  .area-mezclas .area-head {
+    grid-template-columns: 0.92fr 1.08fr;
+    align-items: center;
+  }
+
+  .area-mezclas .area-title-block h3 {
+    max-width: 16ch;
+  }
+
+  .area-mezclas .area-services {
+    margin-top: 2rem;
+  }
+
+  .area-mezclas .area-number,
+  .area-mezclas .area-title-block p {
+    color: #9baa01;
+  }
+
+  .area-mezclas .area-title-block h3 {
+    color: #031c51;
+  }
+
+  .mezclas-service .area-list li:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .area-endoscopica {
+    background:
+      radial-gradient(circle at 12% 18%, rgba(5, 46, 135, 0.16) 0%, transparent 34%),
+      radial-gradient(circle at 92% 82%, rgba(194, 213, 1, 0.18) 0%, transparent 30%),
+      #ffffff;
+  }
+
+  .area-endoscopica .area-number,
+  .area-endoscopica .area-title-block p {
+    color: #052e87;
+  }
+
+  .area-endoscopica .area-title-block h3 {
+    color: #021236;
+  }
+
+  @media (max-width: 640px) {
+    .sede-hero {
+      min-height: auto;
+    }
+
+    .cemic-service {
+      grid-template-columns: 1fr;
+    }
+
+    .cemic-service-featured .area-list {
+      grid-template-columns: 1fr;
+    }
+
+    .cemic-service-reverse .area-service-image,
+    .cemic-service-reverse .area-service-body {
+      order: initial;
+    }
+
+    .cemic-service .area-service-body {
+      min-height: auto;
+      padding: 1.35rem;
+    }
+
+    .area-service-image {
+      height: 13rem;
+    }
+  }
+</style>

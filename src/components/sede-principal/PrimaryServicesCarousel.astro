@@ -1,0 +1,404 @@
+---
+type ServiceGroup = {
+  title: string;
+  items: string[];
+};
+
+type PrimaryService = {
+  title: string;
+  image?: string;
+  text?: string[];
+  label?: string;
+  bullets?: string[];
+  groups?: ServiceGroup[];
+};
+
+type Props = {
+  services: PrimaryService[];
+};
+
+const { services } = Astro.props;
+---
+
+<div class="primary-carousel" data-primary-carousel>
+  <div class="mb-5 flex items-center justify-end gap-2">
+    <button type="button" class="primary-carousel-control" data-carousel-prev aria-label="Servicio anterior">‹</button>
+    <button type="button" class="primary-carousel-control" data-carousel-next aria-label="Servicio siguiente">›</button>
+  </div>
+
+  <div class="primary-carousel-viewport" data-carousel-viewport>
+    <div class="primary-carousel-track" data-carousel-track>
+      {services.map((service, index) => (
+        <button
+          type="button"
+          class="primary-service-card group"
+          data-primary-open
+          data-service-index={index % services.length}
+          aria-haspopup="dialog"
+        >
+          {service.image && (
+            <span class="primary-service-media">
+              <img src={service.image} alt={service.title} loading="lazy" decoding="async" />
+            </span>
+          )}
+          <span class="primary-service-body block p-5 text-left">
+            <span class="text-xs font-extrabold uppercase tracking-[0.16em] text-primary-500">Servicio principal</span>
+            <span class="mt-2 block text-xl font-black leading-tight text-primary-800 transition group-hover:text-link">{service.title}</span>
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <div class="primary-modal fixed inset-0 z-70 hidden items-center justify-center px-4 pb-8 pt-36" data-primary-modal role="dialog" aria-modal="true" aria-labelledby="primary-modal-title">
+    <button type="button" class="primary-modal-backdrop absolute inset-0 bg-primary-950/62 backdrop-blur-sm" data-primary-close aria-label="Cerrar detalle"></button>
+
+    <article class="primary-modal-panel relative max-h-[calc(100vh-11rem)] w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl shadow-primary-950/30">
+      <button
+        type="button"
+        class="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-primary-800 shadow-lg transition hover:bg-accent-200 focus-visible:ring-2 focus-visible:ring-focus-ring"
+        data-primary-close
+        aria-label="Cerrar detalle"
+      >
+        ×
+      </button>
+
+      <div class="grid max-h-[calc(100vh-11rem)] overflow-y-auto lg:grid-cols-[0.9fr_1.1fr]">
+        <img data-primary-image src="" alt="" class="h-72 w-full object-cover lg:h-full" loading="lazy" decoding="async" />
+        <div class="p-6 md:p-8">
+          <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">Sede Principal</p>
+          <h3 id="primary-modal-title" class="mt-3 text-3xl font-black leading-tight text-primary-800" data-primary-title></h3>
+          <p class="mt-3 hidden text-xs font-extrabold uppercase tracking-[0.18em] text-accent-700" data-primary-label></p>
+          <div class="mt-5 space-y-4 text-sm leading-6 text-text-muted md:text-base md:leading-7" data-primary-text></div>
+          <ul class="mt-6 grid gap-2 sm:grid-cols-2" data-primary-list></ul>
+          <div class="mt-6 grid gap-3 sm:grid-cols-2" data-primary-groups></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script type="application/json" data-primary-payload set:html={JSON.stringify(services)} />
+</div>
+
+<script>
+  const carouselRoots = document.querySelectorAll<HTMLElement>('[data-primary-carousel]');
+
+  carouselRoots.forEach((root) => {
+    const payload = root.querySelector<HTMLScriptElement>('[data-primary-payload]');
+    const viewport = root.querySelector<HTMLElement>('[data-carousel-viewport]');
+    const track = root.querySelector<HTMLElement>('[data-carousel-track]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    const modal = root.querySelector<HTMLElement>('[data-primary-modal]');
+    const image = root.querySelector<HTMLImageElement>('[data-primary-image]');
+    const title = root.querySelector<HTMLElement>('[data-primary-title]');
+    const label = root.querySelector<HTMLElement>('[data-primary-label]');
+    const text = root.querySelector<HTMLElement>('[data-primary-text]');
+    const list = root.querySelector<HTMLElement>('[data-primary-list]');
+    const groups = root.querySelector<HTMLElement>('[data-primary-groups]');
+    const openButtons = root.querySelectorAll<HTMLButtonElement>('[data-primary-open]');
+    const closeButtons = root.querySelectorAll<HTMLButtonElement>('[data-primary-close]');
+
+    if (!payload || !viewport || !track || !prev || !next || !modal || !image || !title || !label || !text || !list || !groups) return;
+
+    const services = JSON.parse(payload.textContent || '[]') as Array<{
+      title: string;
+      image?: string;
+      text?: string[];
+      label?: string;
+      bullets?: string[];
+      groups?: Array<{ title: string; items: string[] }>;
+    }>;
+
+    let activeButton: HTMLButtonElement | null = null;
+    let closeTimer: number | undefined;
+    let autoplay: number | undefined;
+    let restartTimer: number | undefined;
+    let isAnimating = false;
+
+    const getStep = () => {
+      const card = track.querySelector<HTMLElement>('.primary-service-card');
+      const gap = Number.parseFloat(getComputedStyle(track).columnGap || '20');
+      return card ? card.offsetWidth + gap : 388;
+    };
+
+    const animateTrack = (distance: number, after: () => void) => {
+      if (isAnimating) return;
+
+      isAnimating = true;
+      track.style.transition = 'transform 520ms cubic-bezier(0.16, 1, 0.3, 1)';
+      track.style.transform = `translateX(${distance}px)`;
+
+      track.addEventListener(
+        'transitionend',
+        () => {
+          track.style.transition = 'none';
+          after();
+          track.style.transform = 'translateX(0)';
+          track.getBoundingClientRect();
+          isAnimating = false;
+        },
+        { once: true },
+      );
+    };
+
+    const scrollByCard = (direction: 1 | -1) => {
+      const step = getStep();
+
+      if (direction === 1) {
+        animateTrack(-step, () => {
+          const firstCard = track.firstElementChild;
+          if (firstCard) track.append(firstCard);
+        });
+
+        return;
+      }
+
+      const lastCard = track.lastElementChild;
+      if (!lastCard) return;
+
+      track.style.transition = 'none';
+      track.prepend(lastCard);
+      track.style.transform = `translateX(-${step}px)`;
+      track.getBoundingClientRect();
+      animateTrack(0, () => {});
+    };
+
+    const restartAutoplay = () => {
+      window.clearInterval(autoplay);
+      window.clearTimeout(restartTimer);
+      restartTimer = window.setTimeout(startAutoplay, 3600);
+    };
+
+    const startAutoplay = () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      window.clearInterval(autoplay);
+      autoplay = window.setInterval(() => scrollByCard(1), 3200);
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+
+      closeTimer = window.setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        activeButton?.focus();
+        startAutoplay();
+      }, 260);
+    };
+
+    const openModal = (index: number, button: HTMLButtonElement) => {
+      const service = services[index];
+      if (!service) return;
+
+      window.clearInterval(autoplay);
+      window.clearTimeout(closeTimer);
+      activeButton = button;
+      image.src = service.image || '';
+      image.alt = service.title;
+      title.textContent = service.title;
+      label.textContent = service.label || '';
+      label.classList.toggle('hidden', !service.label);
+      text.innerHTML = '';
+      list.innerHTML = '';
+      groups.innerHTML = '';
+
+      service.text?.forEach((paragraph) => {
+        const element = document.createElement('p');
+        element.textContent = paragraph;
+        text.append(element);
+      });
+
+      service.bullets?.forEach((item) => {
+        const element = document.createElement('li');
+        element.className = 'rounded-lg border border-primary-100 bg-primary-50 px-3 py-2 text-primary-800';
+        element.textContent = item;
+        list.append(element);
+      });
+
+      service.groups?.forEach((group) => {
+        const wrapper = document.createElement('section');
+        wrapper.className = 'rounded-xl border border-primary-100 bg-primary-50/70 p-4';
+
+        const heading = document.createElement('h4');
+        heading.className = 'text-sm font-extrabold text-primary-700';
+        heading.textContent = group.title;
+        wrapper.append(heading);
+
+        if (group.items.length > 0) {
+          const groupList = document.createElement('ul');
+          groupList.className = 'mt-3 space-y-2 text-sm text-text-muted';
+          group.items.forEach((item) => {
+            const element = document.createElement('li');
+            element.textContent = item;
+            groupList.append(element);
+          });
+          wrapper.append(groupList);
+        }
+
+        groups.append(wrapper);
+      });
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => modal.classList.add('is-open'));
+      modal.querySelector<HTMLButtonElement>('[data-primary-close]')?.focus();
+    };
+
+    prev.addEventListener('click', () => {
+      scrollByCard(-1);
+      restartAutoplay();
+    });
+    next.addEventListener('click', () => {
+      scrollByCard(1);
+      restartAutoplay();
+    });
+    viewport.addEventListener('pointerenter', () => window.clearInterval(autoplay));
+    viewport.addEventListener('pointerleave', startAutoplay);
+
+    openButtons.forEach((button) => {
+      button.addEventListener('click', () => openModal(Number(button.dataset.serviceIndex), button));
+    });
+
+    closeButtons.forEach((button) => button.addEventListener('click', closeModal));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
+
+    startAutoplay();
+  });
+</script>
+
+<style>
+  .primary-carousel-viewport {
+    overflow: hidden;
+    scrollbar-width: none;
+  }
+
+  .primary-carousel-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .primary-carousel-track {
+    display: flex;
+    gap: 1.25rem;
+    width: max-content;
+  }
+
+  .primary-service-card {
+    display: flex;
+    min-height: 24.5rem;
+    flex-direction: column;
+    width: min(78vw, 23rem);
+    flex: 0 0 auto;
+    overflow: hidden;
+    border: 1px solid rgba(5, 46, 135, 0.16);
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 16px 34px -28px rgba(3, 28, 81, 0.55);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .primary-service-card:hover {
+    border-color: rgba(194, 213, 1, 0.62);
+    box-shadow: 0 22px 42px -28px rgba(3, 28, 81, 0.65);
+    transform: translateY(-2px);
+  }
+
+  .primary-service-media {
+    display: block;
+    height: 16.5rem;
+    flex: 0 0 16.5rem;
+    overflow: hidden;
+    background: #e8ecf5;
+  }
+
+  .primary-service-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .primary-service-media img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .primary-carousel-control {
+    display: grid;
+    height: 2.5rem;
+    width: 2.5rem;
+    place-items: center;
+    border: 1px solid rgba(5, 46, 135, 0.16);
+    border-radius: 9999px;
+    background: #ffffff;
+    color: #052e87;
+    font-size: 1.8rem;
+    line-height: 1;
+    transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .primary-carousel-control:hover {
+    background: #c2d501;
+    color: #031c51;
+    transform: translateY(-1px);
+  }
+
+  .primary-modal {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease;
+  }
+
+  .primary-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .primary-modal-backdrop {
+    opacity: 0;
+    transition: opacity 240ms ease;
+  }
+
+  .primary-modal.is-open .primary-modal-backdrop {
+    opacity: 1;
+  }
+
+  .primary-modal-panel {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+    transition:
+      opacity 260ms ease,
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .primary-modal.is-open .primary-modal-panel {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .primary-carousel-viewport {
+      scroll-behavior: auto;
+    }
+
+    .primary-modal,
+    .primary-modal-backdrop,
+    .primary-modal-panel {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .primary-modal {
+      align-items: flex-start;
+      padding-top: 6.5rem;
+    }
+  }
+</style>
