@@ -1,5 +1,37 @@
 ---
-const locations = ['Sede placeholder', 'Sede placeholder', 'Sede placeholder'];
+type Location = {
+  title: string;
+  image: string;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  href: string;
+  description: string;
+  ctaLabel: string;
+};
+
+const locations: Location[] = [
+  {
+    title: 'Sede Principal',
+    image: '/img/OHI-entrada.webp',
+    addressLine1: 'Cra. 19 #14-47',
+    addressLine2: 'San Vicente',
+    city: 'Valledupar',
+    href: '/sede-principal',
+    description: 'Sede con portafolio integral que incluye servicios principales y áreas especializadas.',
+    ctaLabel: 'Ver Sede Principal',
+  },
+  {
+    title: 'Sede Santa Isabel',
+    image: '/img/SANTA-ISABEL-entrada.webp',
+    addressLine1: 'Av. Simón Bolívar #22-39',
+    addressLine2: '',
+    city: 'Valledupar',
+    href: '/santa-isabel',
+    description: 'Atención enfocada en trauma y servicios principales de mediana y alta complejidad.',
+    ctaLabel: 'Ver Sede Santa Isabel',
+  },
+];
 ---
 
 <section id="sedes" class="bg-primary-50 py-16 lg:py-20">
@@ -7,22 +39,44 @@ const locations = ['Sede placeholder', 'Sede placeholder', 'Sede placeholder'];
     <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
       <div class="space-y-3">
         <p class="text-sm font-bold uppercase tracking-[0.18em] text-primary-500">Sedes</p>
-        <h2 class="text-3xl font-black text-primary-700 sm:text-4xl">Placeholder sedes de atencion</h2>
+        <h2 class="text-3xl font-black text-primary-700 sm:text-4xl">Nuestras sedes de atención en Valledupar</h2>
       </div>
       <p class="text-base leading-7 text-text-muted">
-        Texto provisional para presentar las sedes, ubicaciones principales, accesos y datos de contacto que se agregaran mas adelante.
+        Encuentra la sede que necesitas y conoce sus servicios. Cada ubicación cuenta con equipos especializados y atención humanizada.
       </p>
     </div>
 
-    <div class="mt-10 grid gap-5 lg:grid-cols-3">
-      {locations.map((location, index) => (
-        <article class="rounded border border-primary-100 bg-background p-5">
-          <div class="grid aspect-video place-items-center rounded border border-dashed border-accent-400 bg-accent-50 text-center text-xs font-semibold uppercase tracking-[0.18em] text-primary-400">
-            Placeholder mapa o sede
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {locations.map((location) => (
+        <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-[0_18px_40px_-28px_rgba(3,28,81,0.55)] transition hover:-translate-y-1 hover:shadow-[0_26px_48px_-28px_rgba(3,28,81,0.7)]">
+          <div class="relative overflow-hidden">
+            <img src={location.image} alt={location.title} class="h-52 w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" decoding="async" />
+            <div class="absolute inset-x-0 top-0 h-1.5 bg-linear-to-r from-primary-700 via-primary-500 to-accent-500"></div>
           </div>
-          <h3 class="mt-5 text-xl font-black text-primary-700">{location} {index + 1}</h3>
-          <p class="mt-2 text-sm leading-6 text-text-muted">Direccion placeholder, barrio placeholder, ciudad placeholder.</p>
-          <p class="mt-4 text-sm font-bold text-link">Horario placeholder</p>
+
+          <div class="flex grow flex-col p-6">
+            <p class="inline-flex w-fit rounded-full bg-primary-100 px-3 py-1 text-[0.67rem] font-extrabold uppercase tracking-[0.16em] text-primary-700">
+              Valledupar
+            </p>
+            <h3 class="mt-4 text-2xl font-black leading-tight text-primary-700">{location.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-text-muted">{location.description}</p>
+
+            <div class="mt-6 flex grow flex-col justify-end gap-5">
+              <div class="rounded-xl border border-primary-100 bg-primary-50 p-4">
+                <p class="text-xs font-bold uppercase tracking-[0.16em] text-primary-500">Dirección</p>
+                <p class="mt-2 text-base font-bold text-primary-700">{location.addressLine1}</p>
+                {location.addressLine2 ? (
+                  <p class="text-base text-primary-700">{location.addressLine2} {location.city}</p>
+                ) : (
+                  <p class="text-base text-primary-700">{location.city}</p>
+                )}
+              </div>
+
+              <a href={location.href} class="inline-flex w-fit rounded bg-accent-500 px-4 py-2.5 text-sm font-extrabold text-primary-800 transition hover:bg-accent-300 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2">
+                {location.ctaLabel}
+              </a>
+            </div>
+          </div>
         </article>
       ))}
     </div>

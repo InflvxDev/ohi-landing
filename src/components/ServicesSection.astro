@@ -1,30 +1,142 @@
 ---
-const services = ['Servicio placeholder', 'Servicio placeholder', 'Servicio placeholder', 'Servicio placeholder'];
+type FeaturedService = {
+  title: string;
+  description: string;
+  image: string;
+  sede: string;
+};
+
+const services: FeaturedService[] = [
+  {
+    title: 'Urgencias 24 horas',
+    description: 'Atención permanente para pacientes adultos con triage, reanimación, observación y salas de procedimientos.',
+    image: '/img/servicios/Urgencias-Santa-Isabel-OHI.webp',
+    sede: 'Sede Principal y Sede Santa Isabel',
+  },
+  {
+    title: 'Cirugías de mediana y alta complejidad',
+    description: 'Quirófanos con altos estándares de calidad, recuperación postquirúrgica y soporte interdisciplinario especializado.',
+    image: '/img/servicios/Cirugia-OHI-2.webp',
+    sede: 'Sede Principal y Sede Santa Isabel',
+  },
+  {
+    title: 'Hospitalización unipersonal y bipersonal adulto',
+    description: 'Habitaciones dotadas para atención segura y seguimiento oportuno del paciente con apoyo interdisciplinario.',
+    image: '/img/servicios/Hospitalizacion-adulto-OHI-1.webp',
+    sede: 'Sede Principal y Sede Santa Isabel',
+  },
+  {
+    title: 'Unidad de Cuidados Críticos',
+    description: 'Monitoreo continuo y atención integral al paciente crítico por talento humano entrenado y tecnología de punta.',
+    image: '/img/servicios/UCI-OHI-1.webp',
+    sede: 'Sede Principal y Sede Santa Isabel',
+  },
+  {
+    title: 'Laboratorio clínico de mediana y alta complejidad',
+    description: 'Procesamiento de pruebas con equipos de última tecnología y personal especializado para resultados confiables.',
+    image: '/img/servicios/Laboratorio-Clinico-OHI-1.webp',
+    sede: 'Sede Principal',
+  },
+  {
+    title: 'Apoyo Terapéutico',
+    description: 'Atención en terapia física y respiratoria, además de acompañamiento integral con nutrición y psicología.',
+    image: '/img/servicios/SI-Terapeutico-OHI.webp',
+    sede: 'Sede Principal y Sede Santa Isabel',
+  },
+  {
+    title: 'Apoyo Diagnóstico',
+    description: 'Servicios de imágenes diagnósticas y apoyo clínico para fortalecer el abordaje integral y la toma de decisiones médicas.',
+    image: '/img/servicios/Apoyo-Diagnostico-OHI.webp',
+    sede: 'Sede Principal y Sede Santa Isabel',
+  },
+  {
+    title: 'Apoyo Asistencial',
+    description: 'Soporte en traslados asistenciales básicos y medicalizados para continuidad de la atención.',
+    image: '/img/servicios/Apoyo-Asistencial-OHI.webp',
+    sede: 'Sede Principal',
+  },
+  {
+    title: 'Terapia de Soporte Renal',
+    description: 'Terapias especializadas para paciente críticamente enfermo y manejo de enfermedad renal aguda.',
+    image: '/img/servicios/T-Renal-OHI.webp',
+    sede: 'Sede Principal',
+  },
+];
+
+const loopingServices = [...services, ...services];
 ---
 
 <section id="servicios" class="bg-background py-16 lg:py-20">
   <div class="mx-auto max-w-7xl px-5">
-    <div class="max-w-2xl space-y-3">
-      <p class="text-sm font-bold uppercase tracking-[0.18em] text-primary-500">Servicios ofrecidos</p>
-      <h2 class="text-3xl font-black text-primary-700 sm:text-4xl">Placeholder titulo de servicios</h2>
+    <div class="grid gap-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+      <div class="space-y-3">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-primary-500">Servicios ofrecidos</p>
+        <h2 class="text-3xl font-black text-primary-700 sm:text-4xl">Atención integral de mediana y alta complejidad</h2>
+      </div>
       <p class="text-base leading-7 text-text-muted">
-        Texto provisional para describir el portafolio de servicios y orientar al visitante sobre lo que encontrara aqui.
+        Nuestras sedes integran servicios asistenciales, diagnósticos y terapéuticos para responder con oportunidad, seguridad clínica y calidad humana.
       </p>
     </div>
 
-    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      {services.map((service, index) => (
-        <article class="rounded border border-primary-100 bg-primary-50 p-5">
-          <div class="mb-5 grid aspect-[4/3] place-items-center rounded border border-dashed border-accent-400 bg-background text-center text-xs font-semibold uppercase tracking-[0.18em] text-primary-400">
-            Placeholder imagen
-          </div>
-          <p class="text-xs font-bold uppercase tracking-[0.16em] text-accent-700">Servicio {index + 1}</p>
-          <h3 class="mt-2 text-xl font-black text-primary-700">{service}</h3>
-          <p class="mt-3 text-sm leading-6 text-text-muted">
-            Texto placeholder para explicar este servicio, beneficios y detalles que se completaran despues.
-          </p>
-        </article>
-      ))}
+    <div class="services-full-bleed mt-10">
+      <div class="services-marquee">
+      <div class="services-track" aria-label="Carrusel de servicios OHI">
+        {loopingServices.map((service) => (
+          <article class="service-card overflow-hidden rounded border border-primary-100 bg-primary-50/75 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <img src={service.image} alt={service.title} class="h-44 w-full object-cover" loading="lazy" decoding="async" />
+            <div class="p-5">
+              <h3 class="text-xl font-black text-primary-700">{service.title}</h3>
+              <p class="mt-3 text-sm font-semibold text-primary-600">{service.sede}</p>
+              <p class="mt-3 text-sm leading-6 text-text-muted">{service.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
     </div>
   </div>
 </section>
+
+<style>
+  .services-full-bleed {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .services-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0, black 5%, black 95%, transparent 100%);
+  }
+
+  .services-track {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    animation: services-scroll 56s linear infinite;
+  }
+
+  .services-marquee:hover .services-track {
+    animation-play-state: paused;
+  }
+
+  .service-card {
+    width: min(85vw, 19rem);
+    flex: 0 0 auto;
+  }
+
+  @keyframes services-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .services-track {
+      animation: none;
+    }
+  }
+</style>
