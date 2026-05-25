@@ -1,26 +1,85 @@
 <section id="siau" class="bg-primary-500 py-16 lg:py-20">
-  <div class="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-    <div class="space-y-4">
+  <div class="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+    <div class="space-y-5">
       <p class="text-sm font-bold uppercase tracking-[0.18em] text-accent-300">SIAU, PQRS y horarios</p>
-      <h2 class="text-3xl font-black text-text-on-primary sm:text-4xl">Placeholder seccion de atencion al usuario</h2>
+      <h2 class="text-3xl font-black text-text-on-primary sm:text-4xl">Servicio de Informacion y Atencion al Usuario</h2>
       <p class="text-base leading-7 text-primary-100">
-        Texto provisional para explicar canales SIAU, radicacion de PQRS, acompanamiento al usuario y horarios de atencion.
+        Te acompanamos en orientacion al usuario, radicacion y seguimiento de PQRS, y acceso a nuestros canales de atencion en cada sede.
       </p>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <article class="rounded-xl border border-primary-300/50 bg-white/95 p-5 shadow-sm">
+          <h3 class="text-lg font-black text-primary-700">SIAU y PQRS</h3>
+          <p class="mt-3 text-sm leading-6 text-text-muted">
+            Recibimos solicitudes, quejas, reclamos, sugerencias y felicitaciones para fortalecer la calidad del servicio.
+          </p>
+          <a
+            href="/pqrs"
+            class="mt-4 inline-flex w-fit rounded bg-primary-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-600 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2"
+          >
+            PQRS
+          </a>
+        </article>
+
+        <article class="rounded-xl border border-accent-300/60 bg-accent-50 p-5 shadow-sm">
+          <h3 class="text-lg font-black text-primary-700">Agendamiento de citas medicas</h3>
+          <p class="mt-3 text-sm leading-6 text-primary-700">
+            Agenda o confirma tus citas medicas por nuestra linea de atencion dedicada.
+          </p>
+          <a
+            href="tel:3175708440"
+            class="mt-4 inline-flex w-fit rounded bg-accent-500 px-4 py-2.5 text-sm font-extrabold text-primary-800 transition hover:bg-accent-400 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2"
+          >
+            317 570 8440
+          </a>
+        </article>
+      </div>
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-3">
-      <article class="rounded border border-primary-200 bg-background p-5 shadow-sm">
-        <h3 class="text-lg font-black text-primary-700">SIAU</h3>
-        <p class="mt-3 text-sm leading-6 text-text-muted">Canal placeholder, telefono placeholder, correo placeholder.</p>
-      </article>
-      <article class="rounded border border-primary-200 bg-background p-5 shadow-sm">
-        <h3 class="text-lg font-black text-primary-700">PQRS</h3>
-        <p class="mt-3 text-sm leading-6 text-text-muted">Texto placeholder para solicitudes, quejas, reclamos y sugerencias.</p>
-      </article>
-      <article class="rounded border border-primary-200 bg-background p-5 shadow-sm">
-        <h3 class="text-lg font-black text-primary-700">Horarios</h3>
-        <p class="mt-3 text-sm leading-6 text-text-muted">Lunes a viernes placeholder. Sabados placeholder.</p>
-      </article>
-    </div>
+    <article class="siau-schedule-card overflow-hidden rounded-2xl border border-primary-200 bg-white shadow-[0_22px_48px_-30px_rgba(3,28,81,0.75)]">
+      <div class="relative px-6 pb-7 pt-6 sm:px-7 sm:pt-7">
+        <div class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent-200/55 blur-2xl"></div>
+        <div class="pointer-events-none absolute -bottom-20 -left-20 h-52 w-52 rounded-full bg-primary-200/60 blur-2xl"></div>
+
+        <p class="relative z-10 inline-flex rounded-full border border-primary-100 bg-primary-50 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-primary-600">
+          Horarios de atencion
+        </p>
+
+        <h3 class="relative z-10 mt-4 max-w-88 text-2xl font-black leading-tight text-primary-700 sm:text-3xl">
+          Canales y lineas disponibles para nuestros usuarios
+        </h3>
+
+        <div class="relative z-10 mt-6 grid gap-4">
+          <div class="rounded-xl border border-primary-100 bg-primary-50 p-4">
+            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-primary-500">Lineas de atencion SIAU</p>
+            <ul class="mt-3 space-y-2 text-sm font-bold text-primary-700">
+              <li class="flex items-start justify-between gap-3 border-b border-dashed border-primary-200 pb-2">
+                <span>&gt; Sede Laura Daniela</span>
+                <a href="tel:3153467668" class="text-accent-600 hover:text-accent-700">315 346 7668</a>
+              </li>
+              <li class="flex items-start justify-between gap-3 border-b border-dashed border-primary-200 pb-2">
+                <span>&gt; Sede Santa Isabel</span>
+                <a href="tel:3158767755" class="text-accent-600 hover:text-accent-700">315 876 7755</a>
+              </li>
+              <li class="text-primary-600">Disponible 24 horas.</li>
+            </ul>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-primary-100 bg-white p-4">
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-primary-500">PBX</p>
+              <a href="tel:5803555" class="mt-2 block text-2xl font-black text-accent-600 hover:text-accent-700">580 35 55</a>
+              <p class="mt-1 text-sm font-semibold text-primary-600">Extension 213</p>
+            </div>
+
+            <div class="rounded-xl border border-primary-100 bg-white p-4">
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-primary-500">Horario administrativo</p>
+              <p class="mt-2 text-sm font-bold text-primary-700">7:00 a.m. - 12:00 m.</p>
+              <p class="mt-1 text-sm font-bold text-primary-700">2:00 p.m. - 6:00 p.m.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>

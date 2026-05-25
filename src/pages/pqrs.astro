@@ -1,0 +1,326 @@
+---
+import MainHeader from '../components/MainHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Layout from '../layouts/Layout.astro';
+
+const sedeOptions = ['Sede Principal', 'Sede Santa Isabel'];
+const tipoSolicitudOptions = ['Peticion', 'Queja', 'Reclamo', 'Sugerencia', 'Felicitaciones'];
+const sexoOptions = ['Masculino', 'Femenino'];
+const enfoqueDiferencialOptions = [
+  'Victima del conflicto armado',
+  'Condicion de discapacidad',
+  'Afrodescendiente',
+  'Indigena',
+  'LGBTI',
+  'Gestante',
+  'Adulto mayor',
+];
+const hours = Array.from({ length: 24 }, (_, index) => String(index).padStart(2, '0'));
+const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(2, '0'));
+---
+
+<Layout>
+  <MainHeader />
+
+  <main class="bg-background text-text-base">
+    <section class="pqrs-hero border-b border-primary-100">
+      <div class="mx-auto max-w-7xl px-5 py-14 md:py-18">
+        <p class="inline-flex rounded-full border border-primary-200 bg-primary-50 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">
+          Atencion al usuario
+        </p>
+        <h1 class="mt-4 text-3xl font-black leading-tight text-primary-700 md:text-5xl">
+          Formato de peticion, queja, reclamo, sugerencia y felicitaciones
+        </h1>
+        <p class="mt-4 max-w-4xl text-base leading-7 text-text-muted md:text-lg md:leading-8">
+          Completa los campos para registrar tu caso. Esta version valida la informacion en pantalla, pero el envio del formulario sera habilitado en una siguiente etapa.
+        </p>
+      </div>
+    </section>
+
+    <section class="pb-16 pt-10 md:pb-20">
+      <div class="mx-auto max-w-7xl px-5">
+        <form id="pqrs-form" class="pqrs-form" novalidate>
+          <div class="grid gap-6">
+            <section class="pqrs-block grid gap-5 md:grid-cols-12">
+              <h2 class="pqrs-block-title md:col-span-12">Datos de radicacion</h2>
+
+              <div class="md:col-span-6">
+                <label for="sede" class="pqrs-label">Selecciona la sede</label>
+                <select id="sede" name="sede" class="pqrs-input" required>
+                  <option value="">Selecciona la sede</option>
+                  {sedeOptions.map((sede) => <option value={sede}>{sede}</option>)}
+                </select>
+              </div>
+
+              <fieldset class="md:col-span-6">
+                <legend class="pqrs-label">Tipo de solicitud</legend>
+                <div class="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm text-primary-700">
+                  {tipoSolicitudOptions.map((tipo) => (
+                    <label class="inline-flex items-center gap-2">
+                      <input type="radio" name="tipoSolicitud" value={tipo} class="h-4 w-4 accent-primary-600" required />
+                      <span>{tipo}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div class="md:col-span-4">
+                <label for="areaServicio" class="pqrs-label">Area / Servicio</label>
+                <input id="areaServicio" name="areaServicio" type="text" class="pqrs-input" placeholder="Ej: Urgencias" required minlength="3" maxlength="120" />
+              </div>
+
+              <div class="md:col-span-4">
+                <label for="fecha" class="pqrs-label">Fecha</label>
+                <input id="fecha" name="fecha" type="date" class="pqrs-input" required />
+              </div>
+
+              <fieldset class="md:col-span-4">
+                <legend class="pqrs-label">Hora</legend>
+                <div class="mt-1 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+                  <select id="hora" name="hora" class="pqrs-input" required>
+                    <option value="">00</option>
+                    {hours.map((hour) => <option value={hour}>{hour}</option>)}
+                  </select>
+                  <span class="text-lg font-extrabold text-primary-500">:</span>
+                  <select id="minuto" name="minuto" class="pqrs-input" required>
+                    <option value="">00</option>
+                    {minutes.map((minute) => <option value={minute}>{minute}</option>)}
+                  </select>
+                </div>
+              </fieldset>
+            </section>
+
+            <section class="pqrs-block grid gap-5 md:grid-cols-12">
+              <h2 class="pqrs-block-title md:col-span-12">Datos del paciente</h2>
+
+              <div class="md:col-span-6">
+                <label for="nombrePaciente" class="pqrs-label">Nombre completo del paciente</label>
+                <input id="nombrePaciente" name="nombrePaciente" type="text" class="pqrs-input" required minlength="6" maxlength="120" />
+              </div>
+
+              <fieldset class="md:col-span-6">
+                <legend class="pqrs-label">Sexo</legend>
+                <div class="mt-2 flex flex-wrap gap-x-8 gap-y-2 text-sm text-primary-700">
+                  {sexoOptions.map((sexo) => (
+                    <label class="inline-flex items-center gap-2">
+                      <input type="radio" name="sexo" value={sexo} class="h-4 w-4 accent-primary-600" required />
+                      <span>{sexo}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div class="md:col-span-4">
+                <label for="identificacion" class="pqrs-label">No. Identificacion del paciente</label>
+                <input id="identificacion" name="identificacion" type="text" class="pqrs-input" inputmode="numeric" pattern="[0-9]{5,15}" required />
+              </div>
+
+              <div class="md:col-span-4">
+                <label for="edad" class="pqrs-label">Edad</label>
+                <input id="edad" name="edad" type="number" class="pqrs-input" min="0" max="120" required />
+              </div>
+
+              <div class="md:col-span-4">
+                <label for="email" class="pqrs-label">Email</label>
+                <input id="email" name="email" type="email" class="pqrs-input" required maxlength="120" />
+              </div>
+
+              <div class="md:col-span-4">
+                <label for="direccion" class="pqrs-label">Direccion</label>
+                <input id="direccion" name="direccion" type="text" class="pqrs-input" required minlength="6" maxlength="140" />
+              </div>
+
+              <div class="md:col-span-4">
+                <label for="telefono" class="pqrs-label">Telefono</label>
+                <input id="telefono" name="telefono" type="tel" class="pqrs-input" inputmode="tel" pattern="[0-9]{7,12}" required />
+              </div>
+
+              <div class="md:col-span-4">
+                <label for="eapb" class="pqrs-label">EAPB</label>
+                <input id="eapb" name="eapb" type="text" class="pqrs-input" required minlength="2" maxlength="80" />
+              </div>
+            </section>
+
+            <section class="pqrs-block grid gap-5 md:grid-cols-12">
+              <h2 class="pqrs-block-title md:col-span-12">Detalle del caso</h2>
+
+              <fieldset class="md:col-span-12">
+                <legend class="pqrs-label">Enfoque diferencial</legend>
+                <div class="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm text-primary-700">
+                  {enfoqueDiferencialOptions.map((item, index) => (
+                    <label class="inline-flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        name="enfoqueDiferencial"
+                        value={item}
+                        class="h-4 w-4 rounded accent-primary-600"
+                        required={index === 0}
+                      />
+                      <span>{item}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div class="md:col-span-12">
+                <label for="descripcion" class="pqrs-label">Descripcion</label>
+                <textarea
+                  id="descripcion"
+                  name="descripcion"
+                  class="pqrs-input min-h-44"
+                  required
+                  minlength="20"
+                  maxlength="1800"
+                  placeholder="Describe tu caso de forma clara para poder ayudarte mejor."
+                ></textarea>
+              </div>
+            </section>
+
+            <section class="pqrs-block grid gap-5 md:grid-cols-12">
+              <h2 class="pqrs-block-title md:col-span-12">Datos del acompaniante</h2>
+
+              <div class="md:col-span-6">
+                <label for="nombreAcompanante" class="pqrs-label">Nombre completo del acompaniante</label>
+                <input id="nombreAcompanante" name="nombreAcompanante" type="text" class="pqrs-input" required minlength="6" maxlength="120" />
+              </div>
+
+              <div class="md:col-span-6">
+                <label for="idAcompanante" class="pqrs-label">No. Identificacion del acompaniante</label>
+                <input id="idAcompanante" name="idAcompanante" type="text" class="pqrs-input" inputmode="numeric" pattern="[0-9]{5,15}" required />
+              </div>
+            </section>
+          </div>
+
+          <div class="mt-7 flex items-center gap-4">
+            <button type="submit" class="inline-flex rounded bg-link px-5 py-2.5 text-sm font-extrabold text-white transition hover:bg-link-hover focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2">
+              Enviar
+            </button>
+            <p id="pqrs-status" class="text-sm text-text-muted" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<script>
+  const form = document.querySelector('#pqrs-form');
+
+  if (form instanceof HTMLFormElement) {
+    const dateInput = form.querySelector('#fecha');
+    const status = form.querySelector('#pqrs-status');
+    const enfoqueCheckboxes = form.querySelectorAll<HTMLInputElement>('input[name="enfoqueDiferencial"]');
+
+    if (dateInput instanceof HTMLInputElement) {
+      dateInput.max = new Date().toISOString().split('T')[0];
+    }
+
+    form.addEventListener('input', (event) => {
+      const target = event.target;
+      if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement) {
+        target.setCustomValidity('');
+      }
+
+      if (target instanceof HTMLInputElement && target.name === 'enfoqueDiferencial') {
+        enfoqueCheckboxes.forEach((checkbox) => checkbox.setCustomValidity(''));
+      }
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const descripcion = form.querySelector('#descripcion');
+      if (descripcion instanceof HTMLTextAreaElement) {
+        const cleanLength = descripcion.value.trim().length;
+        if (cleanLength < 20) {
+          descripcion.setCustomValidity('La descripcion debe tener al menos 20 caracteres.');
+        }
+      }
+
+      const enfoqueSeleccionado = Array.from(enfoqueCheckboxes).some((checkbox) => checkbox.checked);
+      if (!enfoqueSeleccionado && enfoqueCheckboxes[0] instanceof HTMLInputElement) {
+        enfoqueCheckboxes[0].setCustomValidity('Selecciona al menos una opcion de enfoque diferencial.');
+      }
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        if (status instanceof HTMLElement) {
+          status.textContent = 'Revisa los campos obligatorios antes de continuar.';
+        }
+        return;
+      }
+
+      if (status instanceof HTMLElement) {
+        status.textContent = 'Validacion correcta. El envio del formulario sera habilitado pronto.';
+      }
+    });
+  }
+</script>
+
+<style>
+  .pqrs-hero {
+    background:
+      radial-gradient(circle at 12% 14%, rgba(194, 213, 1, 0.14) 0%, transparent 32%),
+      linear-gradient(180deg, #f4f6fa 0%, #ffffff 70%);
+  }
+
+  .pqrs-form {
+    background:
+      linear-gradient(175deg, rgba(244, 246, 250, 0.48) 0%, rgba(255, 255, 255, 0.98) 30%);
+  }
+
+  .pqrs-block {
+    border: 1px solid #e6eaf3;
+    border-radius: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .pqrs-block-title {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #052e87;
+  }
+
+  .pqrs-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #3d5270;
+  }
+
+  .pqrs-input {
+    margin-top: 0.45rem;
+    width: 100%;
+    border: 1px solid #d1d9e9;
+    border-radius: 0.65rem;
+    background: #ffffff;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+    color: #162133;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .pqrs-input:focus-visible {
+    outline: none;
+    border-color: #6982b7;
+    box-shadow: 0 0 0 3px rgba(194, 213, 1, 0.35);
+  }
+
+  @media (max-width: 640px) {
+    .pqrs-block {
+      padding: 0.85rem;
+    }
+
+    .pqrs-label {
+      letter-spacing: 0.1em;
+    }
+  }
+</style>
