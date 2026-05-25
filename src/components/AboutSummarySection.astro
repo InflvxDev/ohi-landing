@@ -1,0 +1,63 @@
+---
+const highlights = [
+  'Atención integral, segura y humanizada para la región.',
+  'Servicios de mediana y alta complejidad con tecnología médica avanzada.',
+  'Más de dos décadas de evolución al servicio de Valledupar y el Cesar.',
+];
+---
+
+<section id="quienes-somos" class="about-summary bg-background py-16 lg:py-20">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+    <div class="relative overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-[0_22px_48px_-34px_rgba(3,28,81,0.62)]">
+      <img
+        src="/img/Quienes-somos-OHI-1.webp"
+        alt="Equipo e instalaciones de Organización Humana Integral"
+        class="h-72 w-full object-cover sm:h-96"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="absolute inset-x-0 bottom-0 bg-linear-to-t from-primary-900/88 via-primary-900/42 to-transparent p-6 text-white">
+        <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-accent-300">Desde 2003</p>
+        <p class="mt-2 max-w-md text-2xl font-black leading-tight">Una historia de crecimiento con calidad humana.</p>
+      </div>
+    </div>
+
+    <article>
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-primary-500">Quiénes somos</p>
+      <h2 class="mt-3 text-3xl font-black leading-tight text-primary-700 sm:text-4xl">
+        Una organización especializada en cuidar la salud de forma integral.
+      </h2>
+      <p class="mt-5 text-base leading-7 text-text-muted md:text-lg md:leading-8">
+        OHI nació como una clínica de urgencias e internación en Valledupar y ha evolucionado hasta consolidarse como una institución de mediana y alta complejidad, con sedes, servicios especializados y una vocación permanente por el cuidado humano.
+      </p>
+      <p class="mt-4 text-base leading-7 text-text-muted">
+        Nuestra historia integra experiencia asistencial, innovación tecnológica y acompañamiento cercano para responder a las necesidades de pacientes y familias de la región.
+      </p>
+
+      <ul class="mt-7 grid gap-3">
+        {highlights.map((highlight) => (
+          <li class="flex gap-3 rounded-xl border border-primary-100 bg-primary-50 px-4 py-3 text-sm font-semibold leading-6 text-primary-700">
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-accent-500"></span>
+            <span>{highlight}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="/quienes-somos" class="rounded bg-primary-700 px-5 py-3 text-center text-sm font-extrabold text-white transition hover:bg-primary-600 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2">
+          Conocer quiénes somos
+        </a>
+        <a href="/historia" class="rounded border border-primary-200 bg-white px-5 py-3 text-center text-sm font-extrabold text-primary-700 transition hover:border-accent-500 hover:text-primary-800 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2">
+          Ver nuestra historia
+        </a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .about-summary {
+    background:
+      linear-gradient(180deg, #ffffff 0%, #f4f6fa 100%);
+  }
+</style>
