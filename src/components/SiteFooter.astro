@@ -3,8 +3,8 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer id="contacto" class="bg-primary-700 text-primary-100">
-  <div class="mx-auto grid max-w-7xl gap-8 px-5 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
-    <div class="space-y-4">
+  <div class="mx-auto grid max-w-7xl gap-8 px-5 py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)_minmax(0,0.9fr)] md:items-start lg:gap-12">
+    <div class="space-y-4 md:pr-4">
       <img
         src="/logo_negativo_fondo_azul_vertical.png"
         alt="Organizacion Humana Integral"
@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
         Organizacion Humana Integral brinda atencion en salud de mediana y alta complejidad con calidad humana, seguridad y vocacion de servicio para la region.
       </p>
     </div>
-    <div>
+    <div class="footer-compact-links md:justify-self-start">
       <h2 class="text-sm font-bold uppercase tracking-[0.16em] text-accent-300">Enlaces</h2>
       <div class="mt-4 grid gap-2 text-sm text-primary-100">
         <a href="/#servicios" class="hover:text-accent-300">Servicios</a>
@@ -26,18 +26,15 @@ const currentYear = new Date().getFullYear();
         <a href="/pqrs" class="hover:text-accent-300">PQRS</a>
       </div>
     </div>
-    <div>
-      <h2 class="text-sm font-bold uppercase tracking-[0.16em] text-accent-300">Lineas de atencion | Referencia</h2>
-      <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-primary-100">
+    <div class="footer-compact-links md:justify-self-end md:text-left">
+      <h2 class="max-w-xs text-sm font-bold uppercase tracking-[0.16em] leading-5 text-accent-300">Lineas de atencion | Referencia</h2>
+      <div class="mt-4 grid gap-1 text-sm text-primary-100">
         <a href="tel:+575803535" class="transition hover:text-accent-300">(5) 580 35 35 Ext. 1160</a>
-        <span class="text-primary-200">|</span>
         <a href="tel:+573182212020" class="transition hover:text-accent-300">3182212020</a>
-        <span class="text-primary-200">|</span>
         <a href="tel:+573168307181" class="transition hover:text-accent-300">3168307181</a>
-        <span class="text-primary-200">|</span>
         <a href="tel:+573153471357" class="transition hover:text-accent-300">3153471357</a>
       </div>
-      <div class="mt-4 flex items-center gap-3 text-primary-100">
+      <div class="mt-2 flex items-center gap-2 text-primary-100">
         <a href="https://www.instagram.com/organizacionhumanaintegral/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Organizacion Humana Integral" class="transition hover:text-accent-300">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12m0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8" clip-rule="evenodd"/><path fill="currentColor" d="M18 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/><path fill="currentColor" fill-rule="evenodd" d="M1.654 4.276C1 5.56 1 7.24 1 10.6v2.8c0 3.36 0 5.04.654 6.324a6 6 0 0 0 2.622 2.622C5.56 23 7.24 23 10.6 23h2.8c3.36 0 5.04 0 6.324-.654a6 6 0 0 0 2.622-2.622C23 18.44 23 16.76 23 13.4v-2.8c0-3.36 0-5.04-.654-6.324a6 6 0 0 0-2.622-2.622C18.44 1 16.76 1 13.4 1h-2.8c-3.36 0-5.04 0-6.324.654a6 6 0 0 0-2.622 2.622M13.4 3h-2.8c-1.713 0-2.878.002-3.778.075-.877.072-1.325.202-1.638.361a4 4 0 0 0-1.748 1.748c-.16.313-.29.761-.36 1.638C3.001 7.722 3 8.887 3 10.6v2.8c0 1.713.002 2.878.075 3.778.072.877.202 1.325.361 1.638a4 4 0 0 0 1.748 1.748c.313.16.761.29 1.638.36.9.074 2.065.076 3.778.076h2.8c1.713 0 2.878-.002 3.778-.075.877-.072 1.325-.202 1.638-.361a4 4 0 0 0 1.748-1.748c.16-.313.29-.761.36-1.638.074-.9.076-2.065.076-3.778v-2.8c0-1.713-.002-2.878-.075-3.778-.072-.877-.202-1.325-.361-1.638a4 4 0 0 0-1.748-1.748c-.313-.16-.761-.29-1.638-.36C16.278 3.001 15.113 3 13.4 3" clip-rule="evenodd"/></svg>
         </a>
@@ -57,3 +54,9 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<style>
+  #contacto .footer-compact-links a {
+    min-height: 0;
+  }
+</style>

@@ -78,11 +78,11 @@ const loopingServices = [...services, ...services];
       </p>
     </div>
 
-    <div class="services-full-bleed mt-10">
+    <div class="services-full-bleed mt-10" data-services-carousel>
       <div class="services-marquee">
-      <div class="services-track" aria-label="Carrusel de servicios OHI">
-        {loopingServices.map((service) => (
-          <article class="service-card overflow-hidden rounded border border-primary-100 bg-primary-50/75 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+        <div class="services-track" aria-label="Carrusel de servicios OHI" data-services-track>
+        {loopingServices.map((service, index) => (
+          <article class="service-card overflow-hidden rounded border border-primary-100 bg-primary-50/75 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md" aria-hidden={index >= services.length ? 'true' : undefined}>
             <img src={service.image} alt={service.title} class="h-44 w-full object-cover" loading="lazy" decoding="async" />
             <div class="p-5">
               <h3 class="text-xl font-black text-primary-700">{service.title}</h3>
@@ -91,11 +91,29 @@ const loopingServices = [...services, ...services];
             </div>
           </article>
         ))}
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </section>
+
+<script>
+  const initServicesCarousels = () => {
+    const carouselRoots = document.querySelectorAll<HTMLElement>('[data-services-carousel]');
+
+    carouselRoots.forEach((root) => {
+      const track = root.querySelector<HTMLElement>('[data-services-track]');
+      if (!track) return;
+
+      track.style.animation = 'none';
+      track.getBoundingClientRect();
+      track.style.animation = '';
+    });
+  };
+
+  document.addEventListener('astro:page-load', initServicesCarousels);
+  initServicesCarousels();
+</script>
 
 <style>
   .services-full-bleed {
@@ -142,6 +160,34 @@ const loopingServices = [...services, ...services];
   @media (prefers-reduced-motion: reduce) {
     .services-track {
       animation: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .services-full-bleed {
+      width: auto;
+      margin-left: 0;
+      transform: none;
+    }
+
+    .services-marquee {
+      overflow: visible;
+      mask-image: none;
+    }
+
+    .services-track {
+      display: grid;
+      width: auto;
+      gap: 1rem;
+      animation: none;
+    }
+
+    .service-card {
+      width: 100%;
+    }
+
+    .service-card:nth-child(n + 10) {
+      display: none;
     }
   }
 </style>

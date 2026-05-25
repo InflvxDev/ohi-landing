@@ -22,7 +22,7 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
 <Layout>
   <MainHeader />
 
-  <main class="bg-background text-text-base">
+  <main id="contenido-principal" class="bg-background text-text-base">
     <section class="pqrs-hero border-b border-primary-100">
       <div class="mx-auto max-w-7xl px-5 py-14 md:py-18">
         <p class="inline-flex rounded-full border border-primary-200 bg-primary-50 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">
@@ -154,7 +154,6 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
                         name="enfoqueDiferencial"
                         value={item}
                         class="h-4 w-4 rounded accent-primary-600"
-                        required={index === 0}
                       />
                       <span>{item}</span>
                     </label>
@@ -246,6 +245,7 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
 
       if (!form.checkValidity()) {
         form.reportValidity();
+        form.querySelector<HTMLElement>(':invalid')?.focus();
         if (status instanceof HTMLElement) {
           status.textContent = 'Revisa los campos obligatorios antes de continuar.';
         }

@@ -34,7 +34,9 @@ const { services } = Astro.props;
           class="primary-service-card group"
           data-primary-open
           data-service-index={index % services.length}
+          aria-label={`Abrir detalle de ${service.title}`}
           aria-haspopup="dialog"
+          aria-expanded="false"
         >
           {service.image && (
             <span class="primary-service-media">
@@ -81,9 +83,13 @@ const { services } = Astro.props;
 </div>
 
 <script>
-  const carouselRoots = document.querySelectorAll<HTMLElement>('[data-primary-carousel]');
+  const initPrimaryCarousels = () => {
+    const carouselRoots = document.querySelectorAll<HTMLElement>('[data-primary-carousel]');
 
-  carouselRoots.forEach((root) => {
+    carouselRoots.forEach((root) => {
+      if (root.dataset.primaryCarouselReady === 'true') return;
+      root.dataset.primaryCarouselReady = 'true';
+
     const payload = root.querySelector<HTMLScriptElement>('[data-primary-payload]');
     const viewport = root.querySelector<HTMLElement>('[data-carousel-viewport]');
     const track = root.querySelector<HTMLElement>('[data-carousel-track]');
@@ -176,8 +182,13 @@ const { services } = Astro.props;
       autoplay = window.setInterval(() => scrollByCard(1), 3200);
     };
 
+    const getFocusableElements = () => Array.from(
+      modal.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+    ).filter((element) => !element.hasAttribute('hidden') && element.offsetParent !== null);
+
     const closeModal = () => {
       modal.classList.remove('is-open');
+      activeButton?.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
 
       closeTimer = window.setTimeout(() => {
@@ -195,6 +206,7 @@ const { services } = Astro.props;
       window.clearInterval(autoplay);
       window.clearTimeout(closeTimer);
       activeButton = button;
+      activeButton.setAttribute('aria-expanded', 'true');
       image.src = service.image || '';
       image.alt = service.title;
       title.textContent = service.title;
@@ -258,6 +270,8 @@ const { services } = Astro.props;
     });
     viewport.addEventListener('pointerenter', () => window.clearInterval(autoplay));
     viewport.addEventListener('pointerleave', startAutoplay);
+    viewport.addEventListener('focusin', () => window.clearInterval(autoplay));
+    viewport.addEventListener('focusout', restartAutoplay);
 
     openButtons.forEach((button) => {
       button.addEventListener('click', () => openModal(Number(button.dataset.serviceIndex), button));
@@ -266,11 +280,33 @@ const { services } = Astro.props;
     closeButtons.forEach((button) => button.addEventListener('click', closeModal));
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+      if (modal.classList.contains('hidden')) return;
+
+      if (event.key === 'Escape') closeModal();
+
+      if (event.key === 'Tab') {
+        const focusableElements = getFocusableElements();
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (!firstElement || !lastElement) return;
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
     });
 
     startAutoplay();
-  });
+    });
+  };
+
+  document.addEventListener('astro:page-load', initPrimaryCarousels);
+  initPrimaryCarousels();
 </script>
 
 <style>
