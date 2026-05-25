@@ -1,21 +1,33 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
 <footer id="contacto" class="bg-primary-700 text-primary-100">
   <div class="mx-auto grid max-w-7xl gap-8 px-5 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
     <div class="space-y-4">
-      <div class="grid h-12 w-12 place-items-center rounded bg-accent-500 text-sm font-black text-primary-700 ring-2 ring-primary-200">LOGO</div>
+      <img
+        src="/logo_negativo_fondo_azul_vertical.png"
+        alt="Organizacion Humana Integral"
+        class="h-20 w-auto object-contain"
+        loading="lazy"
+        decoding="async"
+      />
       <p class="max-w-md text-sm leading-6 text-primary-100">
-        Organizacion Humana Integral acompana procesos de talento humano y bienestar con un enfoque cercano y profesional.
+        Organizacion Humana Integral brinda atencion en salud de mediana y alta complejidad con calidad humana, seguridad y vocacion de servicio para la region.
       </p>
     </div>
     <div>
       <h2 class="text-sm font-bold uppercase tracking-[0.16em] text-accent-300">Enlaces</h2>
       <div class="mt-4 grid gap-2 text-sm text-primary-100">
-        <a href="#servicios" class="hover:text-accent-300">Servicios</a>
-        <a href="#sedes" class="hover:text-accent-300">Sedes</a>
-        <a href="#galeria" class="hover:text-accent-300">Galeria</a>
+        <a href="/#servicios" class="hover:text-accent-300">Servicios</a>
+        <a href="/#sedes" class="hover:text-accent-300">Sedes</a>
+        <a href="/#quienes-somos" class="hover:text-accent-300">Quienes somos</a>
+        <a href="/historia" class="hover:text-accent-300">Historia</a>
+        <a href="/pqrs" class="hover:text-accent-300">PQRS</a>
       </div>
     </div>
     <div>
-      <h2 class="text-sm font-bold uppercase tracking-[0.16em] text-accent-300">Lineas de atencion</h2>
+      <h2 class="text-sm font-bold uppercase tracking-[0.16em] text-accent-300">Lineas de atencion | Referencia</h2>
       <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-primary-100">
         <a href="tel:+575803535" class="transition hover:text-accent-300">(5) 580 35 35 Ext. 1160</a>
         <span class="text-primary-200">|</span>
@@ -38,7 +50,10 @@
       </div>
     </div>
   </div>
-  <div class="border-t border-primary-500 bg-primary-600 px-5 py-4 text-center text-xs text-primary-100">
-    2026 Organizacion Humana Integral. Todos los derechos reservados.
+  <div class="border-t border-primary-500 bg-primary-600 px-5 py-4 text-xs text-primary-100">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 text-center sm:flex-row sm:text-left">
+      <p>&copy; {currentYear} Organizacion Humana Integral. Todos los derechos reservados.</p>
+      <p>Desarrollado por <span class="font-extrabold text-accent-300">InflvxDev</span></p>
+    </div>
   </div>
 </footer>
