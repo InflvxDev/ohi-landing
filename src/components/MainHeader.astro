@@ -73,7 +73,6 @@ const dropdowns: Dropdown[] = [
 
 const navLinks: NavLink[] = [
   { label: "Servicios", href: "/#servicios" },
-  { label: "Galeria", href: "/#galeria" },
   { label: "SIAU", href: "/#siau" },
 ];
 
@@ -82,7 +81,6 @@ const mobileLinks: Array<Dropdown | NavLink> = [
   navLinks[0],
   dropdowns[1],
   navLinks[1],
-  navLinks[2],
   dropdowns[2],
 ];
 
@@ -143,7 +141,6 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
         </div>
       </div>
 
-      <a href="/#galeria" class="nav-pill">Galeria</a>
       <a href="/#siau" class="nav-pill">SIAU</a>
 
       <div class="nav-dropdown group relative" aria-label={dropdowns[2].aria}>
