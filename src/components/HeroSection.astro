@@ -1,17 +1,16 @@
 <section id="inicio" class="hero-home relative overflow-hidden border border-primary-800 bg-link">
-  <div class="pointer-events-none absolute -left-24 top-10 h-64 w-64 rounded-full bg-accent-500/12 blur-3xl"></div>
-  <div class="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-primary-900/45 to-transparent"></div>
 
   <div class="mx-auto max-w-7xl px-5 py-16 lg:py-24">
     <article class="relative z-10 max-w-4xl space-y-6">
-      <p class="inline-flex rounded border border-accent-400/50 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.18em] text-accent-300">
+      <p class="inline-flex rounded-full border border-accent-400/50 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.18em] text-accent-300 shadow-sm backdrop-blur">
         Organización Humana Integral
       </p>
-      <h1 class="max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
-        Cuidamos la salud de la región con calidad humana, experiencia y alta complejidad.
+      <h1 class="max-w-5xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-7xl">
+        No hay mejor cuidado para la salud como el que te hace sentir en casa.
       </h1>
       <p class="max-w-3xl text-base leading-8 text-white/85 md:text-lg">
-        Somos una institución comprometida con una atención integral, segura y oportuna, con tecnología médica avanzada y un talento humano que acompaña cada etapa de cuidado.
+        Atencion integral, segura y oportuna para la region, con tecnologia medica avanzada y un talento humano que acompana cada etapa de cuidado con cercania.
       </p>
       <div class="flex flex-col gap-3 sm:flex-row">
         <a href="#servicios" class="rounded bg-cta px-5 py-3 text-center text-sm font-bold text-primary-800 transition hover:bg-accent-400">
@@ -28,9 +27,12 @@
 
 <style>
   .hero-home {
+    min-height: calc(100vh - 4.75rem);
     background:
-      linear-gradient(112deg, rgba(3, 28, 81, 0.82) 0%, rgba(4, 37, 108, 0.74) 45%, rgba(5, 46, 135, 0.66) 100%),
+      linear-gradient(112deg, rgba(3, 28, 81, 0.9) 0%, rgba(4, 37, 108, 0.76) 44%, rgba(5, 46, 135, 0.36) 100%),
       url('/img/OHI-entrada.webp') center / cover no-repeat;
+    display: flex;
+    align-items: center;
   }
 
   .hero-home h1,
