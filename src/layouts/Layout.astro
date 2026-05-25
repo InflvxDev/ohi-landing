@@ -2,18 +2,126 @@
 import '../styles/global.css'
 import '@fontsource/inter/400.css';
 import { ClientRouter } from "astro:transitions";
+
+type Props = {
+	title?: string;
+	description?: string;
+	path?: string;
+	image?: string;
+	type?: 'website' | 'article';
+	noindex?: boolean;
+	structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+};
+
+const {
+	title = 'Organización Humana Integral | Servicios de salud en Valledupar',
+	description = 'Organización Humana Integral brinda atención integral en salud de mediana y alta complejidad en Valledupar, con calidad humana, seguridad y vocación de servicio.',
+	path = Astro.url.pathname,
+	image = '/img/OHI-entrada.webp',
+	type = 'website',
+	noindex = false,
+	structuredData,
+} = Astro.props;
+
+const siteUrl = new URL(import.meta.env.PUBLIC_SITE_URL ?? Astro.site ?? 'https://ohisalud.com');
+const canonicalUrl = new URL(path, siteUrl).toString();
+const imageUrl = new URL(image, siteUrl).toString();
+const organizationSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'MedicalOrganization',
+	name: 'Organización Humana Integral',
+	alternateName: 'OHI',
+	url: siteUrl.toString(),
+	logo: new URL('/logo.png', siteUrl).toString(),
+	image: imageUrl,
+	telephone: '+57-5-580-3535',
+	email: 'lineadenuncias@ohisalud.com',
+	contactPoint: {
+		'@type': 'ContactPoint',
+		telephone: '+57-5-580-3535',
+		contactType: 'Atención al usuario',
+		areaServed: 'CO',
+		availableLanguage: 'es',
+	},
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: 'Carrera 19 #14-47, barrio San Vicente',
+		addressLocality: 'Valledupar',
+		addressRegion: 'Cesar',
+		addressCountry: 'CO',
+	},
+	sameAs: [
+		'https://www.instagram.com/organizacionhumanaintegral/',
+		'https://www.facebook.com/OrganizacionHumanaIntegral/?locale=es_LA',
+		'https://co.linkedin.com/company/ohi-organizaci%C3%B3n-humana-integral-s-a',
+	],
+};
+
+const pathSegments = path.split('/').filter(Boolean);
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: 'Inicio',
+			item: siteUrl.toString(),
+		},
+		...pathSegments.map((segment, index) => {
+			const segmentPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
+			const name = segment
+				.split('-')
+				.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+				.join(' ');
+
+			return {
+				'@type': 'ListItem',
+				position: index + 2,
+				name,
+				item: new URL(segmentPath, siteUrl).toString(),
+			};
+		}),
+	],
+};
+
+const schema = structuredData
+	? Array.isArray(structuredData)
+		? [organizationSchema, breadcrumbSchema, ...structuredData]
+		: [organizationSchema, breadcrumbSchema, structuredData]
+	: [organizationSchema, breadcrumbSchema];
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-CO">
 	<head>
 		<ClientRouter />
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/webp" href="/icon.webp" />
 		<link rel="icon" href="/icon.webp" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="alternate" hreflang="es-CO" href={canonicalUrl} />
+		<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 		<meta name="generator" content={Astro.generator} />
-		<title>Organización Humana Integral</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
+		<meta name="theme-color" content="#052e87" />
+		<meta property="og:site_name" content="Organización Humana Integral" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={imageUrl} />
+		<meta property="og:image:alt" content={title} />
+		<meta property="og:locale" content="es_CO" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
+		<meta name="twitter:image:alt" content={title} />
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		<title>{title}</title>
 	</head>
 	<body>
 		<a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
