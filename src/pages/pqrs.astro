@@ -4,16 +4,17 @@ import SiteFooter from '../components/SiteFooter.astro';
 import Layout from '../layouts/Layout.astro';
 
 const sedeOptions = ['Sede Principal', 'Sede Santa Isabel'];
-const tipoSolicitudOptions = ['Peticion', 'Queja', 'Reclamo', 'Sugerencia', 'Felicitaciones'];
+const tipoSolicitudOptions = ['Petición', 'Queja', 'Reclamo', 'Sugerencia', 'Felicitaciones'];
 const sexoOptions = ['Masculino', 'Femenino'];
 const enfoqueDiferencialOptions = [
-  'Victima del conflicto armado',
-  'Condicion de discapacidad',
+  'Víctima del conflicto armado',
+  'Condición de discapacidad',
   'Afrodescendiente',
-  'Indigena',
+  'Indígena',
   'LGBTI',
   'Gestante',
   'Adulto mayor',
+  'No aplica / prefiero no responder',
 ];
 const hours = Array.from({ length: 24 }, (_, index) => String(index).padStart(2, '0'));
 const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(2, '0'));
@@ -30,23 +31,34 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
     <section class="pqrs-hero border-b border-primary-100">
       <div class="mx-auto max-w-7xl px-5 py-14 md:py-18">
         <p class="inline-flex rounded-full border border-primary-200 bg-primary-50 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">
-          Atencion al usuario
+          Atención al usuario
         </p>
         <h1 class="mt-4 text-3xl font-black leading-tight text-primary-700 md:text-5xl">
-          Formato de peticion, queja, reclamo, sugerencia y felicitaciones
+          Formato de petición, queja, reclamo, sugerencia y felicitaciones
         </h1>
         <p class="mt-4 max-w-4xl text-base leading-7 text-text-muted md:text-lg md:leading-8">
-          Completa los campos para registrar tu caso. Esta version valida la informacion en pantalla, pero el envio del formulario sera habilitado en una siguiente etapa.
+          Este formulario valida la información en pantalla y no almacena ni envía datos todavía. Para radicar formalmente tu caso, usa los canales de atención indicados en esta página.
         </p>
       </div>
     </section>
 
     <section class="pb-16 pt-10 md:pb-20">
       <div class="mx-auto max-w-7xl px-5">
-        <form id="pqrs-form" class="pqrs-form" novalidate>
+        <div id="pqrs-form-note" class="mb-6 rounded-2xl border border-accent-300 bg-accent-50 p-5 text-primary-800">
+          <p class="text-sm font-extrabold uppercase tracking-[0.16em]">Radicación oficial</p>
+          <p class="mt-2 text-sm leading-6">
+            La radicación digital aún no está habilitada. Puedes validar que tu información esté completa y luego comunicarte con SIAU por teléfono o acercarte a la sede correspondiente.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-3 text-sm font-bold">
+            <a href="tel:+573153467668" class="rounded bg-primary-700 px-3 py-2 text-white transition hover:bg-primary-600">Llamar a SIAU</a>
+            <a href="/#siau" class="rounded border border-primary-200 bg-white px-3 py-2 text-primary-700 transition hover:border-accent-500">Ver canales SIAU</a>
+          </div>
+        </div>
+
+        <form id="pqrs-form" class="pqrs-form" aria-describedby="pqrs-form-note privacy-note" novalidate>
           <div class="grid gap-6">
             <section class="pqrs-block grid gap-5 md:grid-cols-12">
-              <h2 class="pqrs-block-title md:col-span-12">Datos de radicacion</h2>
+              <h2 class="pqrs-block-title md:col-span-12">Datos de radicación</h2>
 
               <div class="md:col-span-6">
                 <label for="sede" class="pqrs-label">Selecciona la sede</label>
@@ -69,7 +81,7 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
               </fieldset>
 
               <div class="md:col-span-4">
-                <label for="areaServicio" class="pqrs-label">Area / Servicio</label>
+                <label for="areaServicio" class="pqrs-label">Área / Servicio</label>
                 <input id="areaServicio" name="areaServicio" type="text" class="pqrs-input" placeholder="Ej: Urgencias" required minlength="3" maxlength="120" />
               </div>
 
@@ -115,8 +127,8 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
               </fieldset>
 
               <div class="md:col-span-4">
-                <label for="identificacion" class="pqrs-label">No. Identificacion del paciente</label>
-                <input id="identificacion" name="identificacion" type="text" class="pqrs-input" inputmode="numeric" pattern="[0-9]{5,15}" required />
+                <label for="identificacion" class="pqrs-label">No. Identificación del paciente</label>
+                <input id="identificacion" name="identificacion" type="text" class="pqrs-input" inputmode="text" pattern="[0-9A-Za-z .-]{5,20}" required />
               </div>
 
               <div class="md:col-span-4">
@@ -130,13 +142,13 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
               </div>
 
               <div class="md:col-span-4">
-                <label for="direccion" class="pqrs-label">Direccion</label>
-                <input id="direccion" name="direccion" type="text" class="pqrs-input" required minlength="6" maxlength="140" />
+                <label for="Dirección" class="pqrs-label">Dirección</label>
+                <input id="Dirección" name="Dirección" type="text" class="pqrs-input" required minlength="6" maxlength="140" />
               </div>
 
               <div class="md:col-span-4">
-                <label for="telefono" class="pqrs-label">Telefono</label>
-                <input id="telefono" name="telefono" type="tel" class="pqrs-input" inputmode="tel" pattern="[0-9]{7,12}" required />
+                <label for="Teléfono" class="pqrs-label">Teléfono</label>
+                <input id="Teléfono" name="Teléfono" type="tel" class="pqrs-input" inputmode="tel" pattern="[0-9+() .-]{7,20}" required />
               </div>
 
               <div class="md:col-span-4">
@@ -151,7 +163,7 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
               <fieldset class="md:col-span-12">
                 <legend class="pqrs-label">Enfoque diferencial</legend>
                 <div class="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm text-primary-700">
-                  {enfoqueDiferencialOptions.map((item, index) => (
+                  {enfoqueDiferencialOptions.map((item) => (
                     <label class="inline-flex items-center gap-2">
                       <input
                         type="checkbox"
@@ -166,10 +178,10 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
               </fieldset>
 
               <div class="md:col-span-12">
-                <label for="descripcion" class="pqrs-label">Descripcion</label>
+                <label for="Descripción" class="pqrs-label">Descripción</label>
                 <textarea
-                  id="descripcion"
-                  name="descripcion"
+                  id="Descripción"
+                  name="Descripción"
                   class="pqrs-input min-h-44"
                   required
                   minlength="20"
@@ -180,23 +192,36 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
             </section>
 
             <section class="pqrs-block grid gap-5 md:grid-cols-12">
-              <h2 class="pqrs-block-title md:col-span-12">Datos del acompaniante</h2>
+              <h2 class="pqrs-block-title md:col-span-12">Datos del acompañante</h2>
 
               <div class="md:col-span-6">
-                <label for="nombreAcompanante" class="pqrs-label">Nombre completo del acompaniante</label>
-                <input id="nombreAcompanante" name="nombreAcompanante" type="text" class="pqrs-input" required minlength="6" maxlength="120" />
+                <label for="nombreAcompanante" class="pqrs-label">Nombre completo del acompañante</label>
+                <input id="nombreAcompanante" name="nombreAcompanante" type="text" class="pqrs-input" minlength="6" maxlength="120" />
               </div>
 
               <div class="md:col-span-6">
-                <label for="idAcompanante" class="pqrs-label">No. Identificacion del acompaniante</label>
-                <input id="idAcompanante" name="idAcompanante" type="text" class="pqrs-input" inputmode="numeric" pattern="[0-9]{5,15}" required />
+                <label for="idAcompanante" class="pqrs-label">No. Identificación del acompañante</label>
+                <input id="idAcompanante" name="idAcompanante" type="text" class="pqrs-input" inputmode="text" pattern="[0-9A-Za-z .-]{5,20}" />
               </div>
+            </section>
+
+            <section class="pqrs-block grid gap-3 md:grid-cols-12">
+              <h2 class="pqrs-block-title md:col-span-12">Privacidad y uso de datos</h2>
+              <p id="privacy-note" class="text-sm leading-6 text-text-muted md:col-span-12">
+                Esta validación ocurre en tu navegador. Cuando la radicación digital esté habilitada, el tratamiento de datos se realizará conforme a la política institucional publicada por OHI.
+              </p>
+              <label class="inline-flex items-start gap-3 text-sm leading-6 text-primary-800 md:col-span-12">
+                <input id="privacyConsent" name="privacyConsent" type="checkbox" class="mt-1 h-4 w-4 rounded accent-primary-600" required />
+                <span>
+                  He leído la <a href="/politicas/tratamiento-datos-personales" class="font-bold text-link underline decoration-primary-200 underline-offset-3 hover:text-link-hover">política de tratamiento de datos personales</a> y entiendo que esta versión no envía ni almacena información.
+                </span>
+              </label>
             </section>
           </div>
 
           <div class="mt-7 flex items-center gap-4">
             <button type="submit" class="inline-flex rounded bg-link px-5 py-2.5 text-sm font-extrabold text-white transition hover:bg-link-hover focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2">
-              Enviar
+              Validar información
             </button>
             <p id="pqrs-status" class="text-sm text-text-muted" aria-live="polite"></p>
           </div>
@@ -214,6 +239,7 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
   if (form instanceof HTMLFormElement) {
     const dateInput = form.querySelector('#fecha');
     const status = form.querySelector('#pqrs-status');
+    const privacyConsent = form.querySelector('#privacyConsent');
     const enfoqueCheckboxes = form.querySelectorAll<HTMLInputElement>('input[name="enfoqueDiferencial"]');
 
     if (dateInput instanceof HTMLInputElement) {
@@ -229,22 +255,30 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
       if (target instanceof HTMLInputElement && target.name === 'enfoqueDiferencial') {
         enfoqueCheckboxes.forEach((checkbox) => checkbox.setCustomValidity(''));
       }
+
+      if (target instanceof HTMLInputElement && target.name === 'privacyConsent') {
+        target.setCustomValidity('');
+      }
     });
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const descripcion = form.querySelector('#descripcion');
-      if (descripcion instanceof HTMLTextAreaElement) {
-        const cleanLength = descripcion.value.trim().length;
+      const Descripción = form.querySelector('#Descripción');
+      if (Descripción instanceof HTMLTextAreaElement) {
+        const cleanLength = Descripción.value.trim().length;
         if (cleanLength < 20) {
-          descripcion.setCustomValidity('La descripcion debe tener al menos 20 caracteres.');
+          Descripción.setCustomValidity('La descripción debe tener al menos 20 caracteres.');
         }
       }
 
       const enfoqueSeleccionado = Array.from(enfoqueCheckboxes).some((checkbox) => checkbox.checked);
       if (!enfoqueSeleccionado && enfoqueCheckboxes[0] instanceof HTMLInputElement) {
-        enfoqueCheckboxes[0].setCustomValidity('Selecciona al menos una opcion de enfoque diferencial.');
+        enfoqueCheckboxes[0].setCustomValidity('Selecciona al menos una opción de enfoque diferencial o No aplica.');
+      }
+
+      if (privacyConsent instanceof HTMLInputElement && !privacyConsent.checked) {
+        privacyConsent.setCustomValidity('Confirma que entiendes el uso de datos antes de validar la información.');
       }
 
       if (!form.checkValidity()) {
@@ -257,7 +291,7 @@ const minutes = Array.from({ length: 60 }, (_, index) => String(index).padStart(
       }
 
       if (status instanceof HTMLElement) {
-        status.textContent = 'Validacion correcta. El envio del formulario sera habilitado pronto.';
+        status.textContent = 'Información completa. No se envió ni almacenó ningún dato; comunícate con SIAU para radicar oficialmente el caso.';
       }
     });
   }

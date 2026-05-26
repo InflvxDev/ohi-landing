@@ -10,6 +10,7 @@ type Dropdown = {
   label: string;
   href: string;
   aria: string;
+  id: string;
   widthClass: string;
   items: DropdownItem[];
 };
@@ -24,12 +25,13 @@ const dropdowns: Dropdown[] = [
     label: "Nosotros",
     href: "/quienes-somos",
     aria: "Submenu Nosotros",
+    id: "nav-nosotros",
     widthClass: "menu-md",
     items: [
-      { label: "Quienes Somos", href: "/quienes-somos", detail: "Proposito, enfoque humano y equipo OHI" },
+      { label: "Quiénes somos", href: "/quienes-somos", detail: "Propósito, enfoque humano y equipo OHI" },
       { label: "Historia", href: "/historia", detail: "Nuestro recorrido institucional" },
       {
-        label: "Linea Etica y Transparencia",
+        label: "Línea Ética y Transparencia",
         href: "https://docs.google.com/forms/d/19h6Vr09KTRC8VyZo4wNVcelmJZ2EjU-Hfd_yk9urZKI/viewform?edit_requested=true",
         detail: "Canal externo de reporte y confianza",
         external: true,
@@ -40,32 +42,34 @@ const dropdowns: Dropdown[] = [
     label: "Sedes",
     href: "/#sedes",
     aria: "Submenu Sedes",
+    id: "nav-sedes",
     widthClass: "menu-sm",
     items: [
-      { label: "Sede Principal", href: "/sede-principal", detail: "Servicios y atencion integral" },
-      { label: "Santa Isabel", href: "/santa-isabel", detail: "Consulta la informacion de esta sede" },
+      { label: "Sede Principal", href: "/sede-principal", detail: "Servicios y atención integral" },
+      { label: "Santa Isabel", href: "/santa-isabel", detail: "Consulta la información de esta sede" },
     ],
   },
   {
-    label: "Politicas",
+    label: "Políticas",
     href: "/politicas",
-    aria: "Submenu Politicas",
+    aria: "Submenú Políticas",
+    id: "nav-Políticas",
     widthClass: "menu-lg",
     items: [
       {
-        label: "Actualizacion y/o Autorizacion de Tratamiento de Datos Personales",
+        label: "Actualización y/o Autorización de Tratamiento de Datos Personales",
         href: "/politicas/actualizacion-autorizacion-tratamiento-datos-personales",
-        detail: "Gestion y autorizacion de informacion personal",
+        detail: "Gestión y autorización de información personal",
       },
       {
-        label: "Politica de Tratamiento de Datos Personales",
+        label: "Política de Tratamiento de Datos Personales",
         href: "/politicas/tratamiento-datos-personales",
-        detail: "Lineamientos de privacidad y proteccion",
+        detail: "Lineamientos de privacidad y protección",
       },
       {
-        label: "Politica Publica de Participacion Social en Salud (PPPSS)",
+        label: "Política Pública de Participación Social en Salud (PPPSS)",
         href: "/politicas/pppss",
-        detail: "Participacion ciudadana y control social",
+        detail: "Participación ciudadana y control social",
       },
     ],
   },
@@ -96,19 +100,19 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
     <a href="/" class="header-logo group/logo" aria-label="Ir al inicio">
       <span class="absolute inset-0 rounded-2xl bg-linear-to-br from-white via-primary-50 to-accent-50 opacity-0 transition duration-300 group-hover/logo:opacity-100"></span>
       <span class="relative flex h-12 items-center rounded-2xl px-3 ring-1 ring-transparent transition duration-300 group-hover/logo:-translate-y-0.5 group-hover/logo:ring-primary-100 group-hover/logo:shadow-[0_14px_28px_-20px_rgba(3,28,81,0.8)]">
-        <img src="/logo.png" alt="Logo de Organizacion Humana Integral" class="h-11 w-auto" loading="eager" decoding="async" />
+        <img src="/logo.png" alt="Logo de Organización Humana Integral" class="h-11 w-auto" loading="eager" decoding="async" />
       </span>
     </a>
 
     <nav class="hidden items-center gap-1 rounded-full border border-primary-100/80 bg-white/72 p-1 text-sm font-semibold text-text-muted shadow-[inset_0_1px_0_rgba(255,255,255,0.95)] lg:flex" aria-label="Navegacion principal">
-      <div class="nav-dropdown group relative" aria-label={dropdowns[0].aria}>
-        <a href={dropdowns[0].href} class="nav-pill">
+      <details class="nav-dropdown relative" data-nav-disclosure>
+        <summary class="nav-pill" aria-controls={dropdowns[0].id}>
           {dropdowns[0].label}
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 transition-transform duration-300">
             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06" clip-rule="evenodd" />
           </svg>
-        </a>
-        <div class:list={["header-menu", dropdowns[0].widthClass]}>
+        </summary>
+        <div id={dropdowns[0].id} class:list={["header-menu", dropdowns[0].widthClass]} aria-label={dropdowns[0].aria}>
           <div class="menu-panel">
             {dropdowns[0].items.map((item) => (
               <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} class="menu-link">
@@ -118,18 +122,18 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
             ))}
           </div>
         </div>
-      </div>
+      </details>
 
       <a href="/#servicios" class="nav-pill">Servicios</a>
 
-      <div class="nav-dropdown group relative" aria-label={dropdowns[1].aria}>
-        <a href={dropdowns[1].href} class="nav-pill">
+      <details class="nav-dropdown relative" data-nav-disclosure>
+        <summary class="nav-pill" aria-controls={dropdowns[1].id}>
           {dropdowns[1].label}
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 transition-transform duration-300">
             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06" clip-rule="evenodd" />
           </svg>
-        </a>
-        <div class:list={["header-menu", dropdowns[1].widthClass]}>
+        </summary>
+        <div id={dropdowns[1].id} class:list={["header-menu", dropdowns[1].widthClass]} aria-label={dropdowns[1].aria}>
           <div class="menu-panel">
             {dropdowns[1].items.map((item) => (
               <a href={item.href} class="menu-link">
@@ -139,18 +143,18 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
             ))}
           </div>
         </div>
-      </div>
+      </details>
 
       <a href="/#siau" class="nav-pill">SIAU</a>
 
-      <div class="nav-dropdown group relative" aria-label={dropdowns[2].aria}>
-        <a href={dropdowns[2].href} class="nav-pill">
+      <details class="nav-dropdown relative" data-nav-disclosure>
+        <summary class="nav-pill" aria-controls={dropdowns[2].id}>
           {dropdowns[2].label}
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 transition-transform duration-300">
             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06" clip-rule="evenodd" />
           </svg>
-        </a>
-        <div class:list={["header-menu", dropdowns[2].widthClass]}>
+        </summary>
+        <div id={dropdowns[2].id} class:list={["header-menu", dropdowns[2].widthClass]} aria-label={dropdowns[2].aria}>
           <div class="menu-panel">
             {dropdowns[2].items.map((item) => (
               <a href={item.href} class="menu-link">
@@ -160,18 +164,18 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
             ))}
           </div>
         </div>
-      </div>
+      </details>
     </nav>
 
     <div class="flex items-center gap-2 text-primary-700">
       <div class="hidden items-center gap-1 sm:flex">
-        <a href="https://www.instagram.com/organizacionhumanaintegral/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Organizacion Humana Integral" class="social-link">
+        <a href="https://www.instagram.com/organizacionhumanaintegral/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Organización Humana Integral" class="social-link">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12m0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8" clip-rule="evenodd"/><path fill="currentColor" d="M18 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/><path fill="currentColor" fill-rule="evenodd" d="M1.654 4.276C1 5.56 1 7.24 1 10.6v2.8c0 3.36 0 5.04.654 6.324a6 6 0 0 0 2.622 2.622C5.56 23 7.24 23 10.6 23h2.8c3.36 0 5.04 0 6.324-.654a6 6 0 0 0 2.622-2.622C23 18.44 23 16.76 23 13.4v-2.8c0-3.36 0-5.04-.654-6.324a6 6 0 0 0-2.622-2.622C18.44 1 16.76 1 13.4 1h-2.8c-3.36 0-5.04 0-6.324.654a6 6 0 0 0-2.622 2.622M13.4 3h-2.8c-1.713 0-2.878.002-3.778.075-.877.072-1.325.202-1.638.361a4 4 0 0 0-1.748 1.748c-.16.313-.29.761-.36 1.638C3.001 7.722 3 8.887 3 10.6v2.8c0 1.713.002 2.878.075 3.778.072.877.202 1.325.361 1.638a4 4 0 0 0 1.748 1.748c.313.16.761.29 1.638.36.9.074 2.065.076 3.778.076h2.8c1.713 0 2.878-.002 3.778-.075.877-.072 1.325-.202 1.638-.361a4 4 0 0 0 1.748-1.748c.16-.313.29-.761.36-1.638.074-.9.076-2.065.076-3.778v-2.8c0-1.713-.002-2.878-.075-3.778-.072-.877-.202-1.325-.361-1.638a4 4 0 0 0-1.748-1.748c-.313-.16-.761-.29-1.638-.36C16.278 3.001 15.113 3 13.4 3" clip-rule="evenodd"/></svg>
         </a>
-        <a href="https://www.facebook.com/OrganizacionHumanaIntegral/?locale=es_LA" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Organizacion Humana Integral" class="social-link">
+        <a href="https://www.facebook.com/OrganizacionHumanaIntegral/?locale=es_LA" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Organización Humana Integral" class="social-link">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M20 1a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3zm0 2a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-5v-7h2.076a1 1 0 0 0 .949-.684l.443-1.329a.75.75 0 0 0-.712-.987H15V9c0-.5.5-1 1-1h2a1 1 0 0 0 1-1v-.686a.71.71 0 0 0-.519-.695C17.171 5.273 16 5.273 16 5.273c-2.5 0-4 1.727-4 3.227V11h-2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h2v7H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" clip-rule="evenodd"/></svg>
         </a>
-        <a href="https://co.linkedin.com/company/ohi-organizaci%C3%B3n-humana-integral-s-a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Organizacion Humana Integral" class="social-link">
+        <a href="https://co.linkedin.com/company/ohi-organizaci%C3%B3n-humana-integral-s-a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Organización Humana Integral" class="social-link">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24"><path fill="currentColor" d="M6.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1zm6 9h1a1 1 0 0 0 1-1v-4.5c0-1.5 3-2.5 3-.5v5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-6c0-2-1.5-3-3.5-3S13 10.5 13 10.5V10a1 1 0 0 0-1-1h-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1"/><path fill="currentColor" fill-rule="evenodd" d="M20 1a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3zm0 2a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" clip-rule="evenodd"/></svg>
         </a>
       </div>
@@ -215,6 +219,65 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
   </div>
 </header>
 
+<script>
+  const initNavDisclosures = () => {
+    const disclosures = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-nav-disclosure]'));
+    const canHoverOpen = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    disclosures.forEach((disclosure) => {
+      if (disclosure.dataset.navReady === 'true') return;
+      disclosure.dataset.navReady = 'true';
+
+      let closeTimer: number | undefined;
+
+      disclosure.addEventListener('toggle', () => {
+        if (!disclosure.open) return;
+
+        disclosures.forEach((otherDisclosure) => {
+          if (otherDisclosure !== disclosure) otherDisclosure.open = false;
+        });
+      });
+
+      if (canHoverOpen) {
+        disclosure.addEventListener('mouseenter', () => {
+          if (closeTimer) window.clearTimeout(closeTimer);
+          disclosure.open = true;
+        });
+
+        disclosure.addEventListener('mouseleave', () => {
+          closeTimer = window.setTimeout(() => {
+            if (!disclosure.contains(document.activeElement)) {
+              disclosure.open = false;
+            }
+          }, 120);
+        });
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+
+      disclosures.forEach((disclosure) => {
+        if (!disclosure.contains(target)) disclosure.open = false;
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+
+      disclosures.forEach((disclosure) => {
+        if (!disclosure.open) return;
+        disclosure.open = false;
+        disclosure.querySelector<HTMLElement>('summary')?.focus();
+      });
+    });
+  };
+
+  document.addEventListener('astro:page-load', initNavDisclosures);
+  initNavDisclosures();
+</script>
+
 <style>
   .header-logo {
     position: relative;
@@ -227,10 +290,15 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
+    cursor: pointer;
     overflow: hidden;
     border-radius: 9999px;
     padding: 0.625rem 0.875rem;
     transition: color 220ms ease, transform 220ms ease, background 220ms ease;
+  }
+
+  .nav-dropdown summary::-webkit-details-marker {
+    display: none;
   }
 
   .nav-pill::before {
@@ -260,7 +328,8 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
   }
 
   .nav-pill:hover,
-  .nav-dropdown:focus-within .nav-pill {
+  .nav-dropdown:focus-within .nav-pill,
+  .nav-dropdown[open] .nav-pill {
     color: #052e87;
     transform: translateY(-1px);
   }
@@ -268,13 +337,16 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
   .nav-pill:hover::before,
   .nav-pill:hover::after,
   .nav-dropdown:focus-within .nav-pill::before,
-  .nav-dropdown:focus-within .nav-pill::after {
+  .nav-dropdown:focus-within .nav-pill::after,
+  .nav-dropdown[open] .nav-pill::before,
+  .nav-dropdown[open] .nav-pill::after {
     opacity: 1;
     transform: translateX(-50%) scaleX(1);
   }
 
   .nav-pill:hover::before,
-  .nav-dropdown:focus-within .nav-pill::before {
+  .nav-dropdown:focus-within .nav-pill::before,
+  .nav-dropdown[open] .nav-pill::before {
     transform: scaleX(1);
   }
 
@@ -295,11 +367,14 @@ const isDropdown = (item: Dropdown | NavLink): item is Dropdown => "items" in it
   .menu-md { width: 18rem; }
   .menu-lg { width: 27rem; }
 
-  .nav-dropdown:hover .header-menu,
-  .nav-dropdown:focus-within .header-menu {
+  .nav-dropdown[open] .header-menu {
     pointer-events: auto;
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  .nav-dropdown[open] summary svg {
+    transform: rotate(180deg);
   }
 
   .menu-panel {

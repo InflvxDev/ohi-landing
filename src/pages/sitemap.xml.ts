@@ -1,6 +1,6 @@
-import type { APIRoute } from 'astro';
+﻿import type { APIRoute } from 'astro';
 
-const lastModified = '2026-05-25';
+const lastModified = '2026-05-26';
 
 const pages = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
@@ -9,6 +9,7 @@ const pages = [
   { path: '/sede-principal', priority: '0.9', changefreq: 'weekly' },
   { path: '/santa-isabel', priority: '0.9', changefreq: 'weekly' },
   { path: '/pqrs', priority: '0.6', changefreq: 'monthly' },
+  { path: '/politicas', priority: '0.6', changefreq: 'yearly' },
   { path: '/politicas/actualizacion-autorizacion-tratamiento-datos-personales', priority: '0.5', changefreq: 'yearly' },
   { path: '/politicas/pppss', priority: '0.5', changefreq: 'yearly' },
   { path: '/politicas/tratamiento-datos-personales', priority: '0.5', changefreq: 'yearly' },

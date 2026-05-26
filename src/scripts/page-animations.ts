@@ -58,12 +58,12 @@ const initPageMotion = () => {
       if (heroElements.length > 0) {
         gsap.fromTo(
           heroElements,
-          { autoAlpha: 0, y: 26 },
+          { opacity: 0, y: 26 },
           {
-            autoAlpha: 1,
+            opacity: 1,
             y: 0,
             stagger: 0.08,
-            clearProps: 'transform,opacity,visibility',
+            clearProps: 'transform,opacity',
           },
         );
       }
@@ -71,13 +71,13 @@ const initPageMotion = () => {
       revealElements.forEach((element, index) => {
         gsap.fromTo(
           element,
-          { autoAlpha: 0, y: 28, willChange: 'transform, opacity' },
+          { opacity: 0, y: 28, willChange: 'transform, opacity' },
           {
-            autoAlpha: 1,
+            opacity: 1,
             y: 0,
             delay: index % (isDesktop ? 4 : 2) * 0.04,
             overwrite: true,
-            clearProps: 'transform,opacity,visibility,willChange',
+            clearProps: 'transform,opacity,willChange',
             scrollTrigger: {
               trigger: element,
               start: 'top 88%',

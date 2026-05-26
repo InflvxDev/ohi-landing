@@ -38,7 +38,7 @@ const services: ServiceItem[] = [
       'La Clínica Santa Isabel brinda disponibilidad permanente de especialistas en:',
     ],
     bullets: [
-      'Cirugia General.',
+      'Cirugía general.',
       'Neurocirugía.',
       'Ortopedia adulto.',
       'Cirugía Plástica y Estética.',
@@ -47,7 +47,7 @@ const services: ServiceItem[] = [
       'Cirugía Vascular y Angiológica.',
       'Cirugía Urológica.',
       'Cirugía Reconstructiva.',
-      'Cirugía Artroscopica.',
+      'Cirugía artroscópica.',
       'Cirugía de Mano.',
       'Cirugía de Pelvis.',
       'Cirugía de Columna.',
@@ -78,10 +78,10 @@ const services: ServiceItem[] = [
     title: 'Apoyo Diagnóstico',
     image: '/img/servicios/Apoyo-Diagnostico-OHI.webp',
     text: [
-      'En la Clínica Santa Isabel , ofrecemos el servicio de imágenes diagnosticas convencionales y especializadas como soporte para el manejo integral del paciente, con alta tecnología y un equipohumano calificado y comprometido, contamos con:',
+      'En la Clínica Santa Isabel, ofrecemos el servicio de imágenes diagnósticas convencionales y especializadas como soporte para el manejo integral del paciente, con alta tecnología y un equipo humano calificado y comprometido. Contamos con:',
     ],
     groups: [
-      { title: 'Imagenología', items: ['Ecografía.', 'Radiología convencional.', 'Tomografia Axial Computarizada.'] },
+      { title: 'Imagenología', items: ['Ecografía.', 'Radiología convencional.', 'Tomografía axial computarizada.'] },
       {
         title: 'Laboratorio Clínico',
         items: [
@@ -91,6 +91,32 @@ const services: ServiceItem[] = [
     ],
   },
 ];
+
+const santaIsabelSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['MedicalClinic', 'Hospital'],
+  name: 'OHI Sede Santa Isabel',
+  url: 'https://ohisalud.com/santa-isabel',
+  image: 'https://ohisalud.com/img/SANTA-ISABEL-entrada.webp',
+  telephone: '+57-5-580-3535',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Avenida Simón Bolívar #22-39',
+    addressLocality: 'Valledupar',
+    addressRegion: 'Cesar',
+    addressCountry: 'CO',
+  },
+  areaServed: 'Valledupar, Cesar, Colombia',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59',
+    },
+  ],
+  medicalSpecialty: ['Emergency', 'Surgical', 'CriticalCare', 'Orthopedic'],
+};
 ---
 
 <Layout
@@ -98,6 +124,7 @@ const services: ServiceItem[] = [
   description="Conoce la Sede Santa Isabel de OHI en Valledupar, orientada a atención integral del paciente politraumatizado, urgencias y alta complejidad."
   path="/santa-isabel"
   image="/img/SANTA-ISABEL-entrada.webp"
+  structuredData={santaIsabelSchema}
 >
   <MainHeader />
 

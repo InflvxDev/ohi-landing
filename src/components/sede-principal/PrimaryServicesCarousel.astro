@@ -22,12 +22,14 @@ const { services } = Astro.props;
 
 <div class="primary-carousel" data-primary-carousel>
   <div class="mb-5 flex items-center justify-end gap-2">
-    <button type="button" class="primary-carousel-control" data-carousel-prev aria-label="Servicio anterior">‹</button>
-    <button type="button" class="primary-carousel-control" data-carousel-next aria-label="Servicio siguiente">›</button>
+    <p class="sr-only" data-carousel-status aria-live="polite">Carrusel de servicios principales listo.</p>
+    <button type="button" class="primary-carousel-control" data-carousel-toggle aria-label="Pausar carrusel" aria-pressed="false">Ⅱ</button>
+    <button type="button" class="primary-carousel-control" data-carousel-prev aria-label="Servicio anterior" aria-controls="primary-carousel-track">‹</button>
+    <button type="button" class="primary-carousel-control" data-carousel-next aria-label="Servicio siguiente" aria-controls="primary-carousel-track">›</button>
   </div>
 
-  <div class="primary-carousel-viewport" data-carousel-viewport>
-    <div class="primary-carousel-track" data-carousel-track>
+  <div class="primary-carousel-viewport" data-carousel-viewport aria-roledescription="carrusel" aria-label="Servicios principales de la Sede Principal">
+    <div id="primary-carousel-track" class="primary-carousel-track" data-carousel-track>
       {services.map((service, index) => (
         <button
           type="button"
@@ -52,7 +54,7 @@ const { services } = Astro.props;
     </div>
   </div>
 
-  <div class="primary-modal fixed inset-0 z-70 hidden items-center justify-center px-4 pb-8 pt-36" data-primary-modal role="dialog" aria-modal="true" aria-labelledby="primary-modal-title">
+  <div class="primary-modal fixed inset-0 z-70 hidden items-center justify-center px-4 pb-8 pt-36" data-primary-modal role="dialog" aria-modal="true" aria-labelledby="primary-modal-title" aria-describedby="primary-modal-description">
     <button type="button" class="primary-modal-backdrop absolute inset-0 bg-primary-950/62 backdrop-blur-sm" data-primary-close aria-label="Cerrar detalle"></button>
 
     <article class="primary-modal-panel relative max-h-[calc(100vh-11rem)] w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl shadow-primary-950/30">
@@ -71,7 +73,7 @@ const { services } = Astro.props;
           <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">Sede Principal</p>
           <h3 id="primary-modal-title" class="mt-3 text-3xl font-black leading-tight text-primary-800" data-primary-title></h3>
           <p class="mt-3 hidden text-xs font-extrabold uppercase tracking-[0.18em] text-accent-700" data-primary-label></p>
-          <div class="mt-5 space-y-4 text-sm leading-6 text-text-muted md:text-base md:leading-7" data-primary-text></div>
+          <div id="primary-modal-description" class="mt-5 space-y-4 text-sm leading-6 text-text-muted md:text-base md:leading-7" data-primary-text></div>
           <ul class="mt-6 grid gap-2 sm:grid-cols-2" data-primary-list></ul>
           <div class="mt-6 grid gap-3 sm:grid-cols-2" data-primary-groups></div>
         </div>
@@ -79,7 +81,7 @@ const { services } = Astro.props;
     </article>
   </div>
 
-  <script type="application/json" data-primary-payload set:html={JSON.stringify(services)} />
+  <script type="application/json" data-primary-payload is:inline set:html={JSON.stringify(services)} />
 </div>
 
 <script>
@@ -95,6 +97,8 @@ const { services } = Astro.props;
     const track = root.querySelector<HTMLElement>('[data-carousel-track]');
     const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
     const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    const toggle = root.querySelector<HTMLButtonElement>('[data-carousel-toggle]');
+    const status = root.querySelector<HTMLElement>('[data-carousel-status]');
     const modal = root.querySelector<HTMLElement>('[data-primary-modal]');
     const image = root.querySelector<HTMLImageElement>('[data-primary-image]');
     const title = root.querySelector<HTMLElement>('[data-primary-title]');
@@ -105,7 +109,7 @@ const { services } = Astro.props;
     const openButtons = root.querySelectorAll<HTMLButtonElement>('[data-primary-open]');
     const closeButtons = root.querySelectorAll<HTMLButtonElement>('[data-primary-close]');
 
-    if (!payload || !viewport || !track || !prev || !next || !modal || !image || !title || !label || !text || !list || !groups) return;
+    if (!payload || !viewport || !track || !prev || !next || !toggle || !modal || !image || !title || !label || !text || !list || !groups) return;
 
     const services = JSON.parse(payload.textContent || '[]') as Array<{
       title: string;
@@ -121,6 +125,7 @@ const { services } = Astro.props;
     let autoplay: number | undefined;
     let restartTimer: number | undefined;
     let isAnimating = false;
+    let isAutoplayPaused = false;
 
     const getStep = () => {
       const card = track.querySelector<HTMLElement>('.primary-service-card');
@@ -150,6 +155,7 @@ const { services } = Astro.props;
 
     const scrollByCard = (direction: 1 | -1) => {
       const step = getStep();
+      status && (status.textContent = direction === 1 ? 'Servicio siguiente visible.' : 'Servicio anterior visible.');
 
       if (direction === 1) {
         animateTrack(-step, () => {
@@ -171,15 +177,32 @@ const { services } = Astro.props;
     };
 
     const restartAutoplay = () => {
+      if (isAutoplayPaused) return;
       window.clearInterval(autoplay);
       window.clearTimeout(restartTimer);
       restartTimer = window.setTimeout(startAutoplay, 3600);
     };
 
     const startAutoplay = () => {
+      if (isAutoplayPaused) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       window.clearInterval(autoplay);
       autoplay = window.setInterval(() => scrollByCard(1), 3200);
+    };
+
+    const setAutoplayPaused = (paused: boolean) => {
+      isAutoplayPaused = paused;
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.setAttribute('aria-label', paused ? 'Reanudar carrusel' : 'Pausar carrusel');
+      toggle.textContent = paused ? '▶' : 'Ⅱ';
+      status && (status.textContent = paused ? 'Carrusel pausado.' : 'Carrusel reanudado.');
+
+      if (paused) {
+        window.clearInterval(autoplay);
+        window.clearTimeout(restartTimer);
+      } else {
+        startAutoplay();
+      }
     };
 
     const getFocusableElements = () => Array.from(
@@ -268,6 +291,7 @@ const { services } = Astro.props;
       scrollByCard(1);
       restartAutoplay();
     });
+    toggle.addEventListener('click', () => setAutoplayPaused(!isAutoplayPaused));
     viewport.addEventListener('pointerenter', () => window.clearInterval(autoplay));
     viewport.addEventListener('pointerleave', startAutoplay);
     viewport.addEventListener('focusin', () => window.clearInterval(autoplay));
@@ -301,7 +325,11 @@ const { services } = Astro.props;
       }
     });
 
-    startAutoplay();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setAutoplayPaused(true);
+    } else {
+      startAutoplay();
+    }
     });
   };
 

@@ -1,0 +1,63 @@
+---
+import MainHeader from '../../components/MainHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const policies = [
+  {
+    title: 'Actualización y autorización de tratamiento de datos personales',
+    description: 'Formato institucional para autorización, finalidades del tratamiento y derechos del titular.',
+    href: '/politicas/actualizacion-autorizacion-tratamiento-datos-personales',
+  },
+  {
+    title: 'Política de tratamiento de datos personales',
+    description: 'Principios, finalidades, procedimientos y canales para el tratamiento de datos personales.',
+    href: '/politicas/tratamiento-datos-personales',
+  },
+  {
+    title: 'Política de Participación Social en Salud',
+    description: 'Lineamientos de participación ciudadana, control social y contacto institucional.',
+    href: '/politicas/pppss',
+  },
+];
+---
+
+<Layout
+  title="Políticas institucionales | OHI"
+  description="Consulta las políticas institucionales de Organización Humana Integral sobre datos personales, autorizaciones y participación social en salud."
+  path="/politicas"
+>
+  <MainHeader />
+
+  <main id="contenido-principal" class="bg-background text-text-base">
+    <section class="policy-hero border-b border-primary-100 bg-primary-50/60">
+      <div class="mx-auto max-w-7xl px-5 py-14 md:py-18">
+        <p class="inline-flex rounded-full border border-primary-200 bg-white px-3 py-1 text-xs font-extrabold uppercase tracking-[0.18em] text-primary-600">
+          Gobierno institucional
+        </p>
+        <h1 class="mt-4 max-w-4xl text-3xl font-black leading-tight text-primary-800 md:text-5xl">
+          Políticas institucionales
+        </h1>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-text-muted md:text-lg md:leading-8">
+          Documentos de consulta sobre tratamiento de datos personales, autorizaciones y participación social en salud.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-14 md:py-18">
+      <div class="mx-auto grid max-w-7xl gap-5 px-5 md:grid-cols-3">
+        {policies.map((policy) => (
+          <article class="flex h-full flex-col rounded-2xl border border-primary-100 bg-white p-6 shadow-[0_18px_38px_-30px_rgba(3,28,81,0.55)]">
+            <h2 class="text-xl font-black leading-tight text-primary-800">{policy.title}</h2>
+            <p class="mt-3 grow text-sm leading-6 text-text-muted">{policy.description}</p>
+            <a href={policy.href} class="mt-6 inline-flex w-fit rounded bg-primary-700 px-4 py-2.5 text-sm font-extrabold text-white transition hover:bg-primary-600 focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2">
+              Consultar documento
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
